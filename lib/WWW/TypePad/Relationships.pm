@@ -18,7 +18,7 @@ sub get {
 sub status {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, 'status', undef, undef, );
+    $api->_call($id, 'status', undef, undef, @_);
 }
 
 

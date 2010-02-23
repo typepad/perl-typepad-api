@@ -2,8 +2,15 @@
 use strict;
 use Template;
 use JSON;
+use LWP::Simple;
+use FindBin qw($Bin);
 
-my $json  = do { open my $fh, "<", "nouns.json" or die $!; join '', <$fh> };
+for my $file ( qw(nouns.json object-types.json) ) {
+    warn "Downloading $file\n";
+    LWP::Simple::mirror("http://api.typepad.com/$file", "$Bin/$file");
+}
+
+my $json  = do { open my $fh, "<", "$Bin/nouns.json" or die $!; join '', <$fh> };
 my $nouns = decode_json($json);
 
 for my $entry (@{$nouns->{entries}}) {
@@ -22,7 +29,7 @@ sub rewrite_file {
     my($noun, $package, $file) = @_;
 
     my $content = slurp($file) || stub_for($package);
-    $content =~ s/### BEGIN auto-generated.*### END auto-generated/generate_code($package, $noun)/egs
+    $content =~ s/### BEGIN auto-generated.*### END auto-generated\n/generate_code($package, $noun)/egs
         or return warn "$file: auto-generated code marked was not found.\n";
 
     warn "Writing $file\n";

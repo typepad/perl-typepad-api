@@ -1,6 +1,73 @@
 {
    "entries" : [
       {
+         "name" : "Account",
+         "parentType" : "Base",
+         "properties" : [
+            {
+               "docString" : "A URI that serves as a globally-unique id for the account.",
+               "name" : "id",
+               "type" : "string"
+            },
+            {
+               "docString" : "The DNS domain of the site that the account belongs to.",
+               "name" : "domain",
+               "type" : "string"
+            },
+            {
+               "docString" : "The username of the account, if known. (Some sites only have a userId.)",
+               "name" : "username",
+               "type" : "string"
+            },
+            {
+               "docString" : "The non-user-friendly id or primary key for the account, if known. (Some sites only have a username.)",
+               "name" : "userId",
+               "type" : "string"
+            },
+            {
+               "docString" : "The URL of the user's profile page or some other primary page on the remote site, if known.",
+               "name" : "url",
+               "type" : "string"
+            },
+            {
+               "docString" : "A human-friendly name of the service provider of this account.",
+               "name" : "providerName",
+               "type" : "string"
+            },
+            {
+               "docString" : "The URL of the home page of the service provider of this account.",
+               "name" : "providerURL",
+               "type" : "string"
+            },
+            {
+               "docString" : "The URL of a 16x16 pixel icon that represents the service provider of this account.",
+               "name" : "providerIconURL",
+               "type" : "string"
+            },
+            {
+               "docString" : "Whether the service can be crossposted to.",
+               "name" : "crosspostable",
+               "type" : "boolean"
+            }
+         ]
+      },
+      {
+         "name" : "ApiKey",
+         "parentType" : "Base",
+         "properties" : [
+            {
+               "docString" : "The actual API key string, which is used as the consumer key when making an OAuth request.",
+               "name" : "apiKey",
+               "type" : "string"
+            },
+            {
+               "docString" : "The application that owns this API key.",
+               "name" : "owner",
+               "type" : "Application"
+            }
+         ]
+      },
+      {
          "name" : "Application",
          "parentType" : "Entity",
          "properties" : [
@@ -101,7 +168,17 @@
                "type" : "string"
             },
             {
-               "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\", for assets whose content is HTML, or \"text\", for assets whose content is plain text. Other formatting modes may be added in future.",
+               "docString" : "The content of this asset rendered to HTML. This is currently available only for O<Post> and O<Page> assets.",
+               "name" : "renderedContent",
+               "type" : "string"
+            },
+            {
+               "docString" : "A short, plain-text excerpt of the entry content. This is currently available only for O<Post> assets.",
+               "name" : "excerpt",
+               "type" : "string"
+            },
+            {
+               "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
                "name" : "textFormat",
                "type" : "string"
             },
@@ -141,9 +218,14 @@
                "type" : "integer"
             },
             {
-               "docString" : "Set of strings containing the HTTP methods that the currently-authenticated client is allowed to apply to this asset.",
-               "name" : "allowedMethods",
-               "type" : "set<string>"
+               "docString" : "The title of the asset.",
+               "name" : "title",
+               "type" : "string"
+            },
+            {
+               "docString" : "The description of the asset.",
+               "name" : "description",
+               "type" : "string"
             }
          ]
       },
@@ -153,7 +235,7 @@
          "properties" : [
             {
                "docString" : "A URI that serves as a globally-unique id for the asset. This matches the \"id\" property in the corresponding O<Asset> object.",
-               "name" : "ref",
+               "name" : "id",
                "type" : "string"
             },
             {
@@ -244,7 +326,17 @@
                "type" : "string"
             },
             {
-               "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\", for assets whose content is HTML, or \"text\", for assets whose content is plain text. Other formatting modes may be added in future.",
+               "docString" : "The content of this asset rendered to HTML. This is currently available only for O<Post> and O<Page> assets.",
+               "name" : "renderedContent",
+               "type" : "string"
+            },
+            {
+               "docString" : "A short, plain-text excerpt of the entry content. This is currently available only for O<Post> assets.",
+               "name" : "excerpt",
+               "type" : "string"
+            },
+            {
+               "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
                "name" : "textFormat",
                "type" : "string"
             },
@@ -284,9 +376,14 @@
                "type" : "integer"
             },
             {
-               "docString" : "Set of strings containing the HTTP methods that the currently-authenticated client is allowed to apply to this asset.",
-               "name" : "allowedMethods",
-               "type" : "set<string>"
+               "docString" : "The title of the asset.",
+               "name" : "title",
+               "type" : "string"
+            },
+            {
+               "docString" : "The description of the asset.",
+               "name" : "description",
+               "type" : "string"
             }
          ]
       },
@@ -303,6 +400,22 @@
                "docString" : "The duration of the audio stream in seconds.",
                "name" : "duration",
                "type" : "integer"
+            }
+         ]
+      },
+      {
+         "name" : "AuthToken",
+         "parentType" : "Base",
+         "properties" : [
+            {
+               "docString" : "The actual auth token string, which is used as the access token when making an OAuth request.",
+               "name" : "authToken",
+               "type" : "string"
+            },
+            {
+               "docString" : "T<Deprecated> The root object to which this auth token grants access. This is a legacy field maintained for backwards compatibility with older clients. Auth tokens are no longer scoped to specific objects, so this value will be meaningless in any case except those where a specific object is returned to preserve some client behavior.",
+               "name" : "targetObject",
+               "type" : "Base"
             }
          ]
       },
@@ -352,6 +465,52 @@
          ]
       },
       {
+         "name" : "BlogCommentingSettings",
+         "parentType" : "Base",
+         "properties" : [
+            {
+               "docString" : "C<true> if this blog allows users to sign in to comment. If C<false>, all new comments are anonymous.",
+               "name" : "signinAllowed",
+               "type" : "boolean"
+            },
+            {
+               "docString" : "C<true> if this blog requires users to be logged in in order to leave a comment. If C<false>, anonymous comments will be rejected.",
+               "name" : "signinRequired",
+               "type" : "boolean"
+            },
+            {
+               "docString" : "C<true> if this blog requires anonymous comments to be submitted with an email address.",
+               "name" : "emailAddressRequired",
+               "type" : "boolean"
+            },
+            {
+               "docString" : "C<true> if this blog requires anonymous commenters to pass a CAPTCHA before submitting a comment.",
+               "name" : "captchaRequired",
+               "type" : "boolean"
+            },
+            {
+               "docString" : "C<true> if this blog places new comments into a moderation queue for approval before they are displayed.",
+               "name" : "moderationEnabled",
+               "type" : "boolean"
+            },
+            {
+               "docString" : "Number of days after a post is published that comments will be allowed. Absent if this blog has no time limit for comments.",
+               "name" : "timeLimit",
+               "type" : "integer"
+            },
+            {
+               "docString" : "C<true> if this blog allows commenters to use basic HTML formatting in comments.",
+               "name" : "htmlAllowed",
+               "type" : "boolean"
+            },
+            {
+               "docString" : "C<true> if comments in this blog will automatically have any bare URLs turned into links.",
+               "name" : "urlsAutoLinked",
+               "type" : "boolean"
+            }
+         ]
+      },
+      {
          "name" : "Comment",
          "parentType" : "Asset",
          "properties" : [
@@ -359,6 +518,11 @@
                "docString" : "A reference to the asset that this comment is in reply to.",
                "name" : "inReplyTo",
                "type" : "AssetRef"
+            },
+            {
+               "docString" : "T<Editable> An object describing the visibility status and publication date for this page. Only visibility status is editable.",
+               "name" : "publicationStatus",
+               "type" : "PublicationStatus"
             },
             {
                "docString" : "A URI that serves as a globally-unique id for the user. This can be used to recognise where the same user is returned in response to different requests, and as a mapping key for an application's local data store.",
@@ -391,7 +555,17 @@
                "type" : "string"
             },
             {
-               "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\", for assets whose content is HTML, or \"text\", for assets whose content is plain text. Other formatting modes may be added in future.",
+               "docString" : "The content of this asset rendered to HTML. This is currently available only for O<Post> and O<Page> assets.",
+               "name" : "renderedContent",
+               "type" : "string"
+            },
+            {
+               "docString" : "A short, plain-text excerpt of the entry content. This is currently available only for O<Post> assets.",
+               "name" : "excerpt",
+               "type" : "string"
+            },
+            {
+               "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
                "name" : "textFormat",
                "type" : "string"
             },
@@ -431,9 +605,136 @@
                "type" : "integer"
             },
             {
-               "docString" : "Set of strings containing the HTTP methods that the currently-authenticated client is allowed to apply to this asset.",
-               "name" : "allowedMethods",
+               "docString" : "The title of the asset.",
+               "name" : "title",
+               "type" : "string"
+            },
+            {
+               "docString" : "The description of the asset.",
+               "name" : "description",
+               "type" : "string"
+            }
+         ]
+      },
+      {
+         "name" : "CommentPreview",
+         "parentType" : "Asset",
+         "properties" : [
+            {
+               "docString" : "A reference to the asset that this comment is in reply to.",
+               "name" : "inReplyTo",
+               "type" : "AssetRef"
+            },
+            {
+               "docString" : "T<Editable> An object describing the visibility status and publication date for this page. Only visibility status is editable.",
+               "name" : "publicationStatus",
+               "type" : "PublicationStatus"
+            },
+            {
+               "docString" : "A URI that serves as a globally-unique id for the user. This can be used to recognise where the same user is returned in response to different requests, and as a mapping key for an application's local data store.",
+               "name" : "id",
+               "type" : "string"
+            },
+            {
+               "docString" : "A string containing the canonical identifier that can be used as the \"id\" for this object in URLs. However, this should not be used as a database key to avoid collisions when an application is switched to a different backend server; use the \"id\" property instead.",
+               "name" : "urlId",
+               "type" : "string"
+            },
+            {
+               "docString" : "The URL which is considered to be this asset's permalink. This might be C<null> if the asset does not have a permalink of its own (for example, if it's embedded in another asset), or if TypePad does not know its permalink.",
+               "name" : "permalinkUrl",
+               "type" : "string"
+            },
+            {
+               "docString" : "The user that created the selected asset.",
+               "name" : "author",
+               "type" : "User"
+            },
+            {
+               "docString" : "The time that the asset was created, as an L<http://www.ietf.org/rfc/rfc3339.txt|RFC3339> timestamp.",
+               "name" : "published",
+               "type" : "string"
+            },
+            {
+               "docString" : "The raw asset content. The C<textFormat> property defines what format this data is in.",
+               "name" : "content",
+               "type" : "string"
+            },
+            {
+               "docString" : "The content of this asset rendered to HTML. This is currently available only for O<Post> and O<Page> assets.",
+               "name" : "renderedContent",
+               "type" : "string"
+            },
+            {
+               "docString" : "A short, plain-text excerpt of the entry content. This is currently available only for O<Post> assets.",
+               "name" : "excerpt",
+               "type" : "string"
+            },
+            {
+               "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
+               "name" : "textFormat",
+               "type" : "string"
+            },
+            {
+               "docString" : "An array of strings containing the id URIs of the groups that this asset is mapped into, if any. At present an asset can only be added to one group, but this may change in future.",
+               "name" : "groups",
+               "type" : "array<string>"
+            },
+            {
+               "docString" : "An object describing the site from which this asset was retrieved, for assets obtained from external feeds.",
+               "name" : "source",
+               "type" : "AssetSource"
+            },
+            {
+               "docString" : "T<Deprecated> The hyperlinks for the user object. The \"alternate\" hyperlink of type \"text/html\" points at the user's TypePad profile page. This property has been deprecated in favor of the separate link properties defined by the subclasses of O<Asset>.",
+               "name" : "links",
+               "type" : "array<LegacyHyperlink>"
+            },
+            {
+               "docString" : "An array of object type identifier URIs. At the present time, only one object type is returned per asset, but this may be extended in future. Clients should scan this list and ignore any types that are not recognised. This list also includes appropriate type URIs as defined by the ActivityStrea.ms schema specification.",
+               "name" : "objectTypes",
                "type" : "set<string>"
+            },
+            {
+               "docString" : "C<true> if this asset is a favorite for the current user, or C<false> otherwise. This property is not set for responses to anonymous requests.",
+               "name" : "isFavoriteForCurrentUser",
+               "type" : "boolean"
+            },
+            {
+               "docString" : "The number of distinct users who have added this asset as a favorite.",
+               "name" : "favoriteCount",
+               "type" : "integer"
+            },
+            {
+               "docString" : "The number of comments that have been posted in the comment tree beneath this asset.",
+               "name" : "commentCount",
+               "type" : "integer"
+            },
+            {
+               "docString" : "The title of the asset.",
+               "name" : "title",
+               "type" : "string"
+            },
+            {
+               "docString" : "The description of the asset.",
+               "name" : "description",
+               "type" : "string"
+            }
+         ]
+      },
+      {
+         "name" : "CommentTreeItem",
+         "parentType" : "Base",
+         "properties" : [
+            {
+               "docString" : "A comment asset in the tree",
+               "name" : "comment",
+               "type" : "Asset"
+            },
+            {
+               "docString" : "How many levels deep this comment is in the comment hierarchy. If a given comment has a depth of 1 then all of the direct replies to that comment will have a depth of 2, and their replies will have depth 3, etc. 1 indicates a direct reply to the root asset.",
+               "name" : "depth",
+               "type" : "integer"
             }
          ]
       },
@@ -592,6 +893,27 @@
          ]
       },
       {
+         "name" : "FeedbackStatus",
+         "parentType" : "Base",
+         "properties" : [
+            {
+               "docString" : "C<true> if this asset accepts comments, C<false> otherwise",
+               "name" : "allowComments",
+               "type" : "boolean"
+            },
+            {
+               "docString" : "C<true> if this asset displays comments, C<false> otherwise",
+               "name" : "showComments",
+               "type" : "boolean"
+            },
+            {
+               "docString" : "C<true> if this asset accepts pings, C<false> otherwise",
+               "name" : "allowTrackback",
+               "type" : "boolean"
+            }
+         ]
+      },
+      {
          "name" : "Group",
          "parentType" : "Entity",
          "properties" : [
@@ -739,7 +1061,17 @@
                "type" : "string"
             },
             {
-               "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\", for assets whose content is HTML, or \"text\", for assets whose content is plain text. Other formatting modes may be added in future.",
+               "docString" : "The content of this asset rendered to HTML. This is currently available only for O<Post> and O<Page> assets.",
+               "name" : "renderedContent",
+               "type" : "string"
+            },
+            {
+               "docString" : "A short, plain-text excerpt of the entry content. This is currently available only for O<Post> assets.",
+               "name" : "excerpt",
+               "type" : "string"
+            },
+            {
+               "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
                "name" : "textFormat",
                "type" : "string"
             },
@@ -779,19 +1111,13 @@
                "type" : "integer"
             },
             {
-               "docString" : "Set of strings containing the HTTP methods that the currently-authenticated client is allowed to apply to this asset.",
-               "name" : "allowedMethods",
-               "type" : "set<string>"
-            }
-         ]
-      },
-      {
-         "name" : "MobileProfile",
-         "parentType" : "Base",
-         "properties" : [
+               "docString" : "The title of the asset.",
+               "name" : "title",
+               "type" : "string"
+            },
             {
-               "docString" : "A private email address for posting via email",
-               "name" : "emailAddress",
+               "docString" : "The description of the asset.",
+               "name" : "description",
                "type" : "string"
             }
          ]
@@ -848,6 +1174,36 @@
                "type" : "array<ImageLink>"
             },
             {
+               "docString" : "T<Editable> The title of the page.",
+               "name" : "title",
+               "type" : "string"
+            },
+            {
+               "docString" : "T<Editable> The description of the page.",
+               "name" : "description",
+               "type" : "string"
+            },
+            {
+               "docString" : "T<Editable> A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
+               "name" : "textFormat",
+               "type" : "string"
+            },
+            {
+               "docString" : "T<Editable> The data format for C<content>.",
+               "name" : "textFormat",
+               "type" : "string"
+            },
+            {
+               "docString" : "T<Editable> An object describing the draft status and publication date for this page.",
+               "name" : "publicationStatus",
+               "type" : "PublicationStatus"
+            },
+            {
+               "docString" : "T<Editable> An object describing the comment and trackback behavior for this page.",
+               "name" : "feedbackStatus",
+               "type" : "FeedbackStatus"
+            },
+            {
                "docString" : "A URI that serves as a globally-unique id for the user. This can be used to recognise where the same user is returned in response to different requests, and as a mapping key for an application's local data store.",
                "name" : "id",
                "type" : "string"
@@ -878,7 +1234,17 @@
                "type" : "string"
             },
             {
-               "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\", for assets whose content is HTML, or \"text\", for assets whose content is plain text. Other formatting modes may be added in future.",
+               "docString" : "The content of this asset rendered to HTML. This is currently available only for O<Post> and O<Page> assets.",
+               "name" : "renderedContent",
+               "type" : "string"
+            },
+            {
+               "docString" : "A short, plain-text excerpt of the entry content. This is currently available only for O<Post> assets.",
+               "name" : "excerpt",
+               "type" : "string"
+            },
+            {
+               "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
                "name" : "textFormat",
                "type" : "string"
             },
@@ -918,9 +1284,14 @@
                "type" : "integer"
             },
             {
-               "docString" : "Set of strings containing the HTTP methods that the currently-authenticated client is allowed to apply to this asset.",
-               "name" : "allowedMethods",
-               "type" : "set<string>"
+               "docString" : "The title of the asset.",
+               "name" : "title",
+               "type" : "string"
+            },
+            {
+               "docString" : "The description of the asset.",
+               "name" : "description",
+               "type" : "string"
             }
          ]
       },
@@ -964,7 +1335,17 @@
                "type" : "string"
             },
             {
-               "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\", for assets whose content is HTML, or \"text\", for assets whose content is plain text. Other formatting modes may be added in future.",
+               "docString" : "The content of this asset rendered to HTML. This is currently available only for O<Post> and O<Page> assets.",
+               "name" : "renderedContent",
+               "type" : "string"
+            },
+            {
+               "docString" : "A short, plain-text excerpt of the entry content. This is currently available only for O<Post> assets.",
+               "name" : "excerpt",
+               "type" : "string"
+            },
+            {
+               "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
                "name" : "textFormat",
                "type" : "string"
             },
@@ -1004,9 +1385,14 @@
                "type" : "integer"
             },
             {
-               "docString" : "Set of strings containing the HTTP methods that the currently-authenticated client is allowed to apply to this asset.",
-               "name" : "allowedMethods",
-               "type" : "set<string>"
+               "docString" : "The title of the asset.",
+               "name" : "title",
+               "type" : "string"
+            },
+            {
+               "docString" : "The description of the asset.",
+               "name" : "description",
+               "type" : "string"
             }
          ]
       },
@@ -1015,9 +1401,44 @@
          "parentType" : "Asset",
          "properties" : [
             {
+               "docString" : "T<Editable> A list of categories associated with the post.",
+               "name" : "categories",
+               "type" : "array<string>"
+            },
+            {
                "docString" : "A list of links to the images that are embedded within the content of this post.",
                "name" : "embeddedImageLinks",
                "type" : "array<ImageLink>"
+            },
+            {
+               "docString" : "T<Editable> The title of the post.",
+               "name" : "title",
+               "type" : "string"
+            },
+            {
+               "docString" : "T<Editable> The description of the post.",
+               "name" : "description",
+               "type" : "string"
+            },
+            {
+               "docString" : "T<Editable> The raw post content. The C<textFormat> property defines what format this data is in.",
+               "name" : "content",
+               "type" : "string"
+            },
+            {
+               "docString" : "T<Editable> A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
+               "name" : "textFormat",
+               "type" : "string"
+            },
+            {
+               "docString" : "T<Editable> An object describing the draft status and publication date for this post.",
+               "name" : "publicationStatus",
+               "type" : "PublicationStatus"
+            },
+            {
+               "docString" : "T<Editable> An object describing the comment and trackback behavior for this post.",
+               "name" : "feedbackStatus",
+               "type" : "FeedbackStatus"
             },
             {
                "docString" : "A URI that serves as a globally-unique id for the user. This can be used to recognise where the same user is returned in response to different requests, and as a mapping key for an application's local data store.",
@@ -1050,7 +1471,17 @@
                "type" : "string"
             },
             {
-               "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\", for assets whose content is HTML, or \"text\", for assets whose content is plain text. Other formatting modes may be added in future.",
+               "docString" : "The content of this asset rendered to HTML. This is currently available only for O<Post> and O<Page> assets.",
+               "name" : "renderedContent",
+               "type" : "string"
+            },
+            {
+               "docString" : "A short, plain-text excerpt of the entry content. This is currently available only for O<Post> assets.",
+               "name" : "excerpt",
+               "type" : "string"
+            },
+            {
+               "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
                "name" : "textFormat",
                "type" : "string"
             },
@@ -1090,9 +1521,41 @@
                "type" : "integer"
             },
             {
-               "docString" : "Set of strings containing the HTTP methods that the currently-authenticated client is allowed to apply to this asset.",
-               "name" : "allowedMethods",
-               "type" : "set<string>"
+               "docString" : "The title of the asset.",
+               "name" : "title",
+               "type" : "string"
+            },
+            {
+               "docString" : "The description of the asset.",
+               "name" : "description",
+               "type" : "string"
+            }
+         ]
+      },
+      {
+         "name" : "PostByEmailAddress",
+         "parentType" : "Base",
+         "properties" : [
+            {
+               "docString" : "A private email address for posting via email",
+               "name" : "emailAddress",
+               "type" : "string"
+            }
+         ]
+      },
+      {
+         "name" : "PublicationStatus",
+         "parentType" : "Base",
+         "properties" : [
+            {
+               "docString" : "Represents an asset's publication date (past or future)",
+               "name" : "publicationDate",
+               "type" : "string"
+            },
+            {
+               "docString" : "C<true> if this asset is private, C<false> otherwise",
+               "name" : "draft",
+               "type" : "boolean"
             }
          ]
       },
@@ -1123,7 +1586,34 @@
       },
       {
          "name" : "RelationshipStatus",
-         "properties" : []
+         "parentType" : "Relationship",
+         "properties" : [
+            {
+               "docString" : "A list of strings containing relationship type URIs.",
+               "name" : "types",
+               "type" : "array<string>"
+            },
+            {
+               "docString" : "The source entity, the 'subject' of the relationship.",
+               "name" : "source",
+               "type" : "Entity"
+            },
+            {
+               "docString" : "The target entity, the 'object' of the relationship.",
+               "name" : "target",
+               "type" : "Entity"
+            },
+            {
+               "docString" : "A RelationshipStatus object describing the types of relationship that currently exist between the source and the target.",
+               "name" : "status",
+               "type" : "RelationshipStatus"
+            },
+            {
+               "docString" : "The hyperlinks for the relationship object.",
+               "name" : "links",
+               "type" : "set<LegacyHyperlink>"
+            }
+         ]
       },
       {
          "name" : "User",
@@ -1167,11 +1657,6 @@
             {
                "docString" : "An array of object type identifier URIs. At the present time, only one object type is returned per asset, but this may be extended in future. Clients should scan this list and ignore any types that are not recognised. This list also includes appropriate type URIs as defined by the ActivityStrea.ms schema specification.",
                "name" : "objectTypes",
-               "type" : "set<string>"
-            },
-            {
-               "docString" : "Set of strings containing the HTTP methods that the currently-authenticated client is allowed to apply to this user.",
-               "name" : "allowedMethods",
                "type" : "set<string>"
             },
             {
@@ -1287,7 +1772,17 @@
                "type" : "string"
             },
             {
-               "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\", for assets whose content is HTML, or \"text\", for assets whose content is plain text. Other formatting modes may be added in future.",
+               "docString" : "The content of this asset rendered to HTML. This is currently available only for O<Post> and O<Page> assets.",
+               "name" : "renderedContent",
+               "type" : "string"
+            },
+            {
+               "docString" : "A short, plain-text excerpt of the entry content. This is currently available only for O<Post> assets.",
+               "name" : "excerpt",
+               "type" : "string"
+            },
+            {
+               "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
                "name" : "textFormat",
                "type" : "string"
             },
@@ -1327,9 +1822,14 @@
                "type" : "integer"
             },
             {
-               "docString" : "Set of strings containing the HTTP methods that the currently-authenticated client is allowed to apply to this asset.",
-               "name" : "allowedMethods",
-               "type" : "set<string>"
+               "docString" : "The title of the asset.",
+               "name" : "title",
+               "type" : "string"
+            },
+            {
+               "docString" : "The description of the asset.",
+               "name" : "description",
+               "type" : "string"
             }
          ]
       },
@@ -1345,5 +1845,5 @@
          ]
       }
    ],
-   "totalResults" : 29
+   "totalResults" : 37
 }

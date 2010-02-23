@@ -33,6 +33,12 @@ sub member_memberships {
     $api->_call($id, 'memberships', 'member', undef, @_);
 }
 
+sub blocked_memberships {
+    my $api = shift;
+    my $id  = shift;
+    $api->_call($id, 'memberships', 'blocked', undef, @_);
+}
+
 sub events {
     my $api = shift;
     my $id  = shift;

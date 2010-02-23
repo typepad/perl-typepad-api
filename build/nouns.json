@@ -7,6 +7,22 @@
          "formatSensitive" : true,
          "name" : "api-keys",
          "propertyEndpoints" : [],
+         "resourceObjectType" : {
+            "name" : "ApiKey",
+            "parentType" : "Base",
+            "properties" : [
+               {
+                  "docString" : "The actual API key string, which is used as the consumer key when making an OAuth request.",
+                  "name" : "apiKey",
+                  "type" : "string"
+               },
+               {
+                  "docString" : "The application that owns this API key.",
+                  "name" : "owner",
+                  "type" : "Application"
+               }
+            ]
+         },
          "supportedMethods" : {
             "GET" : "Get basic information about the selected API key, including what application it belongs to."
          },
@@ -91,7 +107,68 @@
          "supportedQueryArguments" : []
       },
       {
-         "actionEndpoints" : [],
+         "actionEndpoints" : [
+            {
+               "formatSensitive" : true,
+               "name" : "remove-category",
+               "postObjectType" : {
+                  "properties" : [
+                     {
+                        "docString" : "The category to remove",
+                        "name" : "category",
+                        "type" : "string"
+                     }
+                  ]
+               },
+               "supportedMethods" : {
+                  "POST" : "Send label argument to remove a category from an asset"
+               },
+               "supportedQueryArguments" : []
+            },
+            {
+               "formatSensitive" : true,
+               "name" : "add-category",
+               "postObjectType" : {
+                  "properties" : [
+                     {
+                        "docString" : "The category to add",
+                        "name" : "category",
+                        "type" : "string"
+                     }
+                  ]
+               },
+               "supportedMethods" : {
+                  "POST" : "Send label argument to add a category to an asset"
+               },
+               "supportedQueryArguments" : []
+            },
+            {
+               "formatSensitive" : true,
+               "name" : "make-comment-preview",
+               "postObjectType" : {
+                  "properties" : [
+                     {
+                        "docString" : "The body of the comment.",
+                        "name" : "content",
+                        "type" : "string"
+                     }
+                  ]
+               },
+               "responseObjectType" : {
+                  "properties" : [
+                     {
+                        "docString" : "A mockup of the future comment.",
+                        "name" : "comment",
+                        "type" : "string"
+                     }
+                  ]
+               },
+               "supportedMethods" : {
+                  "POST" : "Send relevant data to get back a model of what the submitted comment will look like."
+               },
+               "supportedQueryArguments" : []
+            }
+         ],
          "canHaveId" : true,
          "canOmitId" : false,
          "formatSensitive" : true,
@@ -103,6 +180,7 @@
                "name" : "favorites",
                "resourceObjectType" : {
                   "name" : "List<Favorite>",
+                  "parentType" : "Base",
                   "properties" : [
                      {
                         "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -127,9 +205,95 @@
             {
                "filterEndpoints" : [],
                "formatSensitive" : true,
+               "name" : "feedback-status",
+               "resourceObjectType" : {
+                  "name" : "FeedbackStatus",
+                  "parentType" : "Base",
+                  "properties" : [
+                     {
+                        "docString" : "C<true> if this asset accepts comments, C<false> otherwise",
+                        "name" : "allowComments",
+                        "type" : "boolean"
+                     },
+                     {
+                        "docString" : "C<true> if this asset displays comments, C<false> otherwise",
+                        "name" : "showComments",
+                        "type" : "boolean"
+                     },
+                     {
+                        "docString" : "C<true> if this asset accepts pings, C<false> otherwise",
+                        "name" : "allowTrackback",
+                        "type" : "boolean"
+                     }
+                  ]
+               },
+               "supportedMethods" : {
+                  "GET" : "Get the feedback status of selected asset",
+                  "PUT" : "Set the feedback status of selected asset"
+               },
+               "supportedQueryArguments" : []
+            },
+            {
+               "filterEndpoints" : [],
+               "formatSensitive" : true,
+               "name" : "publication-status",
+               "resourceObjectType" : {
+                  "name" : "PublicationStatus",
+                  "parentType" : "Base",
+                  "properties" : [
+                     {
+                        "docString" : "Represents an asset's publication date (past or future)",
+                        "name" : "publicationDate",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "C<true> if this asset is private, C<false> otherwise",
+                        "name" : "draft",
+                        "type" : "boolean"
+                     }
+                  ]
+               },
+               "supportedMethods" : {
+                  "GET" : "Get the publication status of selected asset",
+                  "PUT" : "Set the publication status of selected asset"
+               },
+               "supportedQueryArguments" : []
+            },
+            {
+               "filterEndpoints" : [],
+               "formatSensitive" : true,
+               "name" : "categories",
+               "resourceObjectType" : {
+                  "name" : "List<string>",
+                  "parentType" : "Base",
+                  "properties" : [
+                     {
+                        "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                        "name" : "totalResults",
+                        "type" : "integer"
+                     },
+                     {
+                        "docString" : "The items within the selected slice of the list.",
+                        "name" : "entries",
+                        "type" : "array<string>"
+                     }
+                  ]
+               },
+               "supportedMethods" : {
+                  "GET" : "Get a list of categories into which this asset has been placed within its blog. Currently supported only for O<Post> assets that are posted within a blog."
+               },
+               "supportedQueryArguments" : [
+                  "max-results",
+                  "start-index"
+               ]
+            },
+            {
+               "filterEndpoints" : [],
+               "formatSensitive" : true,
                "name" : "comments",
                "resourceObjectType" : {
                   "name" : "List<Comment>",
+                  "parentType" : "Base",
                   "properties" : [
                      {
                         "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -149,6 +313,64 @@
                },
                "supportedQueryArguments" : [
                   "max-results",
+                  "selected-item",
+                  "start-index"
+               ]
+            },
+            {
+               "filterEndpoints" : [],
+               "formatSensitive" : true,
+               "name" : "media-assets",
+               "resourceObjectType" : {
+                  "name" : "List<Asset>",
+                  "parentType" : "Base",
+                  "properties" : [
+                     {
+                        "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                        "name" : "totalResults",
+                        "type" : "integer"
+                     },
+                     {
+                        "docString" : "The items within the selected slice of the list.",
+                        "name" : "entries",
+                        "type" : "array<Asset>"
+                     }
+                  ]
+               },
+               "supportedMethods" : {
+                  "GET" : "Get a list of media assets that are embedded in the content of the selected asset."
+               },
+               "supportedQueryArguments" : [
+                  "max-results",
+                  "start-index"
+               ]
+            },
+            {
+               "filterEndpoints" : [],
+               "formatSensitive" : true,
+               "name" : "comment-tree",
+               "resourceObjectType" : {
+                  "name" : "List<CommentTreeItem>",
+                  "parentType" : "Base",
+                  "properties" : [
+                     {
+                        "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                        "name" : "totalResults",
+                        "type" : "integer"
+                     },
+                     {
+                        "docString" : "The items within the selected slice of the list.",
+                        "name" : "entries",
+                        "type" : "array<CommentTreeItem>"
+                     }
+                  ]
+               },
+               "supportedMethods" : {
+                  "GET" : "Get a list of assets that were posted in response to the selected asset and their depth in the response tree"
+               },
+               "supportedQueryArguments" : [
+                  "max-results",
+                  "selected-item",
                   "start-index"
                ]
             }
@@ -188,7 +410,17 @@
                   "type" : "string"
                },
                {
-                  "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\", for assets whose content is HTML, or \"text\", for assets whose content is plain text. Other formatting modes may be added in future.",
+                  "docString" : "The content of this asset rendered to HTML. This is currently available only for O<Post> and O<Page> assets.",
+                  "name" : "renderedContent",
+                  "type" : "string"
+               },
+               {
+                  "docString" : "A short, plain-text excerpt of the entry content. This is currently available only for O<Post> assets.",
+                  "name" : "excerpt",
+                  "type" : "string"
+               },
+               {
+                  "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
                   "name" : "textFormat",
                   "type" : "string"
                },
@@ -228,15 +460,21 @@
                   "type" : "integer"
                },
                {
-                  "docString" : "Set of strings containing the HTTP methods that the currently-authenticated client is allowed to apply to this asset.",
-                  "name" : "allowedMethods",
-                  "type" : "set<string>"
+                  "docString" : "The title of the asset.",
+                  "name" : "title",
+                  "type" : "string"
+               },
+               {
+                  "docString" : "The description of the asset.",
+                  "name" : "description",
+                  "type" : "string"
                }
             ]
          },
          "supportedMethods" : {
-            "DELETE" : "Delete the selected asset and its associated events, comments and favorites.",
-            "GET" : "Get basic information about the selected asset."
+            "DELETE" : "Update the selected asset",
+            "GET" : "Get basic information about the selected asset.",
+            "PUT" : ""
          },
          "supportedQueryArguments" : []
       },
@@ -247,6 +485,22 @@
          "formatSensitive" : true,
          "name" : "auth-tokens",
          "propertyEndpoints" : [],
+         "resourceObjectType" : {
+            "name" : "AuthToken",
+            "parentType" : "Base",
+            "properties" : [
+               {
+                  "docString" : "The actual auth token string, which is used as the access token when making an OAuth request.",
+                  "name" : "authToken",
+                  "type" : "string"
+               },
+               {
+                  "docString" : "T<Deprecated> The root object to which this auth token grants access. This is a legacy field maintained for backwards compatibility with older clients. Auth tokens are no longer scoped to specific objects, so this value will be meaningless in any case except those where a specific object is returned to preserve some client behavior.",
+                  "name" : "targetObject",
+                  "type" : "Base"
+               }
+            ]
+         },
          "supportedMethods" : {
             "GET" : "Get basic information about the selected auth token, including what object it grants access to."
          },
@@ -265,7 +519,42 @@
          "supportedQueryArguments" : []
       },
       {
-         "actionEndpoints" : [],
+         "actionEndpoints" : [
+            {
+               "formatSensitive" : true,
+               "name" : "remove-category",
+               "postObjectType" : {
+                  "properties" : [
+                     {
+                        "docString" : "The category to remove",
+                        "name" : "category",
+                        "type" : "string"
+                     }
+                  ]
+               },
+               "supportedMethods" : {
+                  "POST" : "Send label argument to remove a category from the blog"
+               },
+               "supportedQueryArguments" : []
+            },
+            {
+               "formatSensitive" : true,
+               "name" : "add-category",
+               "postObjectType" : {
+                  "properties" : [
+                     {
+                        "docString" : "The category to add",
+                        "name" : "category",
+                        "type" : "string"
+                     }
+                  ]
+               },
+               "supportedMethods" : {
+                  "POST" : "Send label argument to remove a category from the blog"
+               },
+               "supportedQueryArguments" : []
+            }
+         ],
          "canHaveId" : true,
          "canOmitId" : false,
          "formatSensitive" : true,
@@ -279,7 +568,7 @@
                      "name" : "by-user",
                      "parameterized" : true,
                      "resourceObjectType" : {
-                        "name" : "MobileProfile",
+                        "name" : "PostByEmailAddress",
                         "parentType" : "Base",
                         "properties" : [
                            {
@@ -301,7 +590,7 @@
                "formatSensitive" : true,
                "name" : "post-by-email-settings",
                "resourceObjectType" : {
-                  "name" : "MobileProfile",
+                  "name" : "PostByEmailAddress",
                   "parentType" : "Base",
                   "properties" : [
                      {
@@ -332,6 +621,189 @@
             {
                "filterEndpoints" : [],
                "formatSensitive" : true,
+               "name" : "categories",
+               "resourceObjectType" : {
+                  "name" : "List<string>",
+                  "parentType" : "Base",
+                  "properties" : [
+                     {
+                        "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                        "name" : "totalResults",
+                        "type" : "integer"
+                     },
+                     {
+                        "docString" : "The items within the selected slice of the list.",
+                        "name" : "entries",
+                        "type" : "array<string>"
+                     }
+                  ]
+               },
+               "supportedMethods" : {
+                  "GET" : "Get a list of categories which are defined for the selected blog."
+               },
+               "supportedQueryArguments" : [
+                  "max-results",
+                  "start-index"
+               ]
+            },
+            {
+               "filterEndpoints" : [
+                  {
+                     "filterEndpoints" : [
+                        {
+                           "filterEndpoints" : [],
+                           "formatSensitive" : true,
+                           "name" : "recent",
+                           "parameterized" : false,
+                           "resourceObjectType" : {
+                              "name" : "List<Comment>",
+                              "parentType" : "Base",
+                              "properties" : [
+                                 {
+                                    "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                                    "name" : "totalResults",
+                                    "type" : "integer"
+                                 },
+                                 {
+                                    "docString" : "The items within the selected slice of the list.",
+                                    "name" : "entries",
+                                    "type" : "array<Comment>"
+                                 }
+                              ]
+                           },
+                           "supportedMethods" : {
+                              "GET" : "Return the fifty most recent published comments associated with the selected blog"
+                           },
+                           "supportedQueryArguments" : [
+                              "max-results",
+                              "start-index"
+                           ]
+                        }
+                     ],
+                     "formatSensitive" : true,
+                     "name" : "published",
+                     "parameterized" : false,
+                     "resourceObjectType" : {
+                        "name" : "List<Comment>",
+                        "parentType" : "Base",
+                        "properties" : [
+                           {
+                              "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                              "name" : "totalResults",
+                              "type" : "integer"
+                           },
+                           {
+                              "docString" : "The items within the selected slice of the list.",
+                              "name" : "entries",
+                              "type" : "array<Comment>"
+                           }
+                        ]
+                     },
+                     "supportedMethods" : {
+                        "GET" : "Return a pageable list of published comments associated with the selected blog"
+                     },
+                     "supportedQueryArguments" : [
+                        "max-results",
+                        "start-index"
+                     ]
+                  }
+               ],
+               "formatSensitive" : true,
+               "name" : "comments",
+               "supportedMethods" : {
+                  "GET" : ""
+               },
+               "supportedQueryArguments" : [
+                  "max-results",
+                  "start-index"
+               ]
+            },
+            {
+               "filterEndpoints" : [],
+               "formatSensitive" : true,
+               "name" : "crosspost-accounts",
+               "resourceObjectType" : {
+                  "name" : "List<Account>",
+                  "parentType" : "Base",
+                  "properties" : [
+                     {
+                        "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                        "name" : "totalResults",
+                        "type" : "integer"
+                     },
+                     {
+                        "docString" : "The items within the selected slice of the list.",
+                        "name" : "entries",
+                        "type" : "array<Account>"
+                     }
+                  ]
+               },
+               "supportedMethods" : {
+                  "GET" : "Get  a list of accounts that can be used for crossposting with this blog."
+               },
+               "supportedQueryArguments" : [
+                  "max-results",
+                  "start-index"
+               ]
+            },
+            {
+               "filterEndpoints" : [],
+               "formatSensitive" : true,
+               "name" : "commenting-settings",
+               "resourceObjectType" : {
+                  "name" : "BlogCommentingSettings",
+                  "parentType" : "Base",
+                  "properties" : [
+                     {
+                        "docString" : "C<true> if this blog allows users to sign in to comment. If C<false>, all new comments are anonymous.",
+                        "name" : "signinAllowed",
+                        "type" : "boolean"
+                     },
+                     {
+                        "docString" : "C<true> if this blog requires users to be logged in in order to leave a comment. If C<false>, anonymous comments will be rejected.",
+                        "name" : "signinRequired",
+                        "type" : "boolean"
+                     },
+                     {
+                        "docString" : "C<true> if this blog requires anonymous comments to be submitted with an email address.",
+                        "name" : "emailAddressRequired",
+                        "type" : "boolean"
+                     },
+                     {
+                        "docString" : "C<true> if this blog requires anonymous commenters to pass a CAPTCHA before submitting a comment.",
+                        "name" : "captchaRequired",
+                        "type" : "boolean"
+                     },
+                     {
+                        "docString" : "C<true> if this blog places new comments into a moderation queue for approval before they are displayed.",
+                        "name" : "moderationEnabled",
+                        "type" : "boolean"
+                     },
+                     {
+                        "docString" : "Number of days after a post is published that comments will be allowed. Absent if this blog has no time limit for comments.",
+                        "name" : "timeLimit",
+                        "type" : "integer"
+                     },
+                     {
+                        "docString" : "C<true> if this blog allows commenters to use basic HTML formatting in comments.",
+                        "name" : "htmlAllowed",
+                        "type" : "boolean"
+                     },
+                     {
+                        "docString" : "C<true> if comments in this blog will automatically have any bare URLs turned into links.",
+                        "name" : "urlsAutoLinked",
+                        "type" : "boolean"
+                     }
+                  ]
+               },
+               "supportedMethods" : {
+                  "GET" : "Get the commenting-related settings for this blog."
+               },
+               "supportedQueryArguments" : []
+            },
+            {
+               "filterEndpoints" : [],
+               "formatSensitive" : true,
                "name" : "page-assets",
                "postObjectType" : {
                   "name" : "Page",
@@ -341,6 +813,36 @@
                         "docString" : "A list of links to the images that are embedded within the content of this page.",
                         "name" : "embeddedImageLinks",
                         "type" : "array<ImageLink>"
+                     },
+                     {
+                        "docString" : "T<Editable> The title of the page.",
+                        "name" : "title",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "T<Editable> The description of the page.",
+                        "name" : "description",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "T<Editable> A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
+                        "name" : "textFormat",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "T<Editable> The data format for C<content>.",
+                        "name" : "textFormat",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "T<Editable> An object describing the draft status and publication date for this page.",
+                        "name" : "publicationStatus",
+                        "type" : "PublicationStatus"
+                     },
+                     {
+                        "docString" : "T<Editable> An object describing the comment and trackback behavior for this page.",
+                        "name" : "feedbackStatus",
+                        "type" : "FeedbackStatus"
                      },
                      {
                         "docString" : "A URI that serves as a globally-unique id for the user. This can be used to recognise where the same user is returned in response to different requests, and as a mapping key for an application's local data store.",
@@ -373,7 +875,17 @@
                         "type" : "string"
                      },
                      {
-                        "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\", for assets whose content is HTML, or \"text\", for assets whose content is plain text. Other formatting modes may be added in future.",
+                        "docString" : "The content of this asset rendered to HTML. This is currently available only for O<Post> and O<Page> assets.",
+                        "name" : "renderedContent",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "A short, plain-text excerpt of the entry content. This is currently available only for O<Post> assets.",
+                        "name" : "excerpt",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
                         "name" : "textFormat",
                         "type" : "string"
                      },
@@ -413,14 +925,20 @@
                         "type" : "integer"
                      },
                      {
-                        "docString" : "Set of strings containing the HTTP methods that the currently-authenticated client is allowed to apply to this asset.",
-                        "name" : "allowedMethods",
-                        "type" : "set<string>"
+                        "docString" : "The title of the asset.",
+                        "name" : "title",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "The description of the asset.",
+                        "name" : "description",
+                        "type" : "string"
                      }
                   ]
                },
                "resourceObjectType" : {
                   "name" : "List<Page>",
+                  "parentType" : "Base",
                   "properties" : [
                      {
                         "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -447,6 +965,19 @@
                "filterEndpoints" : [
                   {
                      "filterEndpoints" : [
+                        {
+                           "filterEndpoints" : [],
+                           "formatSensitive" : true,
+                           "name" : "by-category",
+                           "parameterized" : true,
+                           "supportedMethods" : {
+                              "GET" : "Get the published posts in the selected blog that have been assigned to the given category."
+                           },
+                           "supportedQueryArguments" : [
+                              "max-results",
+                              "start-index"
+                           ]
+                        },
                         {
                            "filterEndpoints" : [],
                            "formatSensitive" : true,
@@ -479,6 +1010,34 @@
                      "parameterized" : false,
                      "resourceObjectType" : {
                         "name" : "List<Post>",
+                        "parentType" : "Base",
+                        "properties" : [
+                           {
+                              "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                              "name" : "totalResults",
+                              "type" : "integer"
+                           },
+                           {
+                              "docString" : "The items within the selected slice of the list.",
+                              "name" : "entries",
+                              "type" : "array<Post>"
+                           }
+                        ]
+                     },
+                     "supportedMethods" : {},
+                     "supportedQueryArguments" : [
+                        "max-results",
+                        "start-index"
+                     ]
+                  },
+                  {
+                     "filterEndpoints" : [],
+                     "formatSensitive" : true,
+                     "name" : "by-category",
+                     "parameterized" : true,
+                     "resourceObjectType" : {
+                        "name" : "List<Post>",
+                        "parentType" : "Base",
                         "properties" : [
                            {
                               "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -493,7 +1052,65 @@
                         ]
                      },
                      "supportedMethods" : {
-                        "GET" : ""
+                        "GET" : "Get all visibile posts in the selected blog that have been assigned to the given category."
+                     },
+                     "supportedQueryArguments" : [
+                        "max-results",
+                        "start-index"
+                     ]
+                  },
+                  {
+                     "filterEndpoints" : [],
+                     "formatSensitive" : true,
+                     "name" : "by-month",
+                     "parameterized" : true,
+                     "resourceObjectType" : {
+                        "name" : "List<Post>",
+                        "parentType" : "Base",
+                        "properties" : [
+                           {
+                              "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                              "name" : "totalResults",
+                              "type" : "integer"
+                           },
+                           {
+                              "docString" : "The items within the selected slice of the list.",
+                              "name" : "entries",
+                              "type" : "array<Post>"
+                           }
+                        ]
+                     },
+                     "supportedMethods" : {
+                        "GET" : "Get all visible posts in the selected blog that have a publication date within the selected month, specified as a string of the form \"YYYY-MM\"."
+                     },
+                     "supportedQueryArguments" : [
+                        "max-results",
+                        "start-index"
+                     ]
+                  },
+                  {
+                     "filterEndpoints" : [],
+                     "formatSensitive" : true,
+                     "name" : "recent",
+                     "parameterized" : false,
+                     "resourceObjectType" : {
+                        "name" : "List<Post>",
+                        "parentType" : "Base",
+                        "properties" : [
+                           {
+                              "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                              "name" : "totalResults",
+                              "type" : "integer"
+                           },
+                           {
+                              "docString" : "The items within the selected slice of the list.",
+                              "name" : "entries",
+                              "type" : "array<Post>"
+                           }
+                        ]
+                     },
+                     "supportedMethods" : {
+                        "GET" : "Get the most recent 50 posts in the selected blog, including draft and scheduled posts."
                      },
                      "supportedQueryArguments" : [
                         "max-results",
@@ -508,9 +1125,44 @@
                   "parentType" : "Asset",
                   "properties" : [
                      {
+                        "docString" : "T<Editable> A list of categories associated with the post.",
+                        "name" : "categories",
+                        "type" : "array<string>"
+                     },
+                     {
                         "docString" : "A list of links to the images that are embedded within the content of this post.",
                         "name" : "embeddedImageLinks",
                         "type" : "array<ImageLink>"
+                     },
+                     {
+                        "docString" : "T<Editable> The title of the post.",
+                        "name" : "title",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "T<Editable> The description of the post.",
+                        "name" : "description",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "T<Editable> The raw post content. The C<textFormat> property defines what format this data is in.",
+                        "name" : "content",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "T<Editable> A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
+                        "name" : "textFormat",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "T<Editable> An object describing the draft status and publication date for this post.",
+                        "name" : "publicationStatus",
+                        "type" : "PublicationStatus"
+                     },
+                     {
+                        "docString" : "T<Editable> An object describing the comment and trackback behavior for this post.",
+                        "name" : "feedbackStatus",
+                        "type" : "FeedbackStatus"
                      },
                      {
                         "docString" : "A URI that serves as a globally-unique id for the user. This can be used to recognise where the same user is returned in response to different requests, and as a mapping key for an application's local data store.",
@@ -543,7 +1195,17 @@
                         "type" : "string"
                      },
                      {
-                        "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\", for assets whose content is HTML, or \"text\", for assets whose content is plain text. Other formatting modes may be added in future.",
+                        "docString" : "The content of this asset rendered to HTML. This is currently available only for O<Post> and O<Page> assets.",
+                        "name" : "renderedContent",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "A short, plain-text excerpt of the entry content. This is currently available only for O<Post> assets.",
+                        "name" : "excerpt",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
                         "name" : "textFormat",
                         "type" : "string"
                      },
@@ -583,14 +1245,20 @@
                         "type" : "integer"
                      },
                      {
-                        "docString" : "Set of strings containing the HTTP methods that the currently-authenticated client is allowed to apply to this asset.",
-                        "name" : "allowedMethods",
-                        "type" : "set<string>"
+                        "docString" : "The title of the asset.",
+                        "name" : "title",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "The description of the asset.",
+                        "name" : "description",
+                        "type" : "string"
                      }
                   ]
                },
                "resourceObjectType" : {
                   "name" : "List<Post>",
+                  "parentType" : "Base",
                   "properties" : [
                      {
                         "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -605,7 +1273,8 @@
                   ]
                },
                "supportedMethods" : {
-                  "POST" : "Create a new post in the selected blog."
+                  "GET" : "Get a list of posts associated with the selected blog.",
+                  "POST" : "Add a new post to a blog"
                },
                "supportedQueryArguments" : [
                   "max-results",
@@ -787,6 +1456,7 @@
                      "parameterized" : false,
                      "resourceObjectType" : {
                         "name" : "List<Relationship>",
+                        "parentType" : "Base",
                         "properties" : [
                            {
                               "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -815,6 +1485,7 @@
                      "parameterized" : false,
                      "resourceObjectType" : {
                         "name" : "List<Relationship>",
+                        "parentType" : "Base",
                         "properties" : [
                            {
                               "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -835,12 +1506,42 @@
                         "max-results",
                         "start-index"
                      ]
+                  },
+                  {
+                     "filterEndpoints" : [],
+                     "formatSensitive" : true,
+                     "name" : "blocked",
+                     "parameterized" : false,
+                     "resourceObjectType" : {
+                        "name" : "List<Relationship>",
+                        "parentType" : "Base",
+                        "properties" : [
+                           {
+                              "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                              "name" : "totalResults",
+                              "type" : "integer"
+                           },
+                           {
+                              "docString" : "The items within the selected slice of the list.",
+                              "name" : "entries",
+                              "type" : "array<Relationship>"
+                           }
+                        ]
+                     },
+                     "supportedMethods" : {
+                        "GET" : "Get a list of relationships that have the Blocked type between users and the selected groups. (Restricted to group admin.)"
+                     },
+                     "supportedQueryArguments" : [
+                        "max-results",
+                        "start-index"
+                     ]
                   }
                ],
                "formatSensitive" : true,
                "name" : "memberships",
                "resourceObjectType" : {
                   "name" : "List<Relationship>",
+                  "parentType" : "Base",
                   "properties" : [
                      {
                         "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -868,6 +1569,7 @@
                "name" : "events",
                "resourceObjectType" : {
                   "name" : "List<Event>",
+                  "parentType" : "Base",
                   "properties" : [
                      {
                         "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -933,7 +1635,17 @@
                         "type" : "string"
                      },
                      {
-                        "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\", for assets whose content is HTML, or \"text\", for assets whose content is plain text. Other formatting modes may be added in future.",
+                        "docString" : "The content of this asset rendered to HTML. This is currently available only for O<Post> and O<Page> assets.",
+                        "name" : "renderedContent",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "A short, plain-text excerpt of the entry content. This is currently available only for O<Post> assets.",
+                        "name" : "excerpt",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
                         "name" : "textFormat",
                         "type" : "string"
                      },
@@ -973,14 +1685,20 @@
                         "type" : "integer"
                      },
                      {
-                        "docString" : "Set of strings containing the HTTP methods that the currently-authenticated client is allowed to apply to this asset.",
-                        "name" : "allowedMethods",
-                        "type" : "set<string>"
+                        "docString" : "The title of the asset.",
+                        "name" : "title",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "The description of the asset.",
+                        "name" : "description",
+                        "type" : "string"
                      }
                   ]
                },
                "resourceObjectType" : {
                   "name" : "List<Photo>",
+                  "parentType" : "Base",
                   "properties" : [
                      {
                         "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -1051,7 +1769,17 @@
                         "type" : "string"
                      },
                      {
-                        "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\", for assets whose content is HTML, or \"text\", for assets whose content is plain text. Other formatting modes may be added in future.",
+                        "docString" : "The content of this asset rendered to HTML. This is currently available only for O<Post> and O<Page> assets.",
+                        "name" : "renderedContent",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "A short, plain-text excerpt of the entry content. This is currently available only for O<Post> assets.",
+                        "name" : "excerpt",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
                         "name" : "textFormat",
                         "type" : "string"
                      },
@@ -1091,14 +1819,20 @@
                         "type" : "integer"
                      },
                      {
-                        "docString" : "Set of strings containing the HTTP methods that the currently-authenticated client is allowed to apply to this asset.",
-                        "name" : "allowedMethods",
-                        "type" : "set<string>"
+                        "docString" : "The title of the asset.",
+                        "name" : "title",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "The description of the asset.",
+                        "name" : "description",
+                        "type" : "string"
                      }
                   ]
                },
                "resourceObjectType" : {
                   "name" : "List<Video>",
+                  "parentType" : "Base",
                   "properties" : [
                      {
                         "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -1129,9 +1863,44 @@
                   "parentType" : "Asset",
                   "properties" : [
                      {
+                        "docString" : "T<Editable> A list of categories associated with the post.",
+                        "name" : "categories",
+                        "type" : "array<string>"
+                     },
+                     {
                         "docString" : "A list of links to the images that are embedded within the content of this post.",
                         "name" : "embeddedImageLinks",
                         "type" : "array<ImageLink>"
+                     },
+                     {
+                        "docString" : "T<Editable> The title of the post.",
+                        "name" : "title",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "T<Editable> The description of the post.",
+                        "name" : "description",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "T<Editable> The raw post content. The C<textFormat> property defines what format this data is in.",
+                        "name" : "content",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "T<Editable> A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
+                        "name" : "textFormat",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "T<Editable> An object describing the draft status and publication date for this post.",
+                        "name" : "publicationStatus",
+                        "type" : "PublicationStatus"
+                     },
+                     {
+                        "docString" : "T<Editable> An object describing the comment and trackback behavior for this post.",
+                        "name" : "feedbackStatus",
+                        "type" : "FeedbackStatus"
                      },
                      {
                         "docString" : "A URI that serves as a globally-unique id for the user. This can be used to recognise where the same user is returned in response to different requests, and as a mapping key for an application's local data store.",
@@ -1164,7 +1933,17 @@
                         "type" : "string"
                      },
                      {
-                        "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\", for assets whose content is HTML, or \"text\", for assets whose content is plain text. Other formatting modes may be added in future.",
+                        "docString" : "The content of this asset rendered to HTML. This is currently available only for O<Post> and O<Page> assets.",
+                        "name" : "renderedContent",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "A short, plain-text excerpt of the entry content. This is currently available only for O<Post> assets.",
+                        "name" : "excerpt",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
                         "name" : "textFormat",
                         "type" : "string"
                      },
@@ -1204,14 +1983,20 @@
                         "type" : "integer"
                      },
                      {
-                        "docString" : "Set of strings containing the HTTP methods that the currently-authenticated client is allowed to apply to this asset.",
-                        "name" : "allowedMethods",
-                        "type" : "set<string>"
+                        "docString" : "The title of the asset.",
+                        "name" : "title",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "The description of the asset.",
+                        "name" : "description",
+                        "type" : "string"
                      }
                   ]
                },
                "resourceObjectType" : {
                   "name" : "List<Post>",
+                  "parentType" : "Base",
                   "properties" : [
                      {
                         "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -1277,7 +2062,17 @@
                         "type" : "string"
                      },
                      {
-                        "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\", for assets whose content is HTML, or \"text\", for assets whose content is plain text. Other formatting modes may be added in future.",
+                        "docString" : "The content of this asset rendered to HTML. This is currently available only for O<Post> and O<Page> assets.",
+                        "name" : "renderedContent",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "A short, plain-text excerpt of the entry content. This is currently available only for O<Post> assets.",
+                        "name" : "excerpt",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "A keyword which indicates what formatting mode is used for the content of this asset. This can currently be \"html\" for assets whose content is HTML, \"html_convert_linebreaks\" for assets whose content is HTML with paragraph tags added automatically, or \"markdown\" for assets whose content is Markdown. Other formatting modes may be added in future. Applications which present assets for editing should use this property to present an appropriate editor.",
                         "name" : "textFormat",
                         "type" : "string"
                      },
@@ -1317,14 +2112,20 @@
                         "type" : "integer"
                      },
                      {
-                        "docString" : "Set of strings containing the HTTP methods that the currently-authenticated client is allowed to apply to this asset.",
-                        "name" : "allowedMethods",
-                        "type" : "set<string>"
+                        "docString" : "The title of the asset.",
+                        "name" : "title",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "The description of the asset.",
+                        "name" : "description",
+                        "type" : "string"
                      }
                   ]
                },
                "resourceObjectType" : {
                   "name" : "List<Link>",
+                  "parentType" : "Base",
                   "properties" : [
                      {
                         "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -1517,7 +2318,34 @@
                "name" : "status",
                "resourceObjectType" : {
                   "name" : "RelationshipStatus",
-                  "properties" : []
+                  "parentType" : "Relationship",
+                  "properties" : [
+                     {
+                        "docString" : "A list of strings containing relationship type URIs.",
+                        "name" : "types",
+                        "type" : "array<string>"
+                     },
+                     {
+                        "docString" : "The source entity, the 'subject' of the relationship.",
+                        "name" : "source",
+                        "type" : "Entity"
+                     },
+                     {
+                        "docString" : "The target entity, the 'object' of the relationship.",
+                        "name" : "target",
+                        "type" : "Entity"
+                     },
+                     {
+                        "docString" : "A RelationshipStatus object describing the types of relationship that currently exist between the source and the target.",
+                        "name" : "status",
+                        "type" : "RelationshipStatus"
+                     },
+                     {
+                        "docString" : "The hyperlinks for the relationship object.",
+                        "name" : "links",
+                        "type" : "set<LegacyHyperlink>"
+                     }
+                  ]
                },
                "supportedMethods" : {
                   "GET" : "Get the status information for the selected relationship, including its types.",
@@ -1528,6 +2356,7 @@
          ],
          "resourceObjectType" : {
             "name" : "List<Relationship>",
+            "parentType" : "Base",
             "properties" : [
                {
                   "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -1630,6 +2459,7 @@
                      "parameterized" : false,
                      "resourceObjectType" : {
                         "name" : "List<Relationship>",
+                        "parentType" : "Base",
                         "properties" : [
                            {
                               "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -1658,6 +2488,7 @@
                      "parameterized" : false,
                      "resourceObjectType" : {
                         "name" : "List<Relationship>",
+                        "parentType" : "Base",
                         "properties" : [
                            {
                               "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -1686,6 +2517,7 @@
                      "parameterized" : true,
                      "resourceObjectType" : {
                         "name" : "List<Relationship>",
+                        "parentType" : "Base",
                         "properties" : [
                            {
                               "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -1712,6 +2544,7 @@
                "name" : "memberships",
                "resourceObjectType" : {
                   "name" : "List<Relationship>",
+                  "parentType" : "Base",
                   "properties" : [
                      {
                         "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -1770,6 +2603,7 @@
                },
                "resourceObjectType" : {
                   "name" : "List<Favorite>",
+                  "parentType" : "Base",
                   "properties" : [
                      {
                         "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -1798,6 +2632,7 @@
                "name" : "blogs",
                "resourceObjectType" : {
                   "name" : "List<Blog>",
+                  "parentType" : "Base",
                   "properties" : [
                      {
                         "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -1842,6 +2677,7 @@
                      "parameterized" : false,
                      "resourceObjectType" : {
                         "name" : "List<Relationship>",
+                        "parentType" : "Base",
                         "properties" : [
                            {
                               "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -1870,6 +2706,7 @@
                      "parameterized" : true,
                      "resourceObjectType" : {
                         "name" : "List<Relationship>",
+                        "parentType" : "Base",
                         "properties" : [
                            {
                               "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -1912,6 +2749,7 @@
                      "parameterized" : false,
                      "resourceObjectType" : {
                         "name" : "List<Relationship>",
+                        "parentType" : "Base",
                         "properties" : [
                            {
                               "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -1938,6 +2776,7 @@
                "name" : "relationships",
                "resourceObjectType" : {
                   "name" : "List<Relationship>",
+                  "parentType" : "Base",
                   "properties" : [
                      {
                         "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -1980,6 +2819,7 @@
                      "parameterized" : true,
                      "resourceObjectType" : {
                         "name" : "List<Event>",
+                        "parentType" : "Base",
                         "properties" : [
                            {
                               "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -2006,6 +2846,7 @@
                "name" : "events",
                "resourceObjectType" : {
                   "name" : "List<Event>",
+                  "parentType" : "Base",
                   "properties" : [
                      {
                         "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -2036,6 +2877,7 @@
                      "parameterized" : true,
                      "resourceObjectType" : {
                         "name" : "List<Event>",
+                        "parentType" : "Base",
                         "properties" : [
                            {
                               "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -2062,6 +2904,7 @@
                "name" : "notifications",
                "resourceObjectType" : {
                   "name" : "List<Event>",
+                  "parentType" : "Base",
                   "properties" : [
                      {
                         "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
@@ -2126,11 +2969,6 @@
                {
                   "docString" : "An array of object type identifier URIs. At the present time, only one object type is returned per asset, but this may be extended in future. Clients should scan this list and ignore any types that are not recognised. This list also includes appropriate type URIs as defined by the ActivityStrea.ms schema specification.",
                   "name" : "objectTypes",
-                  "type" : "set<string>"
-               },
-               {
-                  "docString" : "Set of strings containing the HTTP methods that the currently-authenticated client is allowed to apply to this user.",
-                  "name" : "allowedMethods",
                   "type" : "set<string>"
                },
                {
