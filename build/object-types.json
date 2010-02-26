@@ -1169,6 +1169,11 @@
          "parentType" : "Asset",
          "properties" : [
             {
+               "docString" : "T<Editable> The base name of the page, used to create the permalinkUrl.",
+               "name" : "filename",
+               "type" : "string"
+            },
+            {
                "docString" : "A list of links to the images that are embedded within the content of this page.",
                "name" : "embeddedImageLinks",
                "type" : "array<ImageLink>"
@@ -1418,6 +1423,11 @@
             {
                "docString" : "T<Editable> The description of the post.",
                "name" : "description",
+               "type" : "string"
+            },
+            {
+               "docString" : "T<Editable> The base name of the post, used to create the permalinkUri.",
+               "name" : "filename",
                "type" : "string"
             },
             {

@@ -61,7 +61,7 @@ sub prefix { '/[% noun.name %]' }
 sub get {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id);
+    $api->_get($id);
 }
 
 [% FOREACH property IN noun.propertyEndpoints;
@@ -77,12 +77,20 @@ sub [% safe(property.name) %] {
 [% END # IF -%]
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, '[% property.name %]', [% IF filter %]'[% safe(filter.name) %]'[% ELSE %]undef[% END %], [% UNLESS filter && filter.parameterized %]undef, [% END %][% IF property.resourceObjectType.properties.size %]@_[% END %]);
+    $api->_get($id, '[% property.name %]', [% IF filter %]'[% safe(filter.name) %]'[% ELSE %]undef[% END %], [% UNLESS filter && filter.parameterized %]undef, [% END %][% IF property.resourceObjectType.properties.size %]@_[% END %]);
 }
 
 [% END # FOREACH filter -%]
 [% END # FOREACH property -%]
 
+[% FOREACH action IN noun.actionEndpoints -%]
+sub [% safe(action.name) %] {
+    my $api = shift;
+    my $id  = shift;
+    $api->_post($id, '[% action.name %]', undef, undef, [% IF action.postObjectType.properties.size %]@_[% END %]);
+}
+
+[% END # FOREACH action -%]
 ### END auto-generated
 TEMPLATE
 

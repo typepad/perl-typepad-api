@@ -553,6 +553,32 @@
                   "POST" : "Send label argument to remove a category from the blog"
                },
                "supportedQueryArguments" : []
+            },
+            {
+               "formatSensitive" : true,
+               "name" : "discover-external-post-asset",
+               "postObjectType" : {
+                  "properties" : [
+                     {
+                        "docString" : "The URL of the page whose external post stub is being retrieved.",
+                        "name" : "permalinkUrl",
+                        "type" : "string"
+                     }
+                  ]
+               },
+               "responseObjectType" : {
+                  "properties" : [
+                     {
+                        "docString" : "The asset that acts as a stub for the given permalink.",
+                        "name" : "asset",
+                        "type" : "Asset"
+                     }
+                  ]
+               },
+               "supportedMethods" : {
+                  "POST" : "If the selected blog is a connected blog, create or retrieve the external post stub for the given permalink."
+               },
+               "supportedQueryArguments" : []
             }
          ],
          "canHaveId" : true,
@@ -809,6 +835,11 @@
                   "name" : "Page",
                   "parentType" : "Asset",
                   "properties" : [
+                     {
+                        "docString" : "T<Editable> The base name of the page, used to create the permalinkUrl.",
+                        "name" : "filename",
+                        "type" : "string"
+                     },
                      {
                         "docString" : "A list of links to the images that are embedded within the content of this page.",
                         "name" : "embeddedImageLinks",
@@ -1142,6 +1173,11 @@
                      {
                         "docString" : "T<Editable> The description of the post.",
                         "name" : "description",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "T<Editable> The base name of the post, used to create the permalinkUri.",
+                        "name" : "filename",
                         "type" : "string"
                      },
                      {
@@ -1880,6 +1916,11 @@
                      {
                         "docString" : "T<Editable> The description of the post.",
                         "name" : "description",
+                        "type" : "string"
+                     },
+                     {
+                        "docString" : "T<Editable> The base name of the post, used to create the permalinkUri.",
+                        "name" : "filename",
                         "type" : "string"
                      },
                      {
