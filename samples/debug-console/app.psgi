@@ -52,17 +52,19 @@ my $home = sub {
     my $session = $req->session;
     my $obj;
     if ( $session && $session->{user} ) {
+        $tp->access_token( $session->{user}{token} );
+        $tp->access_token_secret( $session->{user}{token_secret} );
         $obj = $tp->users->get( $session->{user}{xid} );
     }
 
     local $Data::Dumper::Indent = 1;
 
     my $code = $req->parameters->{code};
-    my($result, $err);
+    my($result, $err, $warn);
     if ($code && $obj) {
         # WHOAH
         my $user = $obj; # alias
-        local $SIG{__WARN__} = sub { $err .= $_[0] };
+        local $SIG{__WARN__} = sub { $warn .= $_[0] };
         $result = eval "no strict; $code";
         $err = $@ if $@;
     } else {
@@ -72,8 +74,8 @@ my $home = sub {
 CODE
     }
 
-    my $html = render_mt( <<'HTML', $obj, $code, $result, $err );
-? my($user, $code, $res, $err) = @_;
+    my $html = render_mt( <<'HTML', $obj, $code, $result, $err, $warn );
+? my($user, $code, $res, $err, $warn) = @_;
 <html>
 <head>
     <title>TypePad API debug console</title>
@@ -95,7 +97,10 @@ CODE
 ?   if ( $res ) {
       <textarea rows="16" cols="80" class="dump"><?= Dumper $res ?></textarea>
 ?   } elsif ( $err ) {
-      <textarea rows="16" cols="80"><?= $err ?></textarea>
+      <textarea rows="2" cols="80"><?= $err ?></textarea>
+?   }
+?   if ( $warn ) {
+      <textarea rows="8" cols="80"><?= $warn ?></textarea>
 ?   }
     <h5><a href="/logout">(Sign out)</a></h5>
 ? } else {
