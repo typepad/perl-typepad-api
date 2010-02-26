@@ -27,10 +27,22 @@ sub feedback_status {
     $api->_get($id, 'feedback-status', undef, undef, @_);
 }
 
+sub set_feedback_status {
+    my $api = shift;
+    my $id  = shift;
+    $api->_post($id, 'feedback-status', undef, undef, @_);
+}
+
 sub publication_status {
     my $api = shift;
     my $id  = shift;
     $api->_get($id, 'publication-status', undef, undef, @_);
+}
+
+sub set_publication_status {
+    my $api = shift;
+    my $id  = shift;
+    $api->_post($id, 'publication-status', undef, undef, @_);
 }
 
 sub categories {
@@ -43,6 +55,12 @@ sub comments {
     my $api = shift;
     my $id  = shift;
     $api->_get($id, 'comments', undef, undef, @_);
+}
+
+sub new_comment {
+    my $api = shift;
+    my $id  = shift;
+    $api->_post($id, 'comments', undef, undef, @_);
 }
 
 sub media_assets {

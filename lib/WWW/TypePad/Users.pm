@@ -51,6 +51,12 @@ sub favorites {
     $api->_get($id, 'favorites', undef, undef, @_);
 }
 
+sub new_favorite {
+    my $api = shift;
+    my $id  = shift;
+    $api->_post($id, 'favorites', undef, undef, @_);
+}
+
 sub blogs {
     my $api = shift;
     my $id  = shift;

@@ -69,6 +69,12 @@ sub page_assets {
     $api->_get($id, 'page-assets', undef, undef, @_);
 }
 
+sub new_page_asset {
+    my $api = shift;
+    my $id  = shift;
+    $api->_post($id, 'page-assets', undef, undef, @_);
+}
+
 sub post_assets {
     my $api = shift;
     my $id  = shift;
@@ -97,6 +103,12 @@ sub recent_post_assets {
     my $api = shift;
     my $id  = shift;
     $api->_get($id, 'post-assets', 'recent', undef, @_);
+}
+
+sub new_post_asset {
+    my $api = shift;
+    my $id  = shift;
+    $api->_post($id, 'post-assets', undef, undef, @_);
 }
 
 

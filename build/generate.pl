@@ -81,6 +81,24 @@ sub [% safe(property.name) %] {
 }
 
 [% END # FOREACH filter -%]
+[% IF property.supportedMethods.POST;
+   SET prop_singular = safe(property.name).replace('s$', '');
+ -%]
+sub new_[% prop_singular %] {
+    my $api = shift;
+    my $id  = shift;
+    $api->_post($id, '[% property.name %]', undef, undef, @_);
+}
+
+[% END -%]
+[% IF property.supportedMethods.PUT -%]
+sub set_[% safe(property.name) %] {
+    my $api = shift;
+    my $id  = shift;
+    $api->_post($id, '[% property.name %]', undef, undef, @_);
+}
+
+[% END -%]
 [% END # FOREACH property -%]
 
 [% FOREACH action IN noun.actionEndpoints -%]

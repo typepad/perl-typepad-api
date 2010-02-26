@@ -21,6 +21,12 @@ sub status {
     $api->_get($id, 'status', undef, undef, @_);
 }
 
+sub set_status {
+    my $api = shift;
+    my $id  = shift;
+    $api->_post($id, 'status', undef, undef, @_);
+}
+
 
 ### END auto-generated
 
