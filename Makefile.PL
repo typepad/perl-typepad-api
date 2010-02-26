@@ -1,4 +1,5 @@
 use inc::Module::Install;
+use Module::Install::ReadmeFromPod;
 name 'WWW-TypePad';
 all_from 'lib/WWW/TypePad.pm';
 readme_from 'lib/WWW/TypePad.pm';
