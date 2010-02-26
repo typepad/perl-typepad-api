@@ -17,11 +17,18 @@ sub _endpoint {
     return $path;
 }
 
-sub _call {
+sub _get {
     my $api = shift;
     my($id, $noun, $filter, $filter_arg, @rest) = @_;
     my $path = $api->_endpoint($id, $noun, $filter, $filter_arg);
     return $api->base->call(GET => $path, @rest);
+}
+
+sub _post {
+    my $api = shift;
+    my($id, $noun, $filter, $filter_arg, @rest) = @_;
+    my $path = $api->_endpoint($id, $noun, $filter, $filter_arg);
+    return $api->base->call(POST => $path, @rest);
 }
 
 1;

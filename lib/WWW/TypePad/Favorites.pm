@@ -12,7 +12,7 @@ sub prefix { '/favorites' }
 sub get {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id);
+    $api->_get($id);
 }
 
 

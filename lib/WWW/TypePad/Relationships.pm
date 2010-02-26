@@ -12,13 +12,13 @@ sub prefix { '/relationships' }
 sub get {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id);
+    $api->_get($id);
 }
 
 sub status {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, 'status', undef, undef, @_);
+    $api->_get($id, 'status', undef, undef, @_);
 }
 
 

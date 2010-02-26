@@ -5,7 +5,7 @@ use 5.008_001;
 our $VERSION = '0.01';
 
 use Any::Moose;
-use JSON qw( decode_json );
+use JSON;
 use LWP::UserAgent;
 use Net::OAuth::Simple;
 use WWW::TypePad::Util;
@@ -96,14 +96,21 @@ sub _call {
     unless ( $uri =~ /^http/ ) {
         $uri = $api->uri_for( $uri );
     }
-    if ( $qs ) {
+    if ( $method eq 'GET'&& $qs ) {
         $uri = URI->new( $uri );
         $uri->query_form( $qs );
     }
     my $res;
     if ( $api->access_token && !$anon ) {
         $uri =~ s/^http:/https:/;
-        $res = $api->oauth->make_restricted_request( $uri, $method );
+
+        my %extra;
+        if (($method eq 'POST' or $method eq 'PUT') and $qs) {
+            $extra{ContentBody} = JSON::encode_json($qs);
+            $extra{ContentType} = 'application/json';
+        }
+
+        $res = $api->oauth->make_restricted_request( $uri, $method, %extra );
     } else {
         my $ua = LWP::UserAgent->new;
         my $req = HTTP::Request->new( $method => $uri );
@@ -114,7 +121,8 @@ sub _call {
         WWW::TypePad::Error::HTTP->throw( $res->code, $res->message );
     }
 
-    return decode_json( $res->content );
+    return 1 if $res->code == 204;
+    return JSON::decode_json( $res->content );
 }
 
 package Net::OAuth::Simple::AuthHeader;
@@ -142,6 +150,9 @@ sub make_restricted_request {
 
     $method = lc $method;
 
+    my $content_body = delete $extras{ContentBody};
+    my $content_type = delete $extras{ContentType};
+
     my $request = Net::OAuth::ProtectedResourceRequest->new(
         consumer_key     => $self->consumer_key,
         consumer_secret  => $self->consumer_secret,
@@ -164,7 +175,12 @@ sub make_restricted_request {
 
     my $request_url = URI->new( $url );
     my $response = $self->{browser}->$method(
-        $request_url, 'Authorization' => $request->to_authorization_header
+        $request_url, 'Authorization' => $request->to_authorization_header,
+        ( $content_body ? (
+            'Content-Type'   => $content_type,
+            'Content-Length' => length $content_body,
+            'Content'        => $content_body,
+        ) : () ),
     );
 
     if ( $response->is_redirect ) {

@@ -12,103 +12,103 @@ sub prefix { '/users' }
 sub get {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id);
+    $api->_get($id);
 }
 
 sub profile {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, 'profile', undef, undef, @_);
+    $api->_get($id, 'profile', undef, undef, @_);
 }
 
 sub memberships {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, 'memberships', undef, undef, @_);
+    $api->_get($id, 'memberships', undef, undef, @_);
 }
 
 sub admin_memberships {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, 'memberships', 'admin', undef, @_);
+    $api->_get($id, 'memberships', 'admin', undef, @_);
 }
 
 sub member_memberships {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, 'memberships', 'member', undef, @_);
+    $api->_get($id, 'memberships', 'member', undef, @_);
 }
 
 sub memberships_by_group {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, 'memberships', 'by_group', @_);
+    $api->_get($id, 'memberships', 'by_group', @_);
 }
 
 sub favorites {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, 'favorites', undef, undef, @_);
+    $api->_get($id, 'favorites', undef, undef, @_);
 }
 
 sub blogs {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, 'blogs', undef, undef, @_);
+    $api->_get($id, 'blogs', undef, undef, @_);
 }
 
 sub relationships {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, 'relationships', undef, undef, @_);
+    $api->_get($id, 'relationships', undef, undef, @_);
 }
 
 sub follower_relationships {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, 'relationships', 'follower', undef, @_);
+    $api->_get($id, 'relationships', 'follower', undef, @_);
 }
 
 sub relationships_by_group {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, 'relationships', 'by_group', @_);
+    $api->_get($id, 'relationships', 'by_group', @_);
 }
 
 sub following_relationships {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, 'relationships', 'following', undef, @_);
+    $api->_get($id, 'relationships', 'following', undef, @_);
 }
 
 sub elsewhere_accounts {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, 'elsewhere-accounts', undef, undef, );
+    $api->_get($id, 'elsewhere-accounts', undef, undef, );
 }
 
 sub events {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, 'events', undef, undef, @_);
+    $api->_get($id, 'events', undef, undef, @_);
 }
 
 sub events_by_group {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, 'events', 'by_group', @_);
+    $api->_get($id, 'events', 'by_group', @_);
 }
 
 sub notifications {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, 'notifications', undef, undef, @_);
+    $api->_get($id, 'notifications', undef, undef, @_);
 }
 
 sub notifications_by_group {
     my $api = shift;
     my $id  = shift;
-    $api->_call($id, 'notifications', 'by_group', @_);
+    $api->_get($id, 'notifications', 'by_group', @_);
 }
 
 
