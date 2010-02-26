@@ -8,11 +8,24 @@ use Any::Moose;
 use JSON qw( decode_json );
 use LWP::UserAgent;
 use Net::OAuth::Simple;
-use WWW::TypePad::Assets;
-use WWW::TypePad::Error;
-use WWW::TypePad::Users;
-use WWW::TypePad::Groups;
 use WWW::TypePad::Util;
+use WWW::TypePad::Error;
+
+# TODO import flag to preload them all
+use WWW::TypePad::ApiKeys;
+use WWW::TypePad::Applications;
+use WWW::TypePad::Assets;
+use WWW::TypePad::AuthTokens;
+use WWW::TypePad::BatchProcessor;
+use WWW::TypePad::Blogs;
+use WWW::TypePad::BrowserUpload;
+use WWW::TypePad::Events;
+use WWW::TypePad::Favorites;
+use WWW::TypePad::Groups;
+use WWW::TypePad::Nouns;
+use WWW::TypePad::ObjectTypes;
+use WWW::TypePad::Relationships;
+use WWW::TypePad::Users;
 
 has 'consumer_key' => ( is => 'rw' );
 has 'consumer_secret' => ( is => 'rw' );
@@ -20,6 +33,17 @@ has 'access_token' => ( is => 'rw' );
 has 'access_token_secret' => ( is => 'rw' );
 has 'host' => ( is => 'rw', default => 'api.typepad.com' );
 has '_oauth' => ( is => 'rw' );
+
+for my $object_type (qw( apikeys applications assets auth_tokens batch_processor blogs browser_upload
+                         events favorites groups nouns objecttypes relationships users )) {
+    my $backend_class = ucfirst $object_type;
+    $backend_class =~ s/_(\w)/uc $1/eg;
+    $backend_class = "WWW::TypePad::$backend_class";
+    has $object_type => (
+        is => 'rw', lazy => 1,
+        default => sub { $backend_class->new({ base => $_[0] }) },
+    );
+}
 
 sub oauth {
     my $api = shift;
@@ -54,21 +78,6 @@ sub uri_for {
     my $api = shift;
     my( $path ) = @_;
     return 'http://' . $api->host . $path;
-}
-
-sub assets {
-    my $api = shift;
-    return WWW::TypePad::Assets->new( { base => $api } );
-}
-
-sub users {
-    my $api = shift;
-    return WWW::TypePad::Users->new( { base => $api } );
-}
-
-sub groups {
-    my $api = shift;
-    return WWW::TypePad::Groups->new( { base => $api } );
 }
 
 sub call {
