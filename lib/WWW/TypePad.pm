@@ -2,7 +2,7 @@ package WWW::TypePad;
 use strict;
 use 5.008_001;
 
-our $VERSION = '0.01';
+our $VERSION = '0.009_01';
 
 use Any::Moose;
 use JSON;
@@ -219,15 +219,30 @@ WWW::TypePad - Client for the TypePad Platform
 WWW::TypePad is a Perl library implementing an interface to the TypePad
 API platform.
 
+=head1 WARNINGS
+
+B<The object interface and implementations are considered ALPHA and
+will be likely to change in the future versions>.
+
 =head1 AUTHOR
 
-Benjamin Trott E<lt>ben@sixapart.comE<gt>
+Benjamin Trott and Tatsuhiko Miyagawa E<lt>cpan@sixapart.comE<gt>
+
+=head1 COPYRIGHT
+
+Copyright 2010- Six Apart, Ltd.
 
 =head1 LICENSE
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
+=head1 COMMUNITY
+
+L<http://github.com/sixapart/perl-typepad-api>
+
 =head1 SEE ALSO
+
+L<http://developers.typepad.com/>
 
 =cut

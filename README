@@ -9,11 +9,23 @@ DESCRIPTION
     WWW::TypePad is a Perl library implementing an interface to the TypePad
     API platform.
 
+WARNINGS
+    The object interface and implementations are considered ALPHA and will
+    be likely to change in the future versions.
+
 AUTHOR
-    Benjamin Trott <ben@sixapart.com>
+    Benjamin Trott and Tatsuhiko Miyagawa <cpan@sixapart.com>
+
+COPYRIGHT
+    Copyright 2010- Six Apart, Ltd.
 
 LICENSE
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.
 
+COMMUNITY
+    <http://github.com/sixapart/perl-typepad-api>
+
 SEE ALSO
+    <http://developers.typepad.com/>
+
