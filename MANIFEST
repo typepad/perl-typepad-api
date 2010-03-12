@@ -38,7 +38,7 @@ META.yml
 README
 samples/debug-console/app.psgi
 t/00_compile.t
-t/01_call.t
+xt/01_call.t
 xt/perlcritic.t
 xt/pod.t
 xt/synopsis.t
