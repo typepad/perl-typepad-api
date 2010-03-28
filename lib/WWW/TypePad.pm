@@ -37,6 +37,23 @@ has 'access_token_secret' => ( is => 'rw' );
 has 'host' => ( is => 'rw', default => 'api.typepad.com' );
 has '_oauth' => ( is => 'rw' );
 
+has 'ua' => (
+    is      => 'rw',
+    isa     => 'LWP::UserAgent',
+
+    # All browsers must be an instance of an LWP::UserAgent, so that
+    # we can guarantee that we can disable redirects.
+    default => sub {
+        my $ua = LWP::UserAgent->new;
+        $ua->max_redirect( 0 );
+        return $ua;
+    },
+    trigger => sub {
+        my( $self, $ua, $attr ) = @_;
+        $ua->max_redirect( 0 );
+    },
+);
+
 for my $object_type (qw( apikeys applications assets auth_tokens batch_processor blogs browser_upload
                          events favorites groups nouns objecttypes relationships users )) {
     my $backend_class = ucfirst $object_type;
@@ -54,7 +71,7 @@ sub oauth {
         my $apikey = $api->get_apikey( $api->consumer_key );
         my $links = $apikey->{owner}{links};
 
-        $api->_oauth( Net::OAuth::Simple::AuthHeader->new(
+        my $oauth = Net::OAuth::Simple::AuthHeader->new(
             tokens => {
                 consumer_key          => $api->consumer_key,
                 consumer_secret       => $api->consumer_secret,
@@ -66,7 +83,12 @@ sub oauth {
                 request_token_url   => WWW::TypePad::Util::l( $links, 'oauth-request-token-endpoint' ),
                 access_token_url    => WWW::TypePad::Util::l( $links, 'oauth-access-token-endpoint' ),
             },
-        ) );
+        );
+
+        # Substitute our own LWP::UserAgent instance for the OAuth browser.
+        $oauth->{browser} = $api->ua;
+
+        $api->_oauth( $oauth );
     }
     return $api->_oauth;
 }
@@ -114,11 +136,22 @@ sub _call {
             $extra{ContentType} = 'application/json';
         }
 
-        $res = $api->oauth->make_restricted_request( $uri, $method, %extra );
+        my $oauth = $api->oauth;
+        $res = $oauth->make_restricted_request( $uri, $method, %extra );
+        
+        if ( $res->is_redirect ) {
+            return $oauth->make_restricted_request(
+                $res->header( 'Location' ), $method, %extra
+            );
+        }
     } else {
-        my $ua = LWP::UserAgent->new;
         my $req = HTTP::Request->new( $method => $uri );
-        $res = $ua->request( $req );
+        $res = $api->ua->request( $req );
+        
+        if ( $res->is_redirect ) {
+            $req = HTTP::Request->new( $method => $res->header( 'Location' ) );
+            $res = $api->ua->request( $req );
+        }
     }
 
     unless ( $res->is_success ) {
@@ -180,14 +213,10 @@ sub call_upload {
             file                    => [ $filename ],
         ];
 
-    # Disable the automatic following of redirects.
-    my $ua = LWP::UserAgent->new;
-    $ua->max_redirect( 0 );
-
     # The response to an upload is always a redirect; if it's anything
     # else, this indicates some internal error we weren't planning for,
     # so bail early.
-    my $res = $ua->request( $req );
+    my $res = $api->ua->request( $req );
     unless ( $res->code == RC_FOUND && $res->header( 'Location' ) ) {
         WWW::TypePad::Error::HTTP->throw( $res );
     }
@@ -211,13 +240,6 @@ package Net::OAuth::Simple::AuthHeader;
 # in an Authorization header, as required by the API, rather than the query string
 
 use base qw( Net::OAuth::Simple );
-
-sub new {
-    my $class = shift;
-    my $self = $class->SUPER::new( @_ );
-    $self->{browser}->max_redirect( 0 );
-    return $self;
-}
 
 sub make_restricted_request {
     my $self = shift;
@@ -263,15 +285,6 @@ sub make_restricted_request {
             'Content'        => $content_body,
         ) : () ),
     );
-
-    if ( $response->is_redirect ) {
-        my $referral_uri = $response->header( 'Location' );
-        return $self->make_restricted_request(
-            $referral_uri,
-            $method,
-            %extras,
-        );
-    }
 
     return $response;
 }
