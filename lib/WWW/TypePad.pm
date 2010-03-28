@@ -118,7 +118,7 @@ sub _call {
     }
 
     unless ( $res->is_success ) {
-        WWW::TypePad::Error::HTTP->throw( $res->code, $res->message );
+        WWW::TypePad::Error::HTTP->throw( $res->code, $res->content );
     }
 
     return 1 if $res->code == 204;
@@ -191,9 +191,6 @@ sub make_restricted_request {
             %extras,
         );
     }
-
-    die "$method on $request_url failed: " . $response->status_line
-        unless $response->is_success;
 
     return $response;
 }

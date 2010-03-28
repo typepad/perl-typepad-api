@@ -13,7 +13,7 @@ use Any::Moose;
 use HTTP::Status;
 extends 'WWW::TypePad::Error';
 
-use overload q("") => sub { $_[0]->message }, fallback => 1;
+use overload q("") => sub { sprintf "%s (%d)", $_[0]->message, $_[0]->code }, fallback => 1;
 has code => ( is => 'rw', isa => 'Int' );
 has message => ( is => 'rw', isa => 'Str' );
 
