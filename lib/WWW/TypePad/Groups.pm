@@ -97,6 +97,27 @@ sub new_link_asset {
 ### END auto-generated
 
 
+sub upload_photo {
+    my $api = shift;
+    my( $id, $asset, $filename ) = @_;
+    return $api->base->call_upload( {
+        # No extension on this!
+        target_url  => $api->prefix . '/' . $id . '/photo-assets',
+        asset       => $asset,
+        filename    => $filename,
+    } );
+}
+
+sub upload_audio {
+    my $api = shift;
+    my( $id, $asset, $filename ) = @_;
+    return $api->base->call_upload( {
+        # No extension on this!
+        target_url  => $api->prefix . '/' . $id . '/audio-assets',
+        asset       => $asset,
+        filename    => $filename,
+    } );
+}
 
 
 1;

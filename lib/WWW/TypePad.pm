@@ -5,6 +5,9 @@ use 5.008_001;
 our $VERSION = '0.009_01';
 
 use Any::Moose;
+use Carp qw( croak );
+use HTTP::Request::Common;
+use HTTP::Status;
 use JSON;
 use LWP::UserAgent;
 use Net::OAuth::Simple;
@@ -77,6 +80,7 @@ sub get_apikey {
 sub uri_for {
     my $api = shift;
     my( $path ) = @_;
+    $path = '/' . $path unless $path =~ /^\//;
     return 'http://' . $api->host . $path;
 }
 
@@ -123,6 +127,83 @@ sub _call {
 
     return 1 if $res->code == 204;
     return JSON::decode_json( $res->content );
+}
+
+sub call_upload {
+    my $api = shift;
+    my( $form ) = @_;
+
+    croak "call_upload requires an access token"
+        unless $api->access_token;
+
+    my $target_uri = delete $form->{target_url}
+        or croak "call_upload requires a target_url";
+
+    my $filename = delete $form->{filename}
+        or croak "call_upload requires a filename";
+
+    my $asset = delete $form->{asset} || {};
+    $asset = JSON::encode_json( $asset );
+
+    my $uri = URI->new( $api->uri_for( '/browser-upload.json' ) );
+    $uri->scheme( 'https' );
+
+    # Construct the OAuth parameters to get a signature.
+    my $nonce = Net::OAuth::Simple::AuthHeader->_nonce;
+    my $oauth_req = Net::OAuth::ProtectedResourceRequest->new(
+        consumer_key        => $api->consumer_key,
+        consumer_secret     => $api->consumer_secret,
+        token               => $api->access_token,
+        token_secret        => $api->access_token_secret,
+        request_url         => $uri->as_string,
+        request_method      => 'POST',
+        signature_method    => 'HMAC-SHA1',
+        timestamp           => time,
+        nonce               => $nonce,
+    );
+    $oauth_req->sign;
+
+    # Send all of the OAuth parameters in the query string.
+    $uri->query_form( $oauth_req->to_hash );
+
+    # And now, construct the actual HTTP::Request object that contains
+    # all of the fields we need to send.
+    my $req = POST $uri,
+        'Content-Type'  => 'multipart/form-data',
+        Content         => [
+            # Fake the redirect_to, since we just want to capture the
+            # 302 response, and not actually follow the redirect.
+            redirect_to             => 'http://example.com/none',
+
+            target_url              => $target_uri,
+            asset                   => $asset,
+            file                    => [ $filename ],
+        ];
+
+    # Disable the automatic following of redirects.
+    my $ua = LWP::UserAgent->new;
+    $ua->max_redirect( 0 );
+
+    # The response to an upload is always a redirect; if it's anything
+    # else, this indicates some internal error we weren't planning for,
+    # so bail early.
+    my $res = $ua->request( $req );
+    unless ( $res->code == RC_FOUND && $res->header( 'Location' ) ) {
+        WWW::TypePad::Error::HTTP->throw( $res );
+    }
+
+    # Otherwise, extract the response from the Location header. Successful
+    # uploads will result in a status=201 query string parameter...
+    my $loc = URI->new( $res->header( 'Location' ) );
+    my %form = $loc->query_form;
+    unless ( $form{status} == RC_CREATED ) {
+        WWW::TypePad::Error::HTTP->throw( $form{status}, $form{error} );
+    }
+
+    # ... and an asset_url, which we can GET to get back an asset
+    # dictionary.
+    my $asset_uri = $form{asset_url};
+    return $api->call_anon( GET => $asset_uri );
 }
 
 package Net::OAuth::Simple::AuthHeader;
