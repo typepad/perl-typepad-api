@@ -140,7 +140,7 @@ sub _call {
         $res = $oauth->make_restricted_request( $uri, $method, %extra );
         
         if ( $res->is_redirect ) {
-            return $oauth->make_restricted_request(
+            $res = $oauth->make_restricted_request(
                 $res->header( 'Location' ), $method, %extra
             );
         }
