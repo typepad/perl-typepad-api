@@ -11,7 +11,6 @@ use HTTP::Status;
 use JSON;
 use LWP::UserAgent;
 use Net::OAuth::Simple;
-use WWW::TypePad::Util;
 use WWW::TypePad::Error;
 
 # TODO import flag to preload them all
@@ -69,7 +68,7 @@ sub oauth {
     my $api = shift;
     unless ( defined $api->_oauth ) {
         my $apikey = $api->get_apikey( $api->consumer_key );
-        my $links = $apikey->{owner}{links};
+        my $app = $apikey->{owner};
 
         my $oauth = Net::OAuth::Simple::AuthHeader->new(
             tokens => {
@@ -79,9 +78,9 @@ sub oauth {
                 access_token_secret   => $api->access_token_secret,
             },
             urls => {
-                authorization_url   => WWW::TypePad::Util::l( $links, 'oauth-authorization-page' ),
-                request_token_url   => WWW::TypePad::Util::l( $links, 'oauth-request-token-endpoint' ),
-                access_token_url    => WWW::TypePad::Util::l( $links, 'oauth-access-token-endpoint' ),
+                authorization_url   => $app->{oauthAuthorizationUrl},
+                request_token_url   => $app->{oauthRequestTokenUrl},
+                access_token_url    => $app->{oauthAccessTokenUrl},
             },
         );
 
