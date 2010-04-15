@@ -266,10 +266,9 @@ sub make_restricted_request {
             Net::OAuth::PROTOCOL_VERSION_1_0,
         timestamp        => time,
         nonce            => $self->_nonce,
-        extra_params     => \%query,
         token            => $self->access_token,
         token_secret     => $self->access_token_secret,
-        extra_params     => \%extras,
+        extra_params     => { %query, %extras },
     );
     $request->sign;
     die "COULDN'T VERIFY! Check OAuth parameters.\n"
