@@ -31,4 +31,18 @@ sub _post {
     return $api->base->call(POST => $path, @rest);
 }
 
+sub _put {
+    my $api = shift;
+    my($id, $noun, $filter, $filter_arg, @rest) = @_;
+    my $path = $api->_endpoint($id, $noun, $filter, $filter_arg);
+    return $api->base->call(PUT => $path, @rest);
+}
+
+sub _delete {
+    my $api = shift;
+    my($id, $noun, $filter, $filter_arg, @rest) = @_;
+    my $path = $api->_endpoint($id, $noun, $filter, $filter_arg);
+    return $api->base->call(DELETE => $path, @rest);
+}
+
 1;

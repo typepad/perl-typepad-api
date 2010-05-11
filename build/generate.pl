@@ -60,12 +60,30 @@ extends 'WWW::TypePad::Noun';
 
 sub prefix { '/[% noun.name %]' }
 
+[% IF noun.supportedMethods.exists('GET') -%]
 sub get {
     my $api = shift;
     my $id  = shift;
     $api->_get($id);
 }
 
+[% END -%]
+[% IF noun.supportedMethods.PUT -%]
+sub update {
+    my $api = shift;
+    my $id  = shift;
+    $api->_put($id, undef, undef, undef, @_);
+}
+
+[% END -%]
+[% IF noun.supportedMethods.DELETE -%]
+sub remove {
+    my $api = shift;
+    my $id  = shift;
+    $api->_delete($id, undef, undef, undef, @_);
+}
+
+[% END -%]
 [% FOREACH property IN noun.propertyEndpoints;
    SET filters = property.filterEndpoints;
    CALL filters.unshift(0) -%]
@@ -97,7 +115,7 @@ sub new_[% prop_singular %] {
 sub set_[% safe(property.name) %] {
     my $api = shift;
     my $id  = shift;
-    $api->_post($id, '[% property.name %]', undef, undef, @_);
+    $api->_put($id, '[% property.name %]', undef, undef, @_);
 }
 
 [% END -%]

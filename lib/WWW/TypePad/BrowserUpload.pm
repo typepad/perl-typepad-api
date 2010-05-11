@@ -9,12 +9,6 @@ extends 'WWW::TypePad::Noun';
 
 sub prefix { '/browser-upload' }
 
-sub get {
-    my $api = shift;
-    my $id  = shift;
-    $api->_get($id);
-}
-
 
 ### END auto-generated
 

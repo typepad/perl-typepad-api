@@ -24,7 +24,7 @@ sub status {
 sub set_status {
     my $api = shift;
     my $id  = shift;
-    $api->_post($id, 'status', undef, undef, @_);
+    $api->_put($id, 'status', undef, undef, @_);
 }
 
 

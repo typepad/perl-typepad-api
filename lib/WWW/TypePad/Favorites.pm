@@ -15,6 +15,12 @@ sub get {
     $api->_get($id);
 }
 
+sub remove {
+    my $api = shift;
+    my $id  = shift;
+    $api->_delete($id, undef, undef, undef, @_);
+}
+
 
 ### END auto-generated
 

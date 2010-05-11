@@ -15,6 +15,18 @@ sub get {
     $api->_get($id);
 }
 
+sub update {
+    my $api = shift;
+    my $id  = shift;
+    $api->_put($id, undef, undef, undef, @_);
+}
+
+sub remove {
+    my $api = shift;
+    my $id  = shift;
+    $api->_delete($id, undef, undef, undef, @_);
+}
+
 sub favorites {
     my $api = shift;
     my $id  = shift;
@@ -30,7 +42,7 @@ sub feedback_status {
 sub set_feedback_status {
     my $api = shift;
     my $id  = shift;
-    $api->_post($id, 'feedback-status', undef, undef, @_);
+    $api->_put($id, 'feedback-status', undef, undef, @_);
 }
 
 sub publication_status {
@@ -42,7 +54,7 @@ sub publication_status {
 sub set_publication_status {
     my $api = shift;
     my $id  = shift;
-    $api->_post($id, 'publication-status', undef, undef, @_);
+    $api->_put($id, 'publication-status', undef, undef, @_);
 }
 
 sub reblogs {
