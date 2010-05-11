@@ -30,7 +30,7 @@ sub post_by_email_settings_by_user {
 sub stats {
     my $api = shift;
     my $id  = shift;
-    $api->_get($id, 'stats', undef, undef, );
+    $api->_get($id, 'stats', undef, undef, @_);
 }
 
 sub categories {
@@ -61,6 +61,18 @@ sub commenting_settings {
     my $api = shift;
     my $id  = shift;
     $api->_get($id, 'commenting-settings', undef, undef, @_);
+}
+
+sub media_assets {
+    my $api = shift;
+    my $id  = shift;
+    $api->_get($id, 'media-assets', undef, undef, @_);
+}
+
+sub new_media_asset {
+    my $api = shift;
+    my $id  = shift;
+    $api->_post($id, 'media-assets', undef, undef, @_);
 }
 
 sub page_assets {

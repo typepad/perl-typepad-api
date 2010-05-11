@@ -39,10 +39,34 @@ sub blocked_memberships {
     $api->_get($id, 'memberships', 'blocked', undef, @_);
 }
 
-sub events {
+sub video_assets {
     my $api = shift;
     my $id  = shift;
-    $api->_get($id, 'events', undef, undef, @_);
+    $api->_get($id, 'video-assets', undef, undef, @_);
+}
+
+sub new_video_asset {
+    my $api = shift;
+    my $id  = shift;
+    $api->_post($id, 'video-assets', undef, undef, @_);
+}
+
+sub audio_assets {
+    my $api = shift;
+    my $id  = shift;
+    $api->_get($id, 'audio-assets', undef, undef, @_);
+}
+
+sub new_audio_asset {
+    my $api = shift;
+    my $id  = shift;
+    $api->_post($id, 'audio-assets', undef, undef, @_);
+}
+
+sub external_feed_subscriptions {
+    my $api = shift;
+    my $id  = shift;
+    $api->_get($id, 'external-feed-subscriptions', undef, undef, @_);
 }
 
 sub photo_assets {
@@ -57,28 +81,10 @@ sub new_photo_asset {
     $api->_post($id, 'photo-assets', undef, undef, @_);
 }
 
-sub video_assets {
+sub events {
     my $api = shift;
     my $id  = shift;
-    $api->_get($id, 'video-assets', undef, undef, @_);
-}
-
-sub new_video_asset {
-    my $api = shift;
-    my $id  = shift;
-    $api->_post($id, 'video-assets', undef, undef, @_);
-}
-
-sub post_assets {
-    my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'post-assets', undef, undef, @_);
-}
-
-sub new_post_asset {
-    my $api = shift;
-    my $id  = shift;
-    $api->_post($id, 'post-assets', undef, undef, @_);
+    $api->_get($id, 'events', undef, undef, @_);
 }
 
 sub link_assets {
@@ -93,6 +99,24 @@ sub new_link_asset {
     $api->_post($id, 'link-assets', undef, undef, @_);
 }
 
+sub post_assets {
+    my $api = shift;
+    my $id  = shift;
+    $api->_get($id, 'post-assets', undef, undef, @_);
+}
+
+sub new_post_asset {
+    my $api = shift;
+    my $id  = shift;
+    $api->_post($id, 'post-assets', undef, undef, @_);
+}
+
+
+sub create_external_feed_subscription {
+    my $api = shift;
+    my $id  = shift;
+    $api->_post($id, 'create-external-feed-subscription', undef, undef, @_);
+}
 
 ### END auto-generated
 

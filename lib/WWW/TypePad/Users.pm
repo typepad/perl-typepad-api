@@ -81,6 +81,12 @@ sub relationships_by_group {
     $api->_get($id, 'relationships', 'by_group', @_);
 }
 
+sub relationships_by_user {
+    my $api = shift;
+    my $id  = shift;
+    $api->_get($id, 'relationships', 'by_user', @_);
+}
+
 sub following_relationships {
     my $api = shift;
     my $id  = shift;
@@ -90,7 +96,7 @@ sub following_relationships {
 sub elsewhere_accounts {
     my $api = shift;
     my $id  = shift;
-    $api->_get($id, 'elsewhere-accounts', undef, undef, );
+    $api->_get($id, 'elsewhere-accounts', undef, undef, @_);
 }
 
 sub events {

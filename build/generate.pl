@@ -5,9 +5,11 @@ use JSON;
 use LWP::Simple;
 use FindBin qw($Bin);
 
+my $host = shift || "api.typepad.com";
+
 for my $file ( qw(nouns.json object-types.json) ) {
     warn "Downloading $file\n";
-    LWP::Simple::mirror("http://api.typepad.com/$file", "$Bin/$file");
+    LWP::Simple::mirror("http://$host/$file", "$Bin/$file");
 }
 
 my $json  = do { open my $fh, "<", "$Bin/nouns.json" or die $!; join '', <$fh> };

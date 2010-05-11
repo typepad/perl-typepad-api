@@ -45,6 +45,12 @@ sub set_publication_status {
     $api->_post($id, 'publication-status', undef, undef, @_);
 }
 
+sub reblogs {
+    my $api = shift;
+    my $id  = shift;
+    $api->_get($id, 'reblogs', undef, undef, @_);
+}
+
 sub categories {
     my $api = shift;
     my $id  = shift;
