@@ -22,6 +22,7 @@ use WWW::TypePad::BatchProcessor;
 use WWW::TypePad::Blogs;
 use WWW::TypePad::BrowserUpload;
 use WWW::TypePad::Events;
+use WWW::TypePad::ExternalFeedSubscriptions;
 use WWW::TypePad::Favorites;
 use WWW::TypePad::Groups;
 use WWW::TypePad::Nouns;
@@ -54,7 +55,7 @@ has 'ua' => (
 );
 
 for my $object_type (qw( apikeys applications assets auth_tokens batch_processor blogs browser_upload
-                         events favorites groups nouns objecttypes relationships users )) {
+                         events external_feed_subscriptions favorites groups nouns objecttypes relationships users )) {
     my $backend_class = ucfirst $object_type;
     $backend_class =~ s/_(\w)/uc $1/eg;
     $backend_class = "WWW::TypePad::$backend_class";
@@ -275,14 +276,20 @@ sub make_restricted_request {
         unless $request->verify;
 
     my $request_url = URI->new( $url );
-    my $response = $self->{browser}->$method(
-        $request_url, 'Authorization' => $request->to_authorization_header,
-        ( $content_body ? (
+
+    my @headers = ('Authorization' => $request->to_authorization_header);
+    if ($content_body) {
+        push @headers, (
             'Content-Type'   => $content_type,
             'Content-Length' => length $content_body,
             'Content'        => $content_body,
-        ) : () ),
-    );
+        );
+    }
+
+    my $req = HTTP::Request->new(uc($method) => $request_url);
+    $req->header(@headers);
+
+    my $response = $self->{browser}->request($req);
 
     return $response;
 }
