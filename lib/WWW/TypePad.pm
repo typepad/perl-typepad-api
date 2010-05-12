@@ -277,20 +277,15 @@ sub make_restricted_request {
 
     my $request_url = URI->new( $url );
 
-    my @headers = ('Authorization' => $request->to_authorization_header);
+    my $req = HTTP::Request->new(uc($method) => $request_url);
+    $req->header('Authorization' => $request->to_authorization_header);
     if ($content_body) {
-        push @headers, (
-            'Content-Type'   => $content_type,
-            'Content-Length' => length $content_body,
-            'Content'        => $content_body,
-        );
+        $req->content_type($content_type);
+        $req->content_length(length $content_body);
+        $req->content($content_body);
     }
 
-    my $req = HTTP::Request->new(uc($method) => $request_url);
-    $req->header(@headers);
-
     my $response = $self->{browser}->request($req);
-
     return $response;
 }
 
