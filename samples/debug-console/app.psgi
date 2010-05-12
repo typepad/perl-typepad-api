@@ -34,10 +34,12 @@ sub Plack::Request::uri_for {
 }
 
 sub tp {
-    return WWW::TypePad->new(
+    my $tp = WWW::TypePad->new(
         consumer_key        => $ConsumerKey,
         consumer_secret     => $ConsumerSecret,
     );
+    $tp->host($ENV{TP_API_HOST}) if $ENV{TP_API_HOST};
+    $tp;
 }
 
 my $home = sub {
