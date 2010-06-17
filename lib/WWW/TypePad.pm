@@ -145,6 +145,7 @@ sub _call {
             );
         }
     } else {
+        $uri =~ s/^https:/http:/;
         my $req = HTTP::Request->new( $method => $uri );
         $res = $api->ua->request( $req );
         
