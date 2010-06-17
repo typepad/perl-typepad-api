@@ -144,7 +144,16 @@ sub discover_external_post_asset {
 
 ### END auto-generated
 
+sub upload_media_asset {
+    my $api = shift;
+    my( $id, $asset, $filename ) = @_;
 
-
+    return $api->base->call_upload( {
+        # No extension on this!
+        target_url  => $api->prefix . '/' . $id . '/media-assets',
+        asset       => $asset,
+        filename    => $filename,
+    } );
+}
 
 1;
