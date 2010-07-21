@@ -7,6 +7,8 @@ use strict;
 use Any::Moose;
 extends 'WWW::TypePad::Noun';
 
+use Carp ();
+
 
 sub get {
     my $api = shift;
@@ -16,7 +18,8 @@ sub get {
     $api->base->call("GET", $uri, @_);
 }
 
-sub badges {
+
+sub get_badges {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -24,7 +27,14 @@ sub badges {
     $api->base->call("GET", $uri, @_);
 }
 
-sub blogs {
+
+sub badges {
+    my $self = shift;
+    Carp::carp("'badges' is deprecated. Use 'get_badges' instead.");
+    $self->get_badges(@_);
+}
+
+sub get_blogs {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -32,7 +42,14 @@ sub blogs {
     $api->base->call("GET", $uri, @_);
 }
 
-sub elsewhere_accounts {
+
+sub blogs {
+    my $self = shift;
+    Carp::carp("'blogs' is deprecated. Use 'get_blogs' instead.");
+    $self->get_blogs(@_);
+}
+
+sub get_elsewhere_accounts {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -40,7 +57,14 @@ sub elsewhere_accounts {
     $api->base->call("GET", $uri, @_);
 }
 
-sub events {
+
+sub elsewhere_accounts {
+    my $self = shift;
+    Carp::carp("'elsewhere_accounts' is deprecated. Use 'get_elsewhere_accounts' instead.");
+    $self->get_elsewhere_accounts(@_);
+}
+
+sub get_events {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -48,7 +72,14 @@ sub events {
     $api->base->call("GET", $uri, @_);
 }
 
-sub events_by_group {
+
+sub events {
+    my $self = shift;
+    Carp::carp("'events' is deprecated. Use 'get_events' instead.");
+    $self->get_events(@_);
+}
+
+sub get_events_by_group {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -57,7 +88,14 @@ sub events_by_group {
     $api->base->call("GET", $uri, @_);
 }
 
-sub new_to_favorites {
+
+sub events_by_group {
+    my $self = shift;
+    Carp::carp("'events_by_group' is deprecated. Use 'get_events_by_group' instead.");
+    $self->get_events_by_group(@_);
+}
+
+sub post_to_favorites {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -65,7 +103,14 @@ sub new_to_favorites {
     $api->base->call("POST", $uri, @_);
 }
 
-sub favorites {
+
+sub new_to_favorites {
+    my $self = shift;
+    Carp::carp("'new_to_favorites' is deprecated. Use 'post_to_favorites' instead.");
+    $self->post_to_favorites(@_);
+}
+
+sub get_favorites {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -73,7 +118,14 @@ sub favorites {
     $api->base->call("GET", $uri, @_);
 }
 
-sub memberships {
+
+sub favorites {
+    my $self = shift;
+    Carp::carp("'favorites' is deprecated. Use 'get_favorites' instead.");
+    $self->get_favorites(@_);
+}
+
+sub get_memberships {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -81,7 +133,14 @@ sub memberships {
     $api->base->call("GET", $uri, @_);
 }
 
-sub admin_memberships {
+
+sub memberships {
+    my $self = shift;
+    Carp::carp("'memberships' is deprecated. Use 'get_memberships' instead.");
+    $self->get_memberships(@_);
+}
+
+sub get_admin_memberships {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -89,7 +148,14 @@ sub admin_memberships {
     $api->base->call("GET", $uri, @_);
 }
 
-sub memberships_by_group {
+
+sub admin_memberships {
+    my $self = shift;
+    Carp::carp("'admin_memberships' is deprecated. Use 'get_admin_memberships' instead.");
+    $self->get_admin_memberships(@_);
+}
+
+sub get_memberships_by_group {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -98,7 +164,14 @@ sub memberships_by_group {
     $api->base->call("GET", $uri, @_);
 }
 
-sub member_memberships {
+
+sub memberships_by_group {
+    my $self = shift;
+    Carp::carp("'memberships_by_group' is deprecated. Use 'get_memberships_by_group' instead.");
+    $self->get_memberships_by_group(@_);
+}
+
+sub get_member_memberships {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -106,7 +179,14 @@ sub member_memberships {
     $api->base->call("GET", $uri, @_);
 }
 
-sub notifications {
+
+sub member_memberships {
+    my $self = shift;
+    Carp::carp("'member_memberships' is deprecated. Use 'get_member_memberships' instead.");
+    $self->get_member_memberships(@_);
+}
+
+sub get_notifications {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -114,7 +194,14 @@ sub notifications {
     $api->base->call("GET", $uri, @_);
 }
 
-sub notifications_by_group {
+
+sub notifications {
+    my $self = shift;
+    Carp::carp("'notifications' is deprecated. Use 'get_notifications' instead.");
+    $self->get_notifications(@_);
+}
+
+sub get_notifications_by_group {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -123,7 +210,14 @@ sub notifications_by_group {
     $api->base->call("GET", $uri, @_);
 }
 
-sub profile {
+
+sub notifications_by_group {
+    my $self = shift;
+    Carp::carp("'notifications_by_group' is deprecated. Use 'get_notifications_by_group' instead.");
+    $self->get_notifications_by_group(@_);
+}
+
+sub get_profile {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -131,7 +225,14 @@ sub profile {
     $api->base->call("GET", $uri, @_);
 }
 
-sub relationships {
+
+sub profile {
+    my $self = shift;
+    Carp::carp("'profile' is deprecated. Use 'get_profile' instead.");
+    $self->get_profile(@_);
+}
+
+sub get_relationships {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -139,7 +240,14 @@ sub relationships {
     $api->base->call("GET", $uri, @_);
 }
 
-sub relationships_by_group {
+
+sub relationships {
+    my $self = shift;
+    Carp::carp("'relationships' is deprecated. Use 'get_relationships' instead.");
+    $self->get_relationships(@_);
+}
+
+sub get_relationships_by_group {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -148,7 +256,14 @@ sub relationships_by_group {
     $api->base->call("GET", $uri, @_);
 }
 
-sub relationships_by_user {
+
+sub relationships_by_group {
+    my $self = shift;
+    Carp::carp("'relationships_by_group' is deprecated. Use 'get_relationships_by_group' instead.");
+    $self->get_relationships_by_group(@_);
+}
+
+sub get_relationships_by_user {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -157,7 +272,14 @@ sub relationships_by_user {
     $api->base->call("GET", $uri, @_);
 }
 
-sub follower_relationships {
+
+sub relationships_by_user {
+    my $self = shift;
+    Carp::carp("'relationships_by_user' is deprecated. Use 'get_relationships_by_user' instead.");
+    $self->get_relationships_by_user(@_);
+}
+
+sub get_follower_relationships {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -165,12 +287,26 @@ sub follower_relationships {
     $api->base->call("GET", $uri, @_);
 }
 
-sub following_relationships {
+
+sub follower_relationships {
+    my $self = shift;
+    Carp::carp("'follower_relationships' is deprecated. Use 'get_follower_relationships' instead.");
+    $self->get_follower_relationships(@_);
+}
+
+sub get_following_relationships {
     my $api = shift;
     my @args;
     push @args, shift; # id
     my $uri = sprintf '/users/%s/relationships/@following.json', @args;
     $api->base->call("GET", $uri, @_);
+}
+
+
+sub following_relationships {
+    my $self = shift;
+    Carp::carp("'following_relationships' is deprecated. Use 'get_following_relationships' instead.");
+    $self->get_following_relationships(@_);
 }
 ### END auto-generated
 

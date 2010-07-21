@@ -7,6 +7,8 @@ use strict;
 use Any::Moose;
 extends 'WWW::TypePad::Noun';
 
+use Carp ();
+
 
 sub get {
     my $api = shift;
@@ -16,6 +18,7 @@ sub get {
     $api->base->call("GET", $uri, @_);
 }
 
+
 sub add_member {
     my $api = shift;
     my @args;
@@ -24,12 +27,20 @@ sub add_member {
     $api->base->call("POST", $uri, @_);
 }
 
-sub new_to_audio_assets {
+
+sub post_to_audio_assets {
     my $api = shift;
     my @args;
     push @args, shift; # id
     my $uri = sprintf '/groups/%s/audio-assets.json', @args;
     $api->base->call("POST", $uri, @_);
+}
+
+
+sub new_to_audio_assets {
+    my $self = shift;
+    Carp::carp("'new_to_audio_assets' is deprecated. Use 'post_to_audio_assets' instead.");
+    $self->post_to_audio_assets(@_);
 }
 
 sub block_user {
@@ -40,6 +51,7 @@ sub block_user {
     $api->base->call("POST", $uri, @_);
 }
 
+
 sub create_external_feed_subscription {
     my $api = shift;
     my @args;
@@ -48,7 +60,8 @@ sub create_external_feed_subscription {
     $api->base->call("POST", $uri, @_);
 }
 
-sub events {
+
+sub get_events {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -56,7 +69,14 @@ sub events {
     $api->base->call("GET", $uri, @_);
 }
 
-sub external_feed_subscriptions {
+
+sub events {
+    my $self = shift;
+    Carp::carp("'events' is deprecated. Use 'get_events' instead.");
+    $self->get_events(@_);
+}
+
+sub get_external_feed_subscriptions {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -64,7 +84,14 @@ sub external_feed_subscriptions {
     $api->base->call("GET", $uri, @_);
 }
 
-sub new_to_link_assets {
+
+sub external_feed_subscriptions {
+    my $self = shift;
+    Carp::carp("'external_feed_subscriptions' is deprecated. Use 'get_external_feed_subscriptions' instead.");
+    $self->get_external_feed_subscriptions(@_);
+}
+
+sub post_to_link_assets {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -72,7 +99,14 @@ sub new_to_link_assets {
     $api->base->call("POST", $uri, @_);
 }
 
-sub memberships {
+
+sub new_to_link_assets {
+    my $self = shift;
+    Carp::carp("'new_to_link_assets' is deprecated. Use 'post_to_link_assets' instead.");
+    $self->post_to_link_assets(@_);
+}
+
+sub get_memberships {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -80,7 +114,14 @@ sub memberships {
     $api->base->call("GET", $uri, @_);
 }
 
-sub admin_memberships {
+
+sub memberships {
+    my $self = shift;
+    Carp::carp("'memberships' is deprecated. Use 'get_memberships' instead.");
+    $self->get_memberships(@_);
+}
+
+sub get_admin_memberships {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -88,7 +129,14 @@ sub admin_memberships {
     $api->base->call("GET", $uri, @_);
 }
 
-sub blocked_memberships {
+
+sub admin_memberships {
+    my $self = shift;
+    Carp::carp("'admin_memberships' is deprecated. Use 'get_admin_memberships' instead.");
+    $self->get_admin_memberships(@_);
+}
+
+sub get_blocked_memberships {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -96,7 +144,14 @@ sub blocked_memberships {
     $api->base->call("GET", $uri, @_);
 }
 
-sub member_memberships {
+
+sub blocked_memberships {
+    my $self = shift;
+    Carp::carp("'blocked_memberships' is deprecated. Use 'get_blocked_memberships' instead.");
+    $self->get_blocked_memberships(@_);
+}
+
+sub get_member_memberships {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -104,7 +159,14 @@ sub member_memberships {
     $api->base->call("GET", $uri, @_);
 }
 
-sub new_to_photo_assets {
+
+sub member_memberships {
+    my $self = shift;
+    Carp::carp("'member_memberships' is deprecated. Use 'get_member_memberships' instead.");
+    $self->get_member_memberships(@_);
+}
+
+sub post_to_photo_assets {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -112,12 +174,26 @@ sub new_to_photo_assets {
     $api->base->call("POST", $uri, @_);
 }
 
-sub new_to_post_assets {
+
+sub new_to_photo_assets {
+    my $self = shift;
+    Carp::carp("'new_to_photo_assets' is deprecated. Use 'post_to_photo_assets' instead.");
+    $self->post_to_photo_assets(@_);
+}
+
+sub post_to_post_assets {
     my $api = shift;
     my @args;
     push @args, shift; # id
     my $uri = sprintf '/groups/%s/post-assets.json', @args;
     $api->base->call("POST", $uri, @_);
+}
+
+
+sub new_to_post_assets {
+    my $self = shift;
+    Carp::carp("'new_to_post_assets' is deprecated. Use 'post_to_post_assets' instead.");
+    $self->post_to_post_assets(@_);
 }
 
 sub remove_member {
@@ -128,6 +204,7 @@ sub remove_member {
     $api->base->call("POST", $uri, @_);
 }
 
+
 sub unblock_user {
     my $api = shift;
     my @args;
@@ -136,12 +213,20 @@ sub unblock_user {
     $api->base->call("POST", $uri, @_);
 }
 
-sub new_to_video_assets {
+
+sub post_to_video_assets {
     my $api = shift;
     my @args;
     push @args, shift; # id
     my $uri = sprintf '/groups/%s/video-assets.json', @args;
     $api->base->call("POST", $uri, @_);
+}
+
+
+sub new_to_video_assets {
+    my $self = shift;
+    Carp::carp("'new_to_video_assets' is deprecated. Use 'post_to_video_assets' instead.");
+    $self->post_to_video_assets(@_);
 }
 ### END auto-generated
 

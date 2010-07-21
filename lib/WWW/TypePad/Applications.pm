@@ -7,6 +7,8 @@ use strict;
 use Any::Moose;
 extends 'WWW::TypePad::Noun';
 
+use Carp ();
+
 
 sub get {
     my $api = shift;
@@ -16,6 +18,7 @@ sub get {
     $api->base->call("GET", $uri, @_);
 }
 
+
 sub create_external_feed_subscription {
     my $api = shift;
     my @args;
@@ -24,7 +27,8 @@ sub create_external_feed_subscription {
     $api->base->call("POST", $uri, @_);
 }
 
-sub external_feed_subscriptions {
+
+sub get_external_feed_subscriptions {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -32,12 +36,26 @@ sub external_feed_subscriptions {
     $api->base->call("GET", $uri, @_);
 }
 
-sub groups {
+
+sub external_feed_subscriptions {
+    my $self = shift;
+    Carp::carp("'external_feed_subscriptions' is deprecated. Use 'get_external_feed_subscriptions' instead.");
+    $self->get_external_feed_subscriptions(@_);
+}
+
+sub get_groups {
     my $api = shift;
     my @args;
     push @args, shift; # id
     my $uri = sprintf '/applications/%s/groups.json', @args;
     $api->base->call("GET", $uri, @_);
+}
+
+
+sub groups {
+    my $self = shift;
+    Carp::carp("'groups' is deprecated. Use 'get_groups' instead.");
+    $self->get_groups(@_);
 }
 ### END auto-generated
 

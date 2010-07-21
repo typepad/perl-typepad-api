@@ -7,13 +7,22 @@ use strict;
 use Any::Moose;
 extends 'WWW::TypePad::Noun';
 
+use Carp ();
 
-sub remove {
+
+sub delete {
     my $api = shift;
     my @args;
     push @args, shift; # id
     my $uri = sprintf '/favorites/%s.json', @args;
     $api->base->call("DELETE", $uri, @_);
+}
+
+
+sub remove {
+    my $self = shift;
+    Carp::carp("'remove' is deprecated. Use 'delete' instead.");
+    $self->delete(@_);
 }
 
 sub get {
@@ -23,6 +32,7 @@ sub get {
     my $uri = sprintf '/favorites/%s.json', @args;
     $api->base->call("GET", $uri, @_);
 }
+
 ### END auto-generated
 
 

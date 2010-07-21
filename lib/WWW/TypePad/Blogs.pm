@@ -7,6 +7,8 @@ use strict;
 use Any::Moose;
 extends 'WWW::TypePad::Noun';
 
+use Carp ();
+
 
 sub get {
     my $api = shift;
@@ -16,6 +18,7 @@ sub get {
     $api->base->call("GET", $uri, @_);
 }
 
+
 sub add_category {
     my $api = shift;
     my @args;
@@ -24,7 +27,8 @@ sub add_category {
     $api->base->call("POST", $uri, @_);
 }
 
-sub categories {
+
+sub get_categories {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -32,7 +36,14 @@ sub categories {
     $api->base->call("GET", $uri, @_);
 }
 
-sub commenting_settings {
+
+sub categories {
+    my $self = shift;
+    Carp::carp("'categories' is deprecated. Use 'get_categories' instead.");
+    $self->get_categories(@_);
+}
+
+sub get_commenting_settings {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -40,7 +51,14 @@ sub commenting_settings {
     $api->base->call("GET", $uri, @_);
 }
 
-sub published_comments {
+
+sub commenting_settings {
+    my $self = shift;
+    Carp::carp("'commenting_settings' is deprecated. Use 'get_commenting_settings' instead.");
+    $self->get_commenting_settings(@_);
+}
+
+sub get_published_comments {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -48,7 +66,14 @@ sub published_comments {
     $api->base->call("GET", $uri, @_);
 }
 
-sub published_recent_comments {
+
+sub published_comments {
+    my $self = shift;
+    Carp::carp("'published_comments' is deprecated. Use 'get_published_comments' instead.");
+    $self->get_published_comments(@_);
+}
+
+sub get_published_recent_comments {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -56,12 +81,26 @@ sub published_recent_comments {
     $api->base->call("GET", $uri, @_);
 }
 
-sub crosspost_accounts {
+
+sub published_recent_comments {
+    my $self = shift;
+    Carp::carp("'published_recent_comments' is deprecated. Use 'get_published_recent_comments' instead.");
+    $self->get_published_recent_comments(@_);
+}
+
+sub get_crosspost_accounts {
     my $api = shift;
     my @args;
     push @args, shift; # id
     my $uri = sprintf '/blogs/%s/crosspost-accounts.json', @args;
     $api->base->call("GET", $uri, @_);
+}
+
+
+sub crosspost_accounts {
+    my $self = shift;
+    Carp::carp("'crosspost_accounts' is deprecated. Use 'get_crosspost_accounts' instead.");
+    $self->get_crosspost_accounts(@_);
 }
 
 sub discover_external_post_asset {
@@ -72,7 +111,8 @@ sub discover_external_post_asset {
     $api->base->call("POST", $uri, @_);
 }
 
-sub new_to_media_assets {
+
+sub post_to_media_assets {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -80,23 +120,44 @@ sub new_to_media_assets {
     $api->base->call("POST", $uri, @_);
 }
 
-sub new_to_page_assets {
+
+sub new_to_media_assets {
+    my $self = shift;
+    Carp::carp("'new_to_media_assets' is deprecated. Use 'post_to_media_assets' instead.");
+    $self->post_to_media_assets(@_);
+}
+
+sub post_to_page_assets {
     my $api = shift;
     my @args;
     push @args, shift; # id
     my $uri = sprintf '/blogs/%s/page-assets.json', @args;
     $api->base->call("POST", $uri, @_);
 }
+
+
+sub new_to_page_assets {
+    my $self = shift;
+    Carp::carp("'new_to_page_assets' is deprecated. Use 'post_to_page_assets' instead.");
+    $self->post_to_page_assets(@_);
+}
+
+sub get_page_assets {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/blogs/%s/page-assets.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
 
 sub page_assets {
-    my $api = shift;
-    my @args;
-    push @args, shift; # id
-    my $uri = sprintf '/blogs/%s/page-assets.json', @args;
-    $api->base->call("GET", $uri, @_);
+    my $self = shift;
+    Carp::carp("'page_assets' is deprecated. Use 'get_page_assets' instead.");
+    $self->get_page_assets(@_);
 }
 
-sub new_to_post_assets {
+sub post_to_post_assets {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -104,7 +165,14 @@ sub new_to_post_assets {
     $api->base->call("POST", $uri, @_);
 }
 
-sub post_assets {
+
+sub new_to_post_assets {
+    my $self = shift;
+    Carp::carp("'new_to_post_assets' is deprecated. Use 'post_to_post_assets' instead.");
+    $self->post_to_post_assets(@_);
+}
+
+sub get_post_assets {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -112,7 +180,14 @@ sub post_assets {
     $api->base->call("GET", $uri, @_);
 }
 
-sub post_assets_by_category {
+
+sub post_assets {
+    my $self = shift;
+    Carp::carp("'post_assets' is deprecated. Use 'get_post_assets' instead.");
+    $self->get_post_assets(@_);
+}
+
+sub get_post_assets_by_category {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -121,7 +196,14 @@ sub post_assets_by_category {
     $api->base->call("GET", $uri, @_);
 }
 
-sub post_assets_by_month {
+
+sub post_assets_by_category {
+    my $self = shift;
+    Carp::carp("'post_assets_by_category' is deprecated. Use 'get_post_assets_by_category' instead.");
+    $self->get_post_assets_by_category(@_);
+}
+
+sub get_post_assets_by_month {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -130,7 +212,14 @@ sub post_assets_by_month {
     $api->base->call("GET", $uri, @_);
 }
 
-sub recent_post_assets {
+
+sub post_assets_by_month {
+    my $self = shift;
+    Carp::carp("'post_assets_by_month' is deprecated. Use 'get_post_assets_by_month' instead.");
+    $self->get_post_assets_by_month(@_);
+}
+
+sub get_recent_post_assets {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -138,13 +227,27 @@ sub recent_post_assets {
     $api->base->call("GET", $uri, @_);
 }
 
-sub post_by_email_settings_by_user {
+
+sub recent_post_assets {
+    my $self = shift;
+    Carp::carp("'recent_post_assets' is deprecated. Use 'get_recent_post_assets' instead.");
+    $self->get_recent_post_assets(@_);
+}
+
+sub get_post_by_email_settings_by_user {
     my $api = shift;
     my @args;
     push @args, shift; # id
     push @args, shift; # userId
     my $uri = sprintf '/blogs/%s/post-by-email-settings/@by-user/%s.json', @args;
     $api->base->call("GET", $uri, @_);
+}
+
+
+sub post_by_email_settings_by_user {
+    my $self = shift;
+    Carp::carp("'post_by_email_settings_by_user' is deprecated. Use 'get_post_by_email_settings_by_user' instead.");
+    $self->get_post_by_email_settings_by_user(@_);
 }
 
 sub remove_category {
@@ -155,12 +258,20 @@ sub remove_category {
     $api->base->call("POST", $uri, @_);
 }
 
-sub stats {
+
+sub get_stats {
     my $api = shift;
     my @args;
     push @args, shift; # id
     my $uri = sprintf '/blogs/%s/stats.json', @args;
     $api->base->call("GET", $uri, @_);
+}
+
+
+sub stats {
+    my $self = shift;
+    Carp::carp("'stats' is deprecated. Use 'get_stats' instead.");
+    $self->get_stats(@_);
 }
 ### END auto-generated
 

@@ -7,6 +7,8 @@ use strict;
 use Any::Moose;
 extends 'WWW::TypePad::Noun';
 
+use Carp ();
+
 
 sub search {
     my $api = shift;
@@ -15,12 +17,20 @@ sub search {
     $api->base->call("GET", $uri, @_);
 }
 
-sub remove {
+
+sub delete {
     my $api = shift;
     my @args;
     push @args, shift; # id
     my $uri = sprintf '/assets/%s.json', @args;
     $api->base->call("DELETE", $uri, @_);
+}
+
+
+sub remove {
+    my $self = shift;
+    Carp::carp("'remove' is deprecated. Use 'delete' instead.");
+    $self->delete(@_);
 }
 
 sub get {
@@ -31,12 +41,20 @@ sub get {
     $api->base->call("GET", $uri, @_);
 }
 
-sub update {
+
+sub put {
     my $api = shift;
     my @args;
     push @args, shift; # id
     my $uri = sprintf '/assets/%s.json', @args;
     $api->base->call("PUT", $uri, @_);
+}
+
+
+sub update {
+    my $self = shift;
+    Carp::carp("'update' is deprecated. Use 'put' instead.");
+    $self->put(@_);
 }
 
 sub add_category {
@@ -47,7 +65,8 @@ sub add_category {
     $api->base->call("POST", $uri, @_);
 }
 
-sub categories {
+
+sub get_categories {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -55,7 +74,14 @@ sub categories {
     $api->base->call("GET", $uri, @_);
 }
 
-sub comment_tree {
+
+sub categories {
+    my $self = shift;
+    Carp::carp("'categories' is deprecated. Use 'get_categories' instead.");
+    $self->get_categories(@_);
+}
+
+sub get_comment_tree {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -63,7 +89,14 @@ sub comment_tree {
     $api->base->call("GET", $uri, @_);
 }
 
-sub new_to_comments {
+
+sub comment_tree {
+    my $self = shift;
+    Carp::carp("'comment_tree' is deprecated. Use 'get_comment_tree' instead.");
+    $self->get_comment_tree(@_);
+}
+
+sub post_to_comments {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -71,7 +104,14 @@ sub new_to_comments {
     $api->base->call("POST", $uri, @_);
 }
 
-sub comments {
+
+sub new_to_comments {
+    my $self = shift;
+    Carp::carp("'new_to_comments' is deprecated. Use 'post_to_comments' instead.");
+    $self->post_to_comments(@_);
+}
+
+sub get_comments {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -79,7 +119,14 @@ sub comments {
     $api->base->call("GET", $uri, @_);
 }
 
-sub extended_content {
+
+sub comments {
+    my $self = shift;
+    Carp::carp("'comments' is deprecated. Use 'get_comments' instead.");
+    $self->get_comments(@_);
+}
+
+sub get_extended_content {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -87,7 +134,14 @@ sub extended_content {
     $api->base->call("GET", $uri, @_);
 }
 
-sub favorites {
+
+sub extended_content {
+    my $self = shift;
+    Carp::carp("'extended_content' is deprecated. Use 'get_extended_content' instead.");
+    $self->get_extended_content(@_);
+}
+
+sub get_favorites {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -95,7 +149,14 @@ sub favorites {
     $api->base->call("GET", $uri, @_);
 }
 
-sub feedback_status {
+
+sub favorites {
+    my $self = shift;
+    Carp::carp("'favorites' is deprecated. Use 'get_favorites' instead.");
+    $self->get_favorites(@_);
+}
+
+sub get_feedback_status {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -103,12 +164,26 @@ sub feedback_status {
     $api->base->call("GET", $uri, @_);
 }
 
-sub update_feedback_status {
+
+sub feedback_status {
+    my $self = shift;
+    Carp::carp("'feedback_status' is deprecated. Use 'get_feedback_status' instead.");
+    $self->get_feedback_status(@_);
+}
+
+sub put_feedback_status {
     my $api = shift;
     my @args;
     push @args, shift; # id
     my $uri = sprintf '/assets/%s/feedback-status.json', @args;
     $api->base->call("PUT", $uri, @_);
+}
+
+
+sub update_feedback_status {
+    my $self = shift;
+    Carp::carp("'update_feedback_status' is deprecated. Use 'put_feedback_status' instead.");
+    $self->put_feedback_status(@_);
 }
 
 sub make_comment_preview {
@@ -119,7 +194,8 @@ sub make_comment_preview {
     $api->base->call("POST", $uri, @_);
 }
 
-sub media_assets {
+
+sub get_media_assets {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -127,7 +203,14 @@ sub media_assets {
     $api->base->call("GET", $uri, @_);
 }
 
-sub publication_status {
+
+sub media_assets {
+    my $self = shift;
+    Carp::carp("'media_assets' is deprecated. Use 'get_media_assets' instead.");
+    $self->get_media_assets(@_);
+}
+
+sub get_publication_status {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -135,7 +218,14 @@ sub publication_status {
     $api->base->call("GET", $uri, @_);
 }
 
-sub update_publication_status {
+
+sub publication_status {
+    my $self = shift;
+    Carp::carp("'publication_status' is deprecated. Use 'get_publication_status' instead.");
+    $self->get_publication_status(@_);
+}
+
+sub put_publication_status {
     my $api = shift;
     my @args;
     push @args, shift; # id
@@ -143,12 +233,26 @@ sub update_publication_status {
     $api->base->call("PUT", $uri, @_);
 }
 
-sub reblogs {
+
+sub update_publication_status {
+    my $self = shift;
+    Carp::carp("'update_publication_status' is deprecated. Use 'put_publication_status' instead.");
+    $self->put_publication_status(@_);
+}
+
+sub get_reblogs {
     my $api = shift;
     my @args;
     push @args, shift; # id
     my $uri = sprintf '/assets/%s/reblogs.json', @args;
     $api->base->call("GET", $uri, @_);
+}
+
+
+sub reblogs {
+    my $self = shift;
+    Carp::carp("'reblogs' is deprecated. Use 'get_reblogs' instead.");
+    $self->get_reblogs(@_);
 }
 
 sub remove_category {
@@ -159,6 +263,7 @@ sub remove_category {
     $api->base->call("POST", $uri, @_);
 }
 
+
 sub update_publication_status {
     my $api = shift;
     my @args;
@@ -166,6 +271,7 @@ sub update_publication_status {
     my $uri = sprintf '/assets/%s/update-publication-status.json', @args;
     $api->base->call("POST", $uri, @_);
 }
+
 ### END auto-generated
 
 

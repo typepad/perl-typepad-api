@@ -53,6 +53,7 @@ sub generate_code {
         package => $package,
         mapping => $mapping,
         safe => sub { $_[0] =~ tr/-/_/; $_[0] },
+        decamelize => sub { decamelize($_[0]) },
         mangle_method => sub {
             my $method = $_[0];
             $method =~ s/^(post|put|delete)/$method_name_map->{$1}/;
@@ -73,9 +74,13 @@ use strict;
 use Any::Moose;
 extends 'WWW::TypePad::Noun';
 
+use Carp ();
+
 [% FOREACH method IN mapping.methods -%]
 
-sub [% mangle_method( method.methodName ) %] {
+[% SET canonical = decamelize(method.methodName);
+   SET mangled   = mangle_method(method.methodName) -%]
+sub [% canonical %] {
     my $api = shift;
     my @args;
 [% FOREACH param IN keys_sorted_by_value( method.pathParams ) -%]
@@ -84,6 +89,14 @@ sub [% mangle_method( method.methodName ) %] {
     my $uri = sprintf '/[% path_format(method.pathChunks) %].json', @args;
     $api->base->call("[% method.httpMethod %]", $uri, @_);
 }
+
+[% IF canonical != mangled %]
+sub [% mangled %] {
+    my $self = shift;
+    Carp::carp("'[% mangled %]' is deprecated. Use '[% canonical %]' instead.");
+    $self->[% canonical %](@_);
+}
+[% END -%]
 [% END # FOREACH method -%]
 ### END auto-generated
 TEMPLATE

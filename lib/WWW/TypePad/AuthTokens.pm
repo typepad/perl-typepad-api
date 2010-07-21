@@ -7,6 +7,8 @@ use strict;
 use Any::Moose;
 extends 'WWW::TypePad::Noun';
 
+use Carp ();
+
 
 sub get {
     my $api = shift;
@@ -15,6 +17,7 @@ sub get {
     my $uri = sprintf '/auth-tokens/%s.json', @args;
     $api->base->call("GET", $uri, @_);
 }
+
 ### END auto-generated
 
 

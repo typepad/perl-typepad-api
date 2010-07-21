@@ -7,12 +7,21 @@ use strict;
 use Any::Moose;
 extends 'WWW::TypePad::Noun';
 
+use Carp ();
 
-sub all {
+
+sub get_all {
     my $api = shift;
     my @args;
     my $uri = sprintf '/nouns.json', @args;
     $api->base->call("GET", $uri, @_);
+}
+
+
+sub all {
+    my $self = shift;
+    Carp::carp("'all' is deprecated. Use 'get_all' instead.");
+    $self->get_all(@_);
 }
 
 sub get {
@@ -22,6 +31,7 @@ sub get {
     my $uri = sprintf '/nouns/%s.json', @args;
     $api->base->call("GET", $uri, @_);
 }
+
 ### END auto-generated
 
 
