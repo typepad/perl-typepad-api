@@ -7,21 +7,22 @@ use strict;
 use Any::Moose;
 extends 'WWW::TypePad::Noun';
 
-sub prefix { '/favorites' }
-
-sub get {
-    my $api = shift;
-    my $id  = shift;
-    $api->_get($id);
-}
 
 sub remove {
     my $api = shift;
-    my $id  = shift;
-    $api->_delete($id, undef, undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/favorites/%s.json', @args;
+    $api->base->call("DELETE", $uri, @_);
 }
 
-
+sub get {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/favorites/%s.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
 ### END auto-generated
 
 

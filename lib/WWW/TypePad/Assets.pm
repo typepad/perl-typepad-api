@@ -7,111 +7,165 @@ use strict;
 use Any::Moose;
 extends 'WWW::TypePad::Noun';
 
-sub prefix { '/assets' }
 
-sub get {
+sub search {
     my $api = shift;
-    my $id  = shift;
-    $api->_get($id);
-}
-
-sub update {
-    my $api = shift;
-    my $id  = shift;
-    $api->_put($id, undef, undef, undef, @_);
+    my @args;
+    my $uri = sprintf '/assets.json', @args;
+    $api->base->call("GET", $uri, @_);
 }
 
 sub remove {
     my $api = shift;
-    my $id  = shift;
-    $api->_delete($id, undef, undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s.json', @args;
+    $api->base->call("DELETE", $uri, @_);
 }
 
-sub favorites {
+sub get {
     my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'favorites', undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s.json', @args;
+    $api->base->call("GET", $uri, @_);
 }
 
-sub feedback_status {
+sub update {
     my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'feedback-status', undef, undef, @_);
-}
-
-sub set_feedback_status {
-    my $api = shift;
-    my $id  = shift;
-    $api->_put($id, 'feedback-status', undef, undef, @_);
-}
-
-sub publication_status {
-    my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'publication-status', undef, undef, @_);
-}
-
-sub set_publication_status {
-    my $api = shift;
-    my $id  = shift;
-    $api->_put($id, 'publication-status', undef, undef, @_);
-}
-
-sub reblogs {
-    my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'reblogs', undef, undef, @_);
-}
-
-sub categories {
-    my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'categories', undef, undef, @_);
-}
-
-sub comments {
-    my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'comments', undef, undef, @_);
-}
-
-sub new_comment {
-    my $api = shift;
-    my $id  = shift;
-    $api->_post($id, 'comments', undef, undef, @_);
-}
-
-sub media_assets {
-    my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'media-assets', undef, undef, @_);
-}
-
-sub comment_tree {
-    my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'comment-tree', undef, undef, @_);
-}
-
-
-sub remove_category {
-    my $api = shift;
-    my $id  = shift;
-    $api->_post($id, 'remove-category', undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s.json', @args;
+    $api->base->call("PUT", $uri, @_);
 }
 
 sub add_category {
     my $api = shift;
-    my $id  = shift;
-    $api->_post($id, 'add-category', undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s/add-category.json', @args;
+    $api->base->call("POST", $uri, @_);
+}
+
+sub categories {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s/categories.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+sub comment_tree {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s/comment-tree.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+sub new_to_comments {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s/comments.json', @args;
+    $api->base->call("POST", $uri, @_);
+}
+
+sub comments {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s/comments.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+sub extended_content {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s/extended-content.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+sub favorites {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s/favorites.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+sub feedback_status {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s/feedback-status.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+sub update_feedback_status {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s/feedback-status.json', @args;
+    $api->base->call("PUT", $uri, @_);
 }
 
 sub make_comment_preview {
     my $api = shift;
-    my $id  = shift;
-    $api->_post($id, 'make-comment-preview', undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s/make-comment-preview.json', @args;
+    $api->base->call("POST", $uri, @_);
 }
 
+sub media_assets {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s/media-assets.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+sub publication_status {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s/publication-status.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+sub update_publication_status {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s/publication-status.json', @args;
+    $api->base->call("PUT", $uri, @_);
+}
+
+sub reblogs {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s/reblogs.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+sub remove_category {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s/remove-category.json', @args;
+    $api->base->call("POST", $uri, @_);
+}
+
+sub update_publication_status {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/assets/%s/update-publication-status.json', @args;
+    $api->base->call("POST", $uri, @_);
+}
 ### END auto-generated
 
 

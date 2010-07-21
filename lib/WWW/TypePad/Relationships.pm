@@ -7,27 +7,30 @@ use strict;
 use Any::Moose;
 extends 'WWW::TypePad::Noun';
 
-sub prefix { '/relationships' }
 
 sub get {
     my $api = shift;
-    my $id  = shift;
-    $api->_get($id);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/relationships/%s.json', @args;
+    $api->base->call("GET", $uri, @_);
 }
 
 sub status {
     my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'status', undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/relationships/%s/status.json', @args;
+    $api->base->call("GET", $uri, @_);
 }
 
-sub set_status {
+sub update_status {
     my $api = shift;
-    my $id  = shift;
-    $api->_put($id, 'status', undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/relationships/%s/status.json', @args;
+    $api->base->call("PUT", $uri, @_);
 }
-
-
 ### END auto-generated
 
 

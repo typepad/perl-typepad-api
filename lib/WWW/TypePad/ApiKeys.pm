@@ -7,15 +7,14 @@ use strict;
 use Any::Moose;
 extends 'WWW::TypePad::Noun';
 
-sub prefix { '/api-keys' }
 
 sub get {
     my $api = shift;
-    my $id  = shift;
-    $api->_get($id);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/api-keys/%s.json', @args;
+    $api->base->call("GET", $uri, @_);
 }
-
-
 ### END auto-generated
 
 

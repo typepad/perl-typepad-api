@@ -7,57 +7,70 @@ use strict;
 use Any::Moose;
 extends 'WWW::TypePad::Noun';
 
-sub prefix { '/external-feed-subscriptions' }
-
-sub get {
-    my $api = shift;
-    my $id  = shift;
-    $api->_get($id);
-}
 
 sub remove {
     my $api = shift;
-    my $id  = shift;
-    $api->_delete($id, undef, undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/external-feed-subscriptions/%s.json', @args;
+    $api->base->call("DELETE", $uri, @_);
+}
+
+sub get {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/external-feed-subscriptions/%s.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+sub add_feeds {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/external-feed-subscriptions/%s/add-feeds.json', @args;
+    $api->base->call("POST", $uri, @_);
 }
 
 sub feeds {
     my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'feeds', undef, undef, @_);
-}
-
-
-sub add_feeds {
-    my $api = shift;
-    my $id  = shift;
-    $api->_post($id, 'add-feeds', undef, undef, @_);
-}
-
-sub update_user {
-    my $api = shift;
-    my $id  = shift;
-    $api->_post($id, 'update-user', undef, undef, @_);
-}
-
-sub update_filters {
-    my $api = shift;
-    my $id  = shift;
-    $api->_post($id, 'update-filters', undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/external-feed-subscriptions/%s/feeds.json', @args;
+    $api->base->call("GET", $uri, @_);
 }
 
 sub remove_feeds {
     my $api = shift;
-    my $id  = shift;
-    $api->_post($id, 'remove-feeds', undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/external-feed-subscriptions/%s/remove-feeds.json', @args;
+    $api->base->call("POST", $uri, @_);
+}
+
+sub update_filters {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/external-feed-subscriptions/%s/update-filters.json', @args;
+    $api->base->call("POST", $uri, @_);
 }
 
 sub update_notification_settings {
     my $api = shift;
-    my $id  = shift;
-    $api->_post($id, 'update-notification-settings', undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/external-feed-subscriptions/%s/update-notification-settings.json', @args;
+    $api->base->call("POST", $uri, @_);
 }
 
+sub update_user {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/external-feed-subscriptions/%s/update-user.json', @args;
+    $api->base->call("POST", $uri, @_);
+}
 ### END auto-generated
 
 1;

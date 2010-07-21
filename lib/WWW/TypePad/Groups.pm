@@ -7,117 +7,142 @@ use strict;
 use Any::Moose;
 extends 'WWW::TypePad::Noun';
 
-sub prefix { '/groups' }
 
 sub get {
     my $api = shift;
-    my $id  = shift;
-    $api->_get($id);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s.json', @args;
+    $api->base->call("GET", $uri, @_);
 }
 
-sub memberships {
+sub add_member {
     my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'memberships', undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/add-member.json', @args;
+    $api->base->call("POST", $uri, @_);
 }
 
-sub admin_memberships {
+sub new_to_audio_assets {
     my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'memberships', 'admin', undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/audio-assets.json', @args;
+    $api->base->call("POST", $uri, @_);
 }
 
-sub member_memberships {
+sub block_user {
     my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'memberships', 'member', undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/block-user.json', @args;
+    $api->base->call("POST", $uri, @_);
 }
 
-sub blocked_memberships {
+sub create_external_feed_subscription {
     my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'memberships', 'blocked', undef, @_);
-}
-
-sub video_assets {
-    my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'video-assets', undef, undef, @_);
-}
-
-sub new_video_asset {
-    my $api = shift;
-    my $id  = shift;
-    $api->_post($id, 'video-assets', undef, undef, @_);
-}
-
-sub audio_assets {
-    my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'audio-assets', undef, undef, @_);
-}
-
-sub new_audio_asset {
-    my $api = shift;
-    my $id  = shift;
-    $api->_post($id, 'audio-assets', undef, undef, @_);
-}
-
-sub external_feed_subscriptions {
-    my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'external-feed-subscriptions', undef, undef, @_);
-}
-
-sub photo_assets {
-    my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'photo-assets', undef, undef, @_);
-}
-
-sub new_photo_asset {
-    my $api = shift;
-    my $id  = shift;
-    $api->_post($id, 'photo-assets', undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/create-external-feed-subscription.json', @args;
+    $api->base->call("POST", $uri, @_);
 }
 
 sub events {
     my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'events', undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/events.json', @args;
+    $api->base->call("GET", $uri, @_);
 }
 
-sub link_assets {
+sub external_feed_subscriptions {
     my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'link-assets', undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/external-feed-subscriptions.json', @args;
+    $api->base->call("GET", $uri, @_);
 }
 
-sub new_link_asset {
+sub new_to_link_assets {
     my $api = shift;
-    my $id  = shift;
-    $api->_post($id, 'link-assets', undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/link-assets.json', @args;
+    $api->base->call("POST", $uri, @_);
 }
 
-sub post_assets {
+sub memberships {
     my $api = shift;
-    my $id  = shift;
-    $api->_get($id, 'post-assets', undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/memberships.json', @args;
+    $api->base->call("GET", $uri, @_);
 }
 
-sub new_post_asset {
+sub admin_memberships {
     my $api = shift;
-    my $id  = shift;
-    $api->_post($id, 'post-assets', undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/memberships/@admin.json', @args;
+    $api->base->call("GET", $uri, @_);
 }
 
-
-sub create_external_feed_subscription {
+sub blocked_memberships {
     my $api = shift;
-    my $id  = shift;
-    $api->_post($id, 'create-external-feed-subscription', undef, undef, @_);
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/memberships/@blocked.json', @args;
+    $api->base->call("GET", $uri, @_);
 }
 
+sub member_memberships {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/memberships/@member.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+sub new_to_photo_assets {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/photo-assets.json', @args;
+    $api->base->call("POST", $uri, @_);
+}
+
+sub new_to_post_assets {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/post-assets.json', @args;
+    $api->base->call("POST", $uri, @_);
+}
+
+sub remove_member {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/remove-member.json', @args;
+    $api->base->call("POST", $uri, @_);
+}
+
+sub unblock_user {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/unblock-user.json', @args;
+    $api->base->call("POST", $uri, @_);
+}
+
+sub new_to_video_assets {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/video-assets.json', @args;
+    $api->base->call("POST", $uri, @_);
+}
 ### END auto-generated
 
 
@@ -126,7 +151,7 @@ sub upload_photo {
     my( $id, $asset, $filename ) = @_;
     return $api->base->call_upload( {
         # No extension on this!
-        target_url  => $api->prefix . '/' . $id . '/photo-assets',
+        target_url  => '/groups/' . $id . '/photo-assets',
         asset       => $asset,
         filename    => $filename,
     } );
@@ -137,7 +162,7 @@ sub upload_audio {
     my( $id, $asset, $filename ) = @_;
     return $api->base->call_upload( {
         # No extension on this!
-        target_url  => $api->prefix . '/' . $id . '/audio-assets',
+        target_url  => '/groups/' . $id . '/audio-assets',
         asset       => $asset,
         filename    => $filename,
     } );
