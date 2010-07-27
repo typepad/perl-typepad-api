@@ -301,8 +301,17 @@ WWW::TypePad - Client for the TypePad Platform
 
 =head1 SYNOPSIS
 
-    use WWW::TypePad;
-    my $tp = WWW::TypePad->new;
+  use WWW::TypePad;
+  my $tp = WWW::TypePad->new(
+      consumer_key => 'YOUR-CONSUMER-KEY',
+      consumer_secret => 'YOUR-CONSUMER-SECRET',
+  );
+
+  # See samples/debug-console/app.psgi for the OAuth authentication flow
+
+  my $user = $tp->users->get($uid);
+
+  # See each modules POD documents for the API methods
 
 =head1 DESCRIPTION
 
@@ -334,5 +343,6 @@ L<http://github.com/sixapart/perl-typepad-api>
 =head1 SEE ALSO
 
 L<http://developers.typepad.com/>
+L<http://www.typepad.com/services/apidocs>
 
 =cut
