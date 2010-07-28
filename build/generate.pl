@@ -49,6 +49,8 @@ sub rewrite_file {
 sub generate_code {
     my($package, $mapping) = @_;
 
+    my %podesc = ('<' => 'E<lt>', '>' => 'E<gt>');
+
     my $stash = {
         package => $package,
         mapping => $mapping,
@@ -62,6 +64,11 @@ sub generate_code {
         },
         path_format => sub { join '/', map { defined $_ ? $_ : '%s' } @{$_[0]} },
         keys_sorted_by_value => sub { sort { $_[0]->{$a} <=> $_[0]->{$b} } keys %{$_[0]} },
+        escape_pod => sub {
+            $_[0] =~ s/T<(.*?)>/B<$1>/g;
+            $_[0] =~ s/([<>])/$podesc{$1}/g;
+            $_[0];
+        },
     };
 
     my $tt = Template->new;
@@ -69,6 +76,16 @@ sub generate_code {
 ### BEGIN auto-generated
 ### This is an automatically generated code, do not edit!
 ### Scroll down to look for END to add additional methods
+
+=pod
+
+=head1 NAME
+
+WWW::TypePad::[% package %] - [% package %] API methods
+
+=head1 METHODS
+
+=cut
 
 use strict;
 use Any::Moose;
@@ -78,12 +95,40 @@ use Carp ();
 
 [% FOREACH method IN mapping.methods -%]
 
-[% SET canonical = decamelize(method.methodName);
-   SET mangled   = mangle_method(method.methodName) -%]
+[%- SET canonical = decamelize(method.methodName);
+    SET mangled   = mangle_method(method.methodName);
+    SET params    = keys_sorted_by_value( method.pathParams ) -%]
+
+=pod
+
+[% IF loop.first %]=over 4
+[% END %]
+
+=item [% canonical %]
+
+  my $res = $tp->[% decamelize(package) %]->[% canonical %]([% FOREACH param IN params %]$[% param %][% UNLESS loop.last %], [% END %][% END %]);
+
+[% escape_pod(method.docString) %]
+
+Returns [% escape_pod(method.returnObjectType.name) || 'hash reference' %] which contains following properties.
+
+=over 8
+
+[% FOREACH prop IN method.returnObjectType.properties -%]
+=item [% prop.name %]
+
+([% escape_pod(prop.type) %]) [% escape_pod(prop.docString) %]
+
+[% END -%]
+
+=back
+
+=cut
+
 sub [% canonical %] {
     my $api = shift;
     my @args;
-[% FOREACH param IN keys_sorted_by_value( method.pathParams ) -%]
+[% FOREACH param IN params -%]
     push @args, shift; # [% param %]
 [% END -%]
     my $uri = sprintf '/[% path_format(method.pathChunks) %].json', @args;
@@ -98,6 +143,13 @@ sub [% mangled %] {
 }
 [% END -%]
 [% END # FOREACH method -%]
+
+=pod
+
+=back
+
+=cut
+
 ### END auto-generated
 TEMPLATE
 
