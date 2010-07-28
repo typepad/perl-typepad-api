@@ -2,8 +2,17 @@ NAME
     WWW::TypePad - Client for the TypePad Platform
 
 SYNOPSIS
-        use WWW::TypePad;
-        my $tp = WWW::TypePad->new;
+      use WWW::TypePad;
+      my $tp = WWW::TypePad->new(
+          consumer_key => 'YOUR-CONSUMER-KEY',
+          consumer_secret => 'YOUR-CONSUMER-SECRET',
+      );
+
+      # See samples/debug-console/app.psgi for the OAuth authentication flow
+
+      my $user = $tp->users->get($uid);
+
+      # See each modules POD documents for the API methods
 
 DESCRIPTION
     WWW::TypePad is a Perl library implementing an interface to the TypePad
@@ -28,4 +37,5 @@ COMMUNITY
 
 SEE ALSO
     <http://developers.typepad.com/>
+    <http://www.typepad.com/services/apidocs>
 

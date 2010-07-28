@@ -1,5 +1,6 @@
 .gitignore
 build/generate.pl
+build/method-mappings.json
 build/nouns.json
 build/object-types.json
 Changes
@@ -19,11 +20,11 @@ lib/WWW/TypePad/ApiKeys.pm
 lib/WWW/TypePad/Applications.pm
 lib/WWW/TypePad/Assets.pm
 lib/WWW/TypePad/AuthTokens.pm
-lib/WWW/TypePad/BatchProcessor.pm
+lib/WWW/TypePad/Badges.pm
 lib/WWW/TypePad/Blogs.pm
-lib/WWW/TypePad/BrowserUpload.pm
 lib/WWW/TypePad/Error.pm
 lib/WWW/TypePad/Events.pm
+lib/WWW/TypePad/ExternalFeedSubscriptions.pm
 lib/WWW/TypePad/Favorites.pm
 lib/WWW/TypePad/Groups.pm
 lib/WWW/TypePad/Noun.pm

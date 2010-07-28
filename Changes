@@ -1,5 +1,13 @@
 Revision history for Perl extension WWW::TypePad
 
+0.2000 Wed Jul 28 14:19:25 PDT 2010
+       - Changed the API method mapping scheme to match with other language bindings (miyagawa, matkins)
+       - Auto generating POD documents using the mapping-methods.json (miyagawa)
+       - Support PUT and DELETE methods for properties (miyagawa)
+       - You can now specify TypePad API endpoint hostnames, for internal development (miyagawa)
+       - Added missing upload_media_asset function (paololim)
+       - Forces anonymous requests to use HTTP (paololim)
+
 0.1000 Fri Apr 16 14:08:13 PDT 2010
        - Upped Net::OAuth::Simple prereq (antoine)
        - Improved error handling (btrott)
