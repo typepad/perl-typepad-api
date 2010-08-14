@@ -215,6 +215,18 @@ Returns Audio which contains following properties.
 
 (setE<lt>stringE<gt>) BE<lt>EditableE<gt> A set of identifiers for OE<lt>AccountE<gt> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.
 
+=item isConversationsAnswer
+
+(boolean) BE<lt>DeprecatedE<gt> CE<lt>trueE<gt> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.
+
+=item reblogOf
+
+(AssetRef) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset, this property describes the original asset.
+
+=item reblogOfUrl
+
+(string) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.
+
 
 =back
 
@@ -233,6 +245,48 @@ sub new_to_audio_assets {
     my $self = shift;
     Carp::carp("'new_to_audio_assets' is deprecated. Use 'post_to_audio_assets' instead.");
     $self->post_to_audio_assets(@_);
+}
+
+=pod
+
+
+
+=item get_audio_assets
+
+  my $res = $tp->groups->get_audio_assets($id);
+
+Get a list of recently created Audio assets from the selected group.
+
+Returns ListE<lt>AudioE<gt> which contains following properties.
+
+=over 8
+
+=item totalResults
+
+(integer) The total number of items in the whole list of which this list object is a paginated view.
+
+=item entries
+
+(arrayE<lt>AudioE<gt>) The items within the selected slice of the list.
+
+
+=back
+
+=cut
+
+sub get_audio_assets {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/audio-assets.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+
+sub audio_assets {
+    my $self = shift;
+    Carp::carp("'audio_assets' is deprecated. Use 'get_audio_assets' instead.");
+    $self->get_audio_assets(@_);
 }
 
 =pod
@@ -485,6 +539,18 @@ Returns Link which contains following properties.
 
 (setE<lt>stringE<gt>) BE<lt>EditableE<gt> A set of identifiers for OE<lt>AccountE<gt> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.
 
+=item isConversationsAnswer
+
+(boolean) BE<lt>DeprecatedE<gt> CE<lt>trueE<gt> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.
+
+=item reblogOf
+
+(AssetRef) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset, this property describes the original asset.
+
+=item reblogOfUrl
+
+(string) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.
+
 
 =back
 
@@ -503,6 +569,48 @@ sub new_to_link_assets {
     my $self = shift;
     Carp::carp("'new_to_link_assets' is deprecated. Use 'post_to_link_assets' instead.");
     $self->post_to_link_assets(@_);
+}
+
+=pod
+
+
+
+=item get_link_assets
+
+  my $res = $tp->groups->get_link_assets($id);
+
+Returns a list of recently created Link assets from the selected group.
+
+Returns ListE<lt>LinkE<gt> which contains following properties.
+
+=over 8
+
+=item totalResults
+
+(integer) The total number of items in the whole list of which this list object is a paginated view.
+
+=item entries
+
+(arrayE<lt>LinkE<gt>) The items within the selected slice of the list.
+
+
+=back
+
+=cut
+
+sub get_link_assets {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/link-assets.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+
+sub link_assets {
+    my $self = shift;
+    Carp::carp("'link_assets' is deprecated. Use 'get_link_assets' instead.");
+    $self->get_link_assets(@_);
 }
 
 =pod
@@ -779,6 +887,18 @@ Returns Photo which contains following properties.
 
 (setE<lt>stringE<gt>) BE<lt>EditableE<gt> A set of identifiers for OE<lt>AccountE<gt> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.
 
+=item isConversationsAnswer
+
+(boolean) BE<lt>DeprecatedE<gt> CE<lt>trueE<gt> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.
+
+=item reblogOf
+
+(AssetRef) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset, this property describes the original asset.
+
+=item reblogOfUrl
+
+(string) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.
+
 
 =back
 
@@ -797,6 +917,48 @@ sub new_to_photo_assets {
     my $self = shift;
     Carp::carp("'new_to_photo_assets' is deprecated. Use 'post_to_photo_assets' instead.");
     $self->post_to_photo_assets(@_);
+}
+
+=pod
+
+
+
+=item get_photo_assets
+
+  my $res = $tp->groups->get_photo_assets($id);
+
+Get a list of recently created Photo assets from the selected group.
+
+Returns ListE<lt>PhotoE<gt> which contains following properties.
+
+=over 8
+
+=item totalResults
+
+(integer) The total number of items in the whole list of which this list object is a paginated view.
+
+=item entries
+
+(arrayE<lt>PhotoE<gt>) The items within the selected slice of the list.
+
+
+=back
+
+=cut
+
+sub get_photo_assets {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/photo-assets.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+
+sub photo_assets {
+    my $self = shift;
+    Carp::carp("'photo_assets' is deprecated. Use 'get_photo_assets' instead.");
+    $self->get_photo_assets(@_);
 }
 
 =pod
@@ -953,6 +1115,18 @@ Returns Post which contains following properties.
 
 (setE<lt>stringE<gt>) BE<lt>EditableE<gt> A set of identifiers for OE<lt>AccountE<gt> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.
 
+=item isConversationsAnswer
+
+(boolean) BE<lt>DeprecatedE<gt> CE<lt>trueE<gt> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.
+
+=item reblogOf
+
+(AssetRef) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset, this property describes the original asset.
+
+=item reblogOfUrl
+
+(string) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.
+
 
 =back
 
@@ -971,6 +1145,48 @@ sub new_to_post_assets {
     my $self = shift;
     Carp::carp("'new_to_post_assets' is deprecated. Use 'post_to_post_assets' instead.");
     $self->post_to_post_assets(@_);
+}
+
+=pod
+
+
+
+=item get_post_assets
+
+  my $res = $tp->groups->get_post_assets($id);
+
+Get a list of recently created Post assets from the selected group.
+
+Returns ListE<lt>PostE<gt> which contains following properties.
+
+=over 8
+
+=item totalResults
+
+(integer) The total number of items in the whole list of which this list object is a paginated view.
+
+=item entries
+
+(arrayE<lt>PostE<gt>) The items within the selected slice of the list.
+
+
+=back
+
+=cut
+
+sub get_post_assets {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/post-assets.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+
+sub post_assets {
+    my $self = shift;
+    Carp::carp("'post_assets' is deprecated. Use 'get_post_assets' instead.");
+    $self->get_post_assets(@_);
 }
 
 =pod
@@ -1140,6 +1356,18 @@ Returns Video which contains following properties.
 
 (setE<lt>stringE<gt>) BE<lt>EditableE<gt> A set of identifiers for OE<lt>AccountE<gt> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.
 
+=item isConversationsAnswer
+
+(boolean) BE<lt>DeprecatedE<gt> CE<lt>trueE<gt> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.
+
+=item reblogOf
+
+(AssetRef) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset, this property describes the original asset.
+
+=item reblogOfUrl
+
+(string) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.
+
 
 =back
 
@@ -1161,11 +1389,53 @@ sub new_to_video_assets {
 }
 
 =pod
- 
+
+
+
+=item get_video_assets
+
+  my $res = $tp->groups->get_video_assets($id);
+
+Get a list of recently created Video assets from the selected group.
+
+Returns ListE<lt>VideoE<gt> which contains following properties.
+
+=over 8
+
+=item totalResults
+
+(integer) The total number of items in the whole list of which this list object is a paginated view.
+
+=item entries
+
+(arrayE<lt>VideoE<gt>) The items within the selected slice of the list.
+
+
 =back
 
 =cut
- 
+
+sub get_video_assets {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/groups/%s/video-assets.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+
+sub video_assets {
+    my $self = shift;
+    Carp::carp("'video_assets' is deprecated. Use 'get_video_assets' instead.");
+    $self->get_video_assets(@_);
+}
+
+=pod
+
+=back
+
+=cut
+
 ### END auto-generated
 
 

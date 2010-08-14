@@ -143,6 +143,90 @@ sub badges {
 
 
 
+=item get_learning_badges
+
+  my $res = $tp->users->get_learning_badges($id);
+
+Get a list of learning badges that the selected user has won.
+
+Returns ListE<lt>UserBadgeE<gt> which contains following properties.
+
+=over 8
+
+=item totalResults
+
+(integer) The total number of items in the whole list of which this list object is a paginated view.
+
+=item entries
+
+(arrayE<lt>UserBadgeE<gt>) The items within the selected slice of the list.
+
+
+=back
+
+=cut
+
+sub get_learning_badges {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/users/%s/badges/@learning.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+
+sub learning_badges {
+    my $self = shift;
+    Carp::carp("'learning_badges' is deprecated. Use 'get_learning_badges' instead.");
+    $self->get_learning_badges(@_);
+}
+
+=pod
+
+
+
+=item get_public_badges
+
+  my $res = $tp->users->get_public_badges($id);
+
+Get a list of public badges that the selected user has won.
+
+Returns ListE<lt>UserBadgeE<gt> which contains following properties.
+
+=over 8
+
+=item totalResults
+
+(integer) The total number of items in the whole list of which this list object is a paginated view.
+
+=item entries
+
+(arrayE<lt>UserBadgeE<gt>) The items within the selected slice of the list.
+
+
+=back
+
+=cut
+
+sub get_public_badges {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/users/%s/badges/@public.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+
+sub public_badges {
+    my $self = shift;
+    Carp::carp("'public_badges' is deprecated. Use 'get_public_badges' instead.");
+    $self->get_public_badges(@_);
+}
+
+=pod
+
+
+
 =item get_blogs
 
   my $res = $tp->users->get_blogs($id);
@@ -934,6 +1018,49 @@ sub follower_relationships {
 
 
 
+=item get_follower_relationships_by_group
+
+  my $res = $tp->users->get_follower_relationships_by_group($id, $groupId);
+
+Get a list of relationships that have the Contact type that the selected user has with other users, constrained to members of a particular group.
+
+Returns ListE<lt>RelationshipE<gt> which contains following properties.
+
+=over 8
+
+=item totalResults
+
+(integer) The total number of items in the whole list of which this list object is a paginated view.
+
+=item entries
+
+(arrayE<lt>RelationshipE<gt>) The items within the selected slice of the list.
+
+
+=back
+
+=cut
+
+sub get_follower_relationships_by_group {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    push @args, shift; # groupId
+    my $uri = sprintf '/users/%s/relationships/@follower/@by-group/%s.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+
+sub follower_relationships_by_group {
+    my $self = shift;
+    Carp::carp("'follower_relationships_by_group' is deprecated. Use 'get_follower_relationships_by_group' instead.");
+    $self->get_follower_relationships_by_group(@_);
+}
+
+=pod
+
+
+
 =item get_following_relationships
 
   my $res = $tp->users->get_following_relationships($id);
@@ -973,11 +1100,54 @@ sub following_relationships {
 }
 
 =pod
- 
+
+
+
+=item get_following_relationships_by_group
+
+  my $res = $tp->users->get_following_relationships_by_group($id, $groupId);
+
+Get a list of relationships that have the Contact type that other users have with the selected user, constrained to members of a particular group.
+
+Returns ListE<lt>RelationshipE<gt> which contains following properties.
+
+=over 8
+
+=item totalResults
+
+(integer) The total number of items in the whole list of which this list object is a paginated view.
+
+=item entries
+
+(arrayE<lt>RelationshipE<gt>) The items within the selected slice of the list.
+
+
 =back
 
 =cut
- 
+
+sub get_following_relationships_by_group {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    push @args, shift; # groupId
+    my $uri = sprintf '/users/%s/relationships/@following/@by-group/%s.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+
+sub following_relationships_by_group {
+    my $self = shift;
+    Carp::carp("'following_relationships_by_group' is deprecated. Use 'get_following_relationships_by_group' instead.");
+    $self->get_following_relationships_by_group(@_);
+}
+
+=pod
+
+=back
+
+=cut
+
 ### END auto-generated
 
 

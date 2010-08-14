@@ -119,6 +119,107 @@
             }
          },
          {
+            "docString" : "Get a list of badges defined by this application.",
+            "httpMethod" : "GET",
+            "methodName" : "getBadges",
+            "pathChunks" : [
+               "applications",
+               null,
+               "badges"
+            ],
+            "pathParams" : {
+               "id" : 1
+            },
+            "queryParams" : {
+               "limit" : "max-results",
+               "offset" : "start-index"
+            },
+            "returnObjectType" : {
+               "name" : "List<Badge>",
+               "parentType" : "Base",
+               "properties" : [
+                  {
+                     "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                     "name" : "totalResults",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "The items within the selected slice of the list.",
+                     "name" : "entries",
+                     "type" : "array<Badge>"
+                  }
+               ]
+            }
+         },
+         {
+            "docString" : "Get a list of all learning badges defined by this application.",
+            "httpMethod" : "GET",
+            "methodName" : "getLearningBadges",
+            "pathChunks" : [
+               "applications",
+               null,
+               "badges",
+               "@learning"
+            ],
+            "pathParams" : {
+               "id" : 1
+            },
+            "queryParams" : {
+               "limit" : "max-results",
+               "offset" : "start-index"
+            },
+            "returnObjectType" : {
+               "name" : "List<Badge>",
+               "parentType" : "Base",
+               "properties" : [
+                  {
+                     "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                     "name" : "totalResults",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "The items within the selected slice of the list.",
+                     "name" : "entries",
+                     "type" : "array<Badge>"
+                  }
+               ]
+            }
+         },
+         {
+            "docString" : "Get a list of all public badges defined by this application.",
+            "httpMethod" : "GET",
+            "methodName" : "getPublicBadges",
+            "pathChunks" : [
+               "applications",
+               null,
+               "badges",
+               "@public"
+            ],
+            "pathParams" : {
+               "id" : 1
+            },
+            "queryParams" : {
+               "limit" : "max-results",
+               "offset" : "start-index"
+            },
+            "returnObjectType" : {
+               "name" : "List<Badge>",
+               "parentType" : "Base",
+               "properties" : [
+                  {
+                     "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                     "name" : "totalResults",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "The items within the selected slice of the list.",
+                     "name" : "entries",
+                     "type" : "array<Badge>"
+                  }
+               ]
+            }
+         },
+         {
             "docString" : "Subscribe the application to one or more external feeds.",
             "httpMethod" : "POST",
             "methodName" : "createExternalFeedSubscription",
@@ -405,6 +506,21 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             }
@@ -529,6 +645,21 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             }
@@ -645,6 +776,21 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             },
@@ -763,6 +909,21 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             }
@@ -988,6 +1149,21 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             },
@@ -1127,6 +1303,21 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             }
@@ -1709,6 +1900,42 @@
             }
          },
          {
+            "docString" : "Begin an import into the selected blog.",
+            "httpMethod" : "POST",
+            "methodName" : "beginImport",
+            "paramObjectType" : {
+               "properties" : [
+                  {
+                     "docString" : "Attempt to create new users based on ones found in the imported data. This is not yet supported.",
+                     "name" : "matchUsers",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "Attempt to create new users based on ones found in the imported data. This is not yet supported.",
+                     "name" : "createUsers",
+                     "type" : "boolean"
+                  }
+               ]
+            },
+            "pathChunks" : [
+               "blogs",
+               null,
+               "begin-import"
+            ],
+            "pathParams" : {
+               "id" : 1
+            },
+            "returnObjectType" : {
+               "properties" : [
+                  {
+                     "docString" : "The O<ImporterJob> object representing the job that was created.",
+                     "name" : "job",
+                     "type" : "ImporterJob"
+                  }
+               ]
+            }
+         },
+         {
             "docString" : "Get a list of categories which are defined for the selected blog.",
             "httpMethod" : "GET",
             "methodName" : "getCategories",
@@ -2046,6 +2273,21 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             },
@@ -2165,6 +2407,21 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             }
@@ -2321,6 +2578,21 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             },
@@ -2480,6 +2752,21 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             }
@@ -2699,6 +2986,21 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             },
@@ -2888,6 +3190,21 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             }
@@ -2962,6 +3279,42 @@
             }
          },
          {
+            "docString" : "Get zero or one posts matching the given year, month and filename.",
+            "httpMethod" : "GET",
+            "methodName" : "getPostAssetsByFilename",
+            "pathChunks" : [
+               "blogs",
+               null,
+               "post-assets",
+               "@by-filename",
+               null
+            ],
+            "pathParams" : {
+               "fileRef" : 4,
+               "id" : 1
+            },
+            "queryParams" : {
+               "limit" : "max-results",
+               "offset" : "start-index"
+            },
+            "returnObjectType" : {
+               "name" : "List<Post>",
+               "parentType" : "Base",
+               "properties" : [
+                  {
+                     "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                     "name" : "totalResults",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "The items within the selected slice of the list.",
+                     "name" : "entries",
+                     "type" : "array<Post>"
+                  }
+               ]
+            }
+         },
+         {
             "docString" : "Get all visible posts in the selected blog that have a publication date within the selected month, specified as a string of the form \"YYYY-MM\".",
             "httpMethod" : "GET",
             "methodName" : "getPostAssetsByMonth",
@@ -2975,6 +3328,115 @@
             "pathParams" : {
                "id" : 1,
                "month" : 4
+            },
+            "queryParams" : {
+               "limit" : "max-results",
+               "offset" : "start-index"
+            },
+            "returnObjectType" : {
+               "name" : "List<Post>",
+               "parentType" : "Base",
+               "properties" : [
+                  {
+                     "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                     "name" : "totalResults",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "The items within the selected slice of the list.",
+                     "name" : "entries",
+                     "type" : "array<Post>"
+                  }
+               ]
+            }
+         },
+         {
+            "docString" : "Get the published posts in the selected blog that have been assigned to the given category.",
+            "httpMethod" : "GET",
+            "methodName" : "getPublishedPostAssetsByCategory",
+            "pathChunks" : [
+               "blogs",
+               null,
+               "post-assets",
+               "@published",
+               "@by-category",
+               null
+            ],
+            "pathParams" : {
+               "category" : 5,
+               "id" : 1
+            },
+            "queryParams" : {
+               "limit" : "max-results",
+               "offset" : "start-index"
+            },
+            "returnObjectType" : {
+               "name" : "List<Post>",
+               "parentType" : "Base",
+               "properties" : [
+                  {
+                     "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                     "name" : "totalResults",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "The items within the selected slice of the list.",
+                     "name" : "entries",
+                     "type" : "array<Post>"
+                  }
+               ]
+            }
+         },
+         {
+            "docString" : "Get the posts that were published within the selected month (YYYY-MM) from the selected blog.",
+            "httpMethod" : "GET",
+            "methodName" : "getPublishedPostAssetsByMonth",
+            "pathChunks" : [
+               "blogs",
+               null,
+               "post-assets",
+               "@published",
+               "@by-month",
+               null
+            ],
+            "pathParams" : {
+               "id" : 1,
+               "month" : 5
+            },
+            "queryParams" : {
+               "limit" : "max-results",
+               "offset" : "start-index"
+            },
+            "returnObjectType" : {
+               "name" : "List<Post>",
+               "parentType" : "Base",
+               "properties" : [
+                  {
+                     "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                     "name" : "totalResults",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "The items within the selected slice of the list.",
+                     "name" : "entries",
+                     "type" : "array<Post>"
+                  }
+               ]
+            }
+         },
+         {
+            "docString" : "Get the most recent 50 published posts in the selected blog.",
+            "httpMethod" : "GET",
+            "methodName" : "getPublishedRecentPostAssets",
+            "pathChunks" : [
+               "blogs",
+               null,
+               "post-assets",
+               "@published",
+               "@recent"
+            ],
+            "pathParams" : {
+               "id" : 1
             },
             "queryParams" : {
                "limit" : "max-results",
@@ -3714,6 +4176,21 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             },
@@ -3843,6 +4320,54 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
+                  }
+               ]
+            }
+         },
+         {
+            "docString" : "Get a list of recently created Audio assets from the selected group.",
+            "httpMethod" : "GET",
+            "methodName" : "getAudioAssets",
+            "pathChunks" : [
+               "groups",
+               null,
+               "audio-assets"
+            ],
+            "pathParams" : {
+               "id" : 1
+            },
+            "queryParams" : {
+               "limit" : "max-results",
+               "offset" : "start-index"
+            },
+            "returnObjectType" : {
+               "name" : "List<Audio>",
+               "parentType" : "Base",
+               "properties" : [
+                  {
+                     "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                     "name" : "totalResults",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "The items within the selected slice of the list.",
+                     "name" : "entries",
+                     "type" : "array<Audio>"
                   }
                ]
             }
@@ -4098,6 +4623,21 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             },
@@ -4227,6 +4767,54 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
+                  }
+               ]
+            }
+         },
+         {
+            "docString" : "Returns a list of recently created Link assets from the selected group.",
+            "httpMethod" : "GET",
+            "methodName" : "getLinkAssets",
+            "pathChunks" : [
+               "groups",
+               null,
+               "link-assets"
+            ],
+            "pathParams" : {
+               "id" : 1
+            },
+            "queryParams" : {
+               "limit" : "max-results",
+               "offset" : "start-index"
+            },
+            "returnObjectType" : {
+               "name" : "List<Link>",
+               "parentType" : "Base",
+               "properties" : [
+                  {
+                     "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                     "name" : "totalResults",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "The items within the selected slice of the list.",
+                     "name" : "entries",
+                     "type" : "array<Link>"
                   }
                ]
             }
@@ -4488,6 +5076,21 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             },
@@ -4617,6 +5220,54 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
+                  }
+               ]
+            }
+         },
+         {
+            "docString" : "Get a list of recently created Photo assets from the selected group.",
+            "httpMethod" : "GET",
+            "methodName" : "getPhotoAssets",
+            "pathChunks" : [
+               "groups",
+               null,
+               "photo-assets"
+            ],
+            "pathParams" : {
+               "id" : 1
+            },
+            "queryParams" : {
+               "limit" : "max-results",
+               "offset" : "start-index"
+            },
+            "returnObjectType" : {
+               "name" : "List<Photo>",
+               "parentType" : "Base",
+               "properties" : [
+                  {
+                     "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                     "name" : "totalResults",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "The items within the selected slice of the list.",
+                     "name" : "entries",
+                     "type" : "array<Photo>"
                   }
                ]
             }
@@ -4803,6 +5454,21 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             },
@@ -4992,6 +5658,54 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
+                  }
+               ]
+            }
+         },
+         {
+            "docString" : "Get a list of recently created Post assets from the selected group.",
+            "httpMethod" : "GET",
+            "methodName" : "getPostAssets",
+            "pathChunks" : [
+               "groups",
+               null,
+               "post-assets"
+            ],
+            "pathParams" : {
+               "id" : 1
+            },
+            "queryParams" : {
+               "limit" : "max-results",
+               "offset" : "start-index"
+            },
+            "returnObjectType" : {
+               "name" : "List<Post>",
+               "parentType" : "Base",
+               "properties" : [
+                  {
+                     "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                     "name" : "totalResults",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "The items within the selected slice of the list.",
+                     "name" : "entries",
+                     "type" : "array<Post>"
                   }
                ]
             }
@@ -5167,6 +5881,21 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             },
@@ -5301,25 +6030,43 @@
                      "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
                      "name" : "crosspostAccounts",
                      "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             }
-         }
-      ]
-   },
-   "nouns" : {
-      "methods" : [
+         },
          {
-            "docString" : "Get information about all of the nouns in the API, along with their sub-resources and filters.",
+            "docString" : "Get a list of recently created Video assets from the selected group.",
             "httpMethod" : "GET",
-            "methodName" : "getAll",
+            "methodName" : "getVideoAssets",
             "pathChunks" : [
-               "nouns"
+               "groups",
+               null,
+               "video-assets"
             ],
-            "pathParams" : {},
-            "queryParams" : {},
+            "pathParams" : {
+               "id" : 1
+            },
+            "queryParams" : {
+               "limit" : "max-results",
+               "offset" : "start-index"
+            },
             "returnObjectType" : {
-               "name" : "List<Endpoint>",
+               "name" : "List<Video>",
                "parentType" : "Base",
                "properties" : [
                   {
@@ -5330,157 +6077,313 @@
                   {
                      "docString" : "The items within the selected slice of the list.",
                      "name" : "entries",
-                     "type" : "array<Endpoint>"
+                     "type" : "array<Video>"
                   }
                ]
             }
-         },
+         }
+      ]
+   },
+   "importJobs" : {
+      "methods" : [
          {
-            "docString" : "Get information about the selected noun, its sub-resources and their filters.",
-            "httpMethod" : "GET",
-            "methodName" : "get",
+            "docString" : "Terminates a blog import job.",
+            "httpMethod" : "POST",
+            "methodName" : "closeJob",
             "pathChunks" : [
-               "nouns",
-               null
+               "import-jobs",
+               null,
+               "close-job"
             ],
             "pathParams" : {
                "id" : 1
-            },
-            "queryParams" : {},
-            "returnObjectType" : {
-               "name" : "Endpoint",
+            }
+         },
+         {
+            "docString" : "Add a new media asset to the account that owns the blog associated with this import job.",
+            "httpMethod" : "POST",
+            "methodName" : "postToMediaAssets",
+            "paramObjectType" : {
+               "name" : "Asset",
                "parentType" : "Base",
                "properties" : [
                   {
-                     "docString" : "The name of the endpoint, as it appears in URLs.",
-                     "name" : "name",
+                     "docString" : "A URI that serves as a globally unique identifier for the user.",
+                     "name" : "id",
                      "type" : "string"
                   },
                   {
-                     "docString" : "A mapping of the HTTP methods that this endpoint accepts to the docstrings describing the result of each method.",
-                     "name" : "supportedMethods",
-                     "type" : "map<string>"
+                     "docString" : "A string containing the canonical identifier that can be used to identify this object in URLs. This can be used to recognise where the same user is returned in response to different requests, and as a mapping key for an application's local data store.",
+                     "name" : "urlId",
+                     "type" : "string"
                   },
                   {
-                     "docString" : "The names of the query string arguments that this endpoint accepts.",
-                     "name" : "supportedQueryArguments",
+                     "docString" : "The URL that is this asset's permalink. This will be omitted if the asset does not have a permalink of its own (for example, if it's embedded in another asset) or if TypePad does not know its permalink.",
+                     "name" : "permalinkUrl",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "The user who created the selected asset.",
+                     "name" : "author",
+                     "type" : "User"
+                  },
+                  {
+                     "docString" : "The time at which the asset was created, as a W3CDTF timestamp.",
+                     "name" : "published",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "The raw asset content. The M<textFormat> property describes how to format this data. Use this property to set the asset content in write operations. An asset posted in a group may have a M<content> value up to 10,000 bytes long, while a O<Post> asset in a blog may have up to 65,000 bytes of content.",
+                     "name" : "content",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "The content of this asset rendered to HTML. This is currently available only for O<Post> and O<Page> assets.",
+                     "name" : "renderedContent",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "A short, plain-text excerpt of the entry content. This is currently available only for O<Post> assets.",
+                     "name" : "excerpt",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "A keyword that indicates what formatting mode to use for the content of this asset. This can be C<html> for assets the content of which is HTML, C<html_convert_linebreaks> for assets the content of which is HTML but where paragraph tags should be added automatically, or C<markdown> for assets the content of which is Markdown source. Other formatting modes may be added in future. Applications that present assets for editing should use this property to present an appropriate editor.",
+                     "name" : "textFormat",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "T<Deprecated> An array of strings containing the M<id> URI of the O<Group> object that this asset is mapped into, if any. This property has been superseded by the M<container> property.",
+                     "name" : "groups",
+                     "type" : "array<string>"
+                  },
+                  {
+                     "docString" : "An object describing the site from which this asset was retrieved, if the asset was obtained from an external source.",
+                     "name" : "source",
+                     "type" : "AssetSource"
+                  },
+                  {
+                     "docString" : "T<Deprecated> An array of object type identifier URIs identifying the type of this asset. Only the one object type URI for the particular type of asset this asset is will be present.",
+                     "name" : "objectTypes",
                      "type" : "set<string>"
                   },
                   {
-                     "docString" : "C<true> if this endpoint requires a format suffix, or C<false> otherwise.",
-                     "name" : "formatSensitive",
+                     "docString" : "The keyword identifying the type of asset this is.",
+                     "name" : "objectType",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "C<true> if this asset is a favorite for the currently authenticated user, or C<false> otherwise. This property is omitted from responses to anonymous requests.",
+                     "name" : "isFavoriteForCurrentUser",
                      "type" : "boolean"
                   },
                   {
-                     "docString" : "For noun endpoints, an array of property endpoints that it supports.",
-                     "name" : "propertyEndpoints",
-                     "type" : "array<Endpoint>"
-                  },
-                  {
-                     "docString" : "For noun endpoints, an array of action endpoints that it supports.",
-                     "name" : "actionEndpoints",
-                     "type" : "array<Endpoint>"
-                  },
-                  {
-                     "docString" : "For noun endpoints, C<true> if an id part is accepted, or C<false> if the noun may only be used alone.",
-                     "name" : "canHaveId",
-                     "type" : "boolean"
-                  },
-                  {
-                     "docString" : "For noun endpoints, C<true> if the id part can be ommitted, or C<false> if it is always required.",
-                     "name" : "canOmitId",
-                     "type" : "boolean"
-                  },
-                  {
-                     "docString" : "For filter endpoints, C<true> if a parameter is required on the filter, or C<false> if it's a boolean filter.",
-                     "name" : "parameterized",
-                     "type" : "boolean"
-                  },
-                  {
-                     "docString" : "For endpoints that return lists, an array of filters that can be appended to the endpoint.",
-                     "name" : "filterEndpoints",
-                     "type" : "array<Endpoint>"
-                  },
-                  {
-                     "docString" : "The type of object that this endpoint represents for C<GET>, C<PUT> and C<DELETE> operations. This property is omitted for action endpoints, as they do not represent resources.",
-                     "name" : "resourceObjectType",
-                     "type" : "ObjectType"
-                  },
-                  {
-                     "docString" : "The type of object that this endpoint accepts for C<POST> operations. This property is omitted if this endpoint does not accept C<POST> requests.",
-                     "name" : "postObjectType",
-                     "type" : "ObjectType"
-                  },
-                  {
-                     "docString" : "For action endpoints, the type of object that this endpoint returns on success. If the endpoint returns no payload on success, or if this is not an action endpoint, this property is omitted.",
-                     "name" : "responseObjectType",
-                     "type" : "ObjectType"
-                  }
-               ]
-            }
-         }
-      ]
-   },
-   "objectTypes" : {
-      "methods" : [
-         {
-            "docString" : "Get information about all of the object types in the API, including the names and types of their properties.",
-            "httpMethod" : "GET",
-            "methodName" : "getAll",
-            "pathChunks" : [
-               "object-types"
-            ],
-            "pathParams" : {},
-            "queryParams" : {},
-            "returnObjectType" : {
-               "name" : "List<ObjectType>",
-               "parentType" : "Base",
-               "properties" : [
-                  {
-                     "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
-                     "name" : "totalResults",
+                     "docString" : "The number of distinct users who have added this asset as a favorite.",
+                     "name" : "favoriteCount",
                      "type" : "integer"
                   },
                   {
-                     "docString" : "The items within the selected slice of the list.",
-                     "name" : "entries",
-                     "type" : "array<ObjectType>"
+                     "docString" : "The number of comments that have been posted in reply to this asset. This number includes comments that have been posted in response to other comments.",
+                     "name" : "commentCount",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "The title of the asset.",
+                     "name" : "title",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "The description of the asset.",
+                     "name" : "description",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "An object describing the group or blog to which this asset belongs.",
+                     "name" : "container",
+                     "type" : "ContainerRef"
+                  },
+                  {
+                     "docString" : "T<Editable> An object describing the visibility status and publication date for this asset. Only visibility status is editable.",
+                     "name" : "publicationStatus",
+                     "type" : "PublicationStatus"
+                  },
+                  {
+                     "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
+                     "name" : "crosspostAccounts",
+                     "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
+                  }
+               ]
+            },
+            "pathChunks" : [
+               "import-jobs",
+               null,
+               "media-assets"
+            ],
+            "pathParams" : {
+               "id" : 1
+            },
+            "returnObjectType" : {
+               "name" : "Asset",
+               "parentType" : "Base",
+               "properties" : [
+                  {
+                     "docString" : "A URI that serves as a globally unique identifier for the user.",
+                     "name" : "id",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "A string containing the canonical identifier that can be used to identify this object in URLs. This can be used to recognise where the same user is returned in response to different requests, and as a mapping key for an application's local data store.",
+                     "name" : "urlId",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "The URL that is this asset's permalink. This will be omitted if the asset does not have a permalink of its own (for example, if it's embedded in another asset) or if TypePad does not know its permalink.",
+                     "name" : "permalinkUrl",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "The user who created the selected asset.",
+                     "name" : "author",
+                     "type" : "User"
+                  },
+                  {
+                     "docString" : "The time at which the asset was created, as a W3CDTF timestamp.",
+                     "name" : "published",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "The raw asset content. The M<textFormat> property describes how to format this data. Use this property to set the asset content in write operations. An asset posted in a group may have a M<content> value up to 10,000 bytes long, while a O<Post> asset in a blog may have up to 65,000 bytes of content.",
+                     "name" : "content",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "The content of this asset rendered to HTML. This is currently available only for O<Post> and O<Page> assets.",
+                     "name" : "renderedContent",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "A short, plain-text excerpt of the entry content. This is currently available only for O<Post> assets.",
+                     "name" : "excerpt",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "A keyword that indicates what formatting mode to use for the content of this asset. This can be C<html> for assets the content of which is HTML, C<html_convert_linebreaks> for assets the content of which is HTML but where paragraph tags should be added automatically, or C<markdown> for assets the content of which is Markdown source. Other formatting modes may be added in future. Applications that present assets for editing should use this property to present an appropriate editor.",
+                     "name" : "textFormat",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "T<Deprecated> An array of strings containing the M<id> URI of the O<Group> object that this asset is mapped into, if any. This property has been superseded by the M<container> property.",
+                     "name" : "groups",
+                     "type" : "array<string>"
+                  },
+                  {
+                     "docString" : "An object describing the site from which this asset was retrieved, if the asset was obtained from an external source.",
+                     "name" : "source",
+                     "type" : "AssetSource"
+                  },
+                  {
+                     "docString" : "T<Deprecated> An array of object type identifier URIs identifying the type of this asset. Only the one object type URI for the particular type of asset this asset is will be present.",
+                     "name" : "objectTypes",
+                     "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "The keyword identifying the type of asset this is.",
+                     "name" : "objectType",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "C<true> if this asset is a favorite for the currently authenticated user, or C<false> otherwise. This property is omitted from responses to anonymous requests.",
+                     "name" : "isFavoriteForCurrentUser",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "The number of distinct users who have added this asset as a favorite.",
+                     "name" : "favoriteCount",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "The number of comments that have been posted in reply to this asset. This number includes comments that have been posted in response to other comments.",
+                     "name" : "commentCount",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "The title of the asset.",
+                     "name" : "title",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "The description of the asset.",
+                     "name" : "description",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "An object describing the group or blog to which this asset belongs.",
+                     "name" : "container",
+                     "type" : "ContainerRef"
+                  },
+                  {
+                     "docString" : "T<Editable> An object describing the visibility status and publication date for this asset. Only visibility status is editable.",
+                     "name" : "publicationStatus",
+                     "type" : "PublicationStatus"
+                  },
+                  {
+                     "docString" : "T<Editable> A set of identifiers for O<Account> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.",
+                     "name" : "crosspostAccounts",
+                     "type" : "set<string>"
+                  },
+                  {
+                     "docString" : "T<Deprecated> C<true> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.",
+                     "name" : "isConversationsAnswer",
+                     "type" : "boolean"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset, this property describes the original asset.",
+                     "name" : "reblogOf",
+                     "type" : "AssetRef"
+                  },
+                  {
+                     "docString" : "T<Deprecated> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.",
+                     "name" : "reblogOfUrl",
+                     "type" : "string"
                   }
                ]
             }
          },
          {
-            "docString" : "Get information about the selected object type and its properties.",
-            "httpMethod" : "GET",
-            "methodName" : "get",
+            "docString" : "Imports a selection of items into a blog import job.",
+            "httpMethod" : "POST",
+            "methodName" : "submitItems",
+            "paramObjectType" : {
+               "properties" : [
+                  {
+                     "docString" : "Represents objects to import.",
+                     "name" : "items",
+                     "type" : "array<ImportAsset>"
+                  }
+               ]
+            },
             "pathChunks" : [
-               "object-types",
-               null
+               "import-jobs",
+               null,
+               "submit-items"
             ],
             "pathParams" : {
                "id" : 1
-            },
-            "queryParams" : {},
-            "returnObjectType" : {
-               "name" : "ObjectType",
-               "parentType" : "Base",
-               "properties" : [
-                  {
-                     "docString" : "The name of this object type. If this is an anonymous type representing the request or response of an action endpoint, this property is omitted.",
-                     "name" : "name",
-                     "type" : "string"
-                  },
-                  {
-                     "docString" : "The name of the parent type. This property is omitted if this object type has no parent type.",
-                     "name" : "parentType",
-                     "type" : "string"
-                  },
-                  {
-                     "docString" : "The properties belonging to objects of this object type.",
-                     "name" : "properties",
-                     "type" : "array<ObjectProperty>"
-                  }
-               ]
             }
          }
       ]
@@ -5686,6 +6589,74 @@
                "users",
                null,
                "badges"
+            ],
+            "pathParams" : {
+               "id" : 1
+            },
+            "queryParams" : {
+               "limit" : "max-results",
+               "offset" : "start-index"
+            },
+            "returnObjectType" : {
+               "name" : "List<UserBadge>",
+               "parentType" : "Base",
+               "properties" : [
+                  {
+                     "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                     "name" : "totalResults",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "The items within the selected slice of the list.",
+                     "name" : "entries",
+                     "type" : "array<UserBadge>"
+                  }
+               ]
+            }
+         },
+         {
+            "docString" : "Get a list of learning badges that the selected user has won.",
+            "httpMethod" : "GET",
+            "methodName" : "getLearningBadges",
+            "pathChunks" : [
+               "users",
+               null,
+               "badges",
+               "@learning"
+            ],
+            "pathParams" : {
+               "id" : 1
+            },
+            "queryParams" : {
+               "limit" : "max-results",
+               "offset" : "start-index"
+            },
+            "returnObjectType" : {
+               "name" : "List<UserBadge>",
+               "parentType" : "Base",
+               "properties" : [
+                  {
+                     "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                     "name" : "totalResults",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "The items within the selected slice of the list.",
+                     "name" : "entries",
+                     "type" : "array<UserBadge>"
+                  }
+               ]
+            }
+         },
+         {
+            "docString" : "Get a list of public badges that the selected user has won.",
+            "httpMethod" : "GET",
+            "methodName" : "getPublicBadges",
+            "pathChunks" : [
+               "users",
+               null,
+               "badges",
+               "@public"
             ],
             "pathParams" : {
                "id" : 1
@@ -6408,6 +7379,43 @@
             }
          },
          {
+            "docString" : "Get a list of relationships that have the Contact type that the selected user has with other users, constrained to members of a particular group.",
+            "httpMethod" : "GET",
+            "methodName" : "getFollowerRelationshipsByGroup",
+            "pathChunks" : [
+               "users",
+               null,
+               "relationships",
+               "@follower",
+               "@by-group",
+               null
+            ],
+            "pathParams" : {
+               "groupId" : 5,
+               "id" : 1
+            },
+            "queryParams" : {
+               "limit" : "max-results",
+               "offset" : "start-index"
+            },
+            "returnObjectType" : {
+               "name" : "List<Relationship>",
+               "parentType" : "Base",
+               "properties" : [
+                  {
+                     "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                     "name" : "totalResults",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "The items within the selected slice of the list.",
+                     "name" : "entries",
+                     "type" : "array<Relationship>"
+                  }
+               ]
+            }
+         },
+         {
             "docString" : "Get a list of relationships that have the Contact type that other users have with the selected user.",
             "httpMethod" : "GET",
             "methodName" : "getFollowingRelationships",
@@ -6418,6 +7426,43 @@
                "@following"
             ],
             "pathParams" : {
+               "id" : 1
+            },
+            "queryParams" : {
+               "limit" : "max-results",
+               "offset" : "start-index"
+            },
+            "returnObjectType" : {
+               "name" : "List<Relationship>",
+               "parentType" : "Base",
+               "properties" : [
+                  {
+                     "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                     "name" : "totalResults",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "The items within the selected slice of the list.",
+                     "name" : "entries",
+                     "type" : "array<Relationship>"
+                  }
+               ]
+            }
+         },
+         {
+            "docString" : "Get a list of relationships that have the Contact type that other users have with the selected user, constrained to members of a particular group.",
+            "httpMethod" : "GET",
+            "methodName" : "getFollowingRelationshipsByGroup",
+            "pathChunks" : [
+               "users",
+               null,
+               "relationships",
+               "@following",
+               "@by-group",
+               null
+            ],
+            "pathParams" : {
+               "groupId" : 5,
                "id" : 1
             },
             "queryParams" : {

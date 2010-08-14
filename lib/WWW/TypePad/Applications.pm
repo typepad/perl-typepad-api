@@ -105,6 +105,132 @@ sub get {
 
 
 
+=item get_badges
+
+  my $res = $tp->applications->get_badges($id);
+
+Get a list of badges defined by this application.
+
+Returns ListE<lt>BadgeE<gt> which contains following properties.
+
+=over 8
+
+=item totalResults
+
+(integer) The total number of items in the whole list of which this list object is a paginated view.
+
+=item entries
+
+(arrayE<lt>BadgeE<gt>) The items within the selected slice of the list.
+
+
+=back
+
+=cut
+
+sub get_badges {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/applications/%s/badges.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+
+sub badges {
+    my $self = shift;
+    Carp::carp("'badges' is deprecated. Use 'get_badges' instead.");
+    $self->get_badges(@_);
+}
+
+=pod
+
+
+
+=item get_learning_badges
+
+  my $res = $tp->applications->get_learning_badges($id);
+
+Get a list of all learning badges defined by this application.
+
+Returns ListE<lt>BadgeE<gt> which contains following properties.
+
+=over 8
+
+=item totalResults
+
+(integer) The total number of items in the whole list of which this list object is a paginated view.
+
+=item entries
+
+(arrayE<lt>BadgeE<gt>) The items within the selected slice of the list.
+
+
+=back
+
+=cut
+
+sub get_learning_badges {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/applications/%s/badges/@learning.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+
+sub learning_badges {
+    my $self = shift;
+    Carp::carp("'learning_badges' is deprecated. Use 'get_learning_badges' instead.");
+    $self->get_learning_badges(@_);
+}
+
+=pod
+
+
+
+=item get_public_badges
+
+  my $res = $tp->applications->get_public_badges($id);
+
+Get a list of all public badges defined by this application.
+
+Returns ListE<lt>BadgeE<gt> which contains following properties.
+
+=over 8
+
+=item totalResults
+
+(integer) The total number of items in the whole list of which this list object is a paginated view.
+
+=item entries
+
+(arrayE<lt>BadgeE<gt>) The items within the selected slice of the list.
+
+
+=back
+
+=cut
+
+sub get_public_badges {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/applications/%s/badges/@public.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+
+sub public_badges {
+    my $self = shift;
+    Carp::carp("'public_badges' is deprecated. Use 'get_public_badges' instead.");
+    $self->get_public_badges(@_);
+}
+
+=pod
+
+
+
 =item create_external_feed_subscription
 
   my $res = $tp->applications->create_external_feed_subscription($id);
@@ -218,11 +344,11 @@ sub groups {
 }
 
 =pod
- 
+
 =back
 
 =cut
- 
+
 ### END auto-generated
 
 

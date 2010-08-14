@@ -113,6 +113,38 @@ sub add_category {
 
 
 
+=item begin_import
+
+  my $res = $tp->blogs->begin_import($id);
+
+Begin an import into the selected blog.
+
+Returns hash reference which contains following properties.
+
+=over 8
+
+=item job
+
+(ImporterJob) The OE<lt>ImporterJobE<gt> object representing the job that was created.
+
+
+=back
+
+=cut
+
+sub begin_import {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/blogs/%s/begin-import.json', @args;
+    $api->base->call("POST", $uri, @_);
+}
+
+
+=pod
+
+
+
 =item get_categories
 
   my $res = $tp->blogs->get_categories($id);
@@ -473,6 +505,18 @@ Returns Asset which contains following properties.
 
 (setE<lt>stringE<gt>) BE<lt>EditableE<gt> A set of identifiers for OE<lt>AccountE<gt> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.
 
+=item isConversationsAnswer
+
+(boolean) BE<lt>DeprecatedE<gt> CE<lt>trueE<gt> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.
+
+=item reblogOf
+
+(AssetRef) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset, this property describes the original asset.
+
+=item reblogOfUrl
+
+(string) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.
+
 
 =back
 
@@ -622,6 +666,18 @@ Returns Page which contains following properties.
 =item crosspostAccounts
 
 (setE<lt>stringE<gt>) BE<lt>EditableE<gt> A set of identifiers for OE<lt>AccountE<gt> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.
+
+=item isConversationsAnswer
+
+(boolean) BE<lt>DeprecatedE<gt> CE<lt>trueE<gt> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.
+
+=item reblogOf
+
+(AssetRef) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset, this property describes the original asset.
+
+=item reblogOfUrl
+
+(string) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.
 
 
 =back
@@ -839,6 +895,18 @@ Returns Post which contains following properties.
 
 (setE<lt>stringE<gt>) BE<lt>EditableE<gt> A set of identifiers for OE<lt>AccountE<gt> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.
 
+=item isConversationsAnswer
+
+(boolean) BE<lt>DeprecatedE<gt> CE<lt>trueE<gt> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.
+
+=item reblogOf
+
+(AssetRef) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset, this property describes the original asset.
+
+=item reblogOfUrl
+
+(string) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.
+
 
 =back
 
@@ -948,6 +1016,49 @@ sub post_assets_by_category {
 
 
 
+=item get_post_assets_by_filename
+
+  my $res = $tp->blogs->get_post_assets_by_filename($id, $fileRef);
+
+Get zero or one posts matching the given year, month and filename.
+
+Returns ListE<lt>PostE<gt> which contains following properties.
+
+=over 8
+
+=item totalResults
+
+(integer) The total number of items in the whole list of which this list object is a paginated view.
+
+=item entries
+
+(arrayE<lt>PostE<gt>) The items within the selected slice of the list.
+
+
+=back
+
+=cut
+
+sub get_post_assets_by_filename {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    push @args, shift; # fileRef
+    my $uri = sprintf '/blogs/%s/post-assets/@by-filename/%s.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+
+sub post_assets_by_filename {
+    my $self = shift;
+    Carp::carp("'post_assets_by_filename' is deprecated. Use 'get_post_assets_by_filename' instead.");
+    $self->get_post_assets_by_filename(@_);
+}
+
+=pod
+
+
+
 =item get_post_assets_by_month
 
   my $res = $tp->blogs->get_post_assets_by_month($id, $month);
@@ -985,6 +1096,134 @@ sub post_assets_by_month {
     my $self = shift;
     Carp::carp("'post_assets_by_month' is deprecated. Use 'get_post_assets_by_month' instead.");
     $self->get_post_assets_by_month(@_);
+}
+
+=pod
+
+
+
+=item get_published_post_assets_by_category
+
+  my $res = $tp->blogs->get_published_post_assets_by_category($id, $category);
+
+Get the published posts in the selected blog that have been assigned to the given category.
+
+Returns ListE<lt>PostE<gt> which contains following properties.
+
+=over 8
+
+=item totalResults
+
+(integer) The total number of items in the whole list of which this list object is a paginated view.
+
+=item entries
+
+(arrayE<lt>PostE<gt>) The items within the selected slice of the list.
+
+
+=back
+
+=cut
+
+sub get_published_post_assets_by_category {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    push @args, shift; # category
+    my $uri = sprintf '/blogs/%s/post-assets/@published/@by-category/%s.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+
+sub published_post_assets_by_category {
+    my $self = shift;
+    Carp::carp("'published_post_assets_by_category' is deprecated. Use 'get_published_post_assets_by_category' instead.");
+    $self->get_published_post_assets_by_category(@_);
+}
+
+=pod
+
+
+
+=item get_published_post_assets_by_month
+
+  my $res = $tp->blogs->get_published_post_assets_by_month($id, $month);
+
+Get the posts that were published within the selected month (YYYY-MM) from the selected blog.
+
+Returns ListE<lt>PostE<gt> which contains following properties.
+
+=over 8
+
+=item totalResults
+
+(integer) The total number of items in the whole list of which this list object is a paginated view.
+
+=item entries
+
+(arrayE<lt>PostE<gt>) The items within the selected slice of the list.
+
+
+=back
+
+=cut
+
+sub get_published_post_assets_by_month {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    push @args, shift; # month
+    my $uri = sprintf '/blogs/%s/post-assets/@published/@by-month/%s.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+
+sub published_post_assets_by_month {
+    my $self = shift;
+    Carp::carp("'published_post_assets_by_month' is deprecated. Use 'get_published_post_assets_by_month' instead.");
+    $self->get_published_post_assets_by_month(@_);
+}
+
+=pod
+
+
+
+=item get_published_recent_post_assets
+
+  my $res = $tp->blogs->get_published_recent_post_assets($id);
+
+Get the most recent 50 published posts in the selected blog.
+
+Returns ListE<lt>PostE<gt> which contains following properties.
+
+=over 8
+
+=item totalResults
+
+(integer) The total number of items in the whole list of which this list object is a paginated view.
+
+=item entries
+
+(arrayE<lt>PostE<gt>) The items within the selected slice of the list.
+
+
+=back
+
+=cut
+
+sub get_published_recent_post_assets {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/blogs/%s/post-assets/@published/@recent.json', @args;
+    $api->base->call("GET", $uri, @_);
+}
+
+
+sub published_recent_post_assets {
+    my $self = shift;
+    Carp::carp("'published_recent_post_assets' is deprecated. Use 'get_published_recent_post_assets' instead.");
+    $self->get_published_recent_post_assets(@_);
 }
 
 =pod
@@ -1139,11 +1378,11 @@ sub stats {
 }
 
 =pod
- 
+
 =back
 
 =cut
- 
+
 ### END auto-generated
 
 sub upload_media_asset {
