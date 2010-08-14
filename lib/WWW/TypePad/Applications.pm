@@ -1,4 +1,12 @@
 package WWW::TypePad::Applications;
+
+use strict;
+use warnings;
+
+# Install an accessor into WWW::TypePad to access an instance of this class
+# bound to the WWW::TypePad instance.
+sub WWW::TypePad::applications { __PACKAGE__->new( base => $_[0] ) }
+
 ### BEGIN auto-generated
 ### This is an automatically generated code, do not edit!
 ### Scroll down to look for END to add additional methods
@@ -350,8 +358,5 @@ sub groups {
 =cut
 
 ### END auto-generated
-
-
-
 
 1;

@@ -53,17 +53,6 @@ has 'ua' => (
     },
 );
 
-for my $object_type (qw( apikeys applications assets auth_tokens batch_processor blogs browser_upload
-                         events external_feed_subscriptions favorites groups nouns objecttypes relationships users )) {
-    my $backend_class = ucfirst $object_type;
-    $backend_class =~ s/_(\w)/uc $1/eg;
-    $backend_class = "WWW::TypePad::$backend_class";
-    has $object_type => (
-        is => 'rw', lazy => 1,
-        default => sub { $backend_class->new({ base => $_[0] }) },
-    );
-}
-
 sub oauth {
     my $api = shift;
     unless ( defined $api->_oauth ) {
