@@ -22,14 +22,14 @@ lib/WWW/TypePad/Assets.pm
 lib/WWW/TypePad/AuthTokens.pm
 lib/WWW/TypePad/Badges.pm
 lib/WWW/TypePad/Blogs.pm
+lib/WWW/TypePad/CodeGen.pm
 lib/WWW/TypePad/Error.pm
 lib/WWW/TypePad/Events.pm
 lib/WWW/TypePad/ExternalFeedSubscriptions.pm
 lib/WWW/TypePad/Favorites.pm
 lib/WWW/TypePad/Groups.pm
+lib/WWW/TypePad/ImportJobs.pm
 lib/WWW/TypePad/Noun.pm
-lib/WWW/TypePad/Nouns.pm
-lib/WWW/TypePad/ObjectTypes.pm
 lib/WWW/TypePad/Relationships.pm
 lib/WWW/TypePad/Users.pm
 lib/WWW/TypePad/Util.pm
