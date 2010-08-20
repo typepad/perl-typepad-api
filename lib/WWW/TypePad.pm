@@ -24,8 +24,6 @@ use WWW::TypePad::ExternalFeedSubscriptions;
 use WWW::TypePad::Favorites;
 use WWW::TypePad::Groups;
 use WWW::TypePad::ImportJobs;
-use WWW::TypePad::Nouns;
-use WWW::TypePad::ObjectTypes;
 use WWW::TypePad::Relationships;
 use WWW::TypePad::Users;
 
