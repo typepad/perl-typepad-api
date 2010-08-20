@@ -2,7 +2,7 @@ package WWW::TypePad;
 use strict;
 use 5.008_001;
 
-our $VERSION = '0.2000';
+our $VERSION = '0.3000';
 
 use Any::Moose;
 use Carp qw( croak );
@@ -315,7 +315,7 @@ will be likely to change in the future versions>.
 
 =head1 AUTHOR
 
-Benjamin Trott and Tatsuhiko Miyagawa E<lt>cpan@sixapart.comE<gt>
+Benjamin Trott, Tatsuhiko Miyagawa and Martin Atkins E<lt>cpan@sixapart.comE<gt>
 
 =head1 COPYRIGHT
 
