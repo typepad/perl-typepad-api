@@ -1,5 +1,12 @@
 Revision history for Perl extension WWW::TypePad
 
+0.3001 Sat Aug 21 14:34:16 PDT 2010
+       - Fixed packaging (miyagawa)
+
+0.3000 Fri Aug 20 11:50:22 PDT 2010
+       - Updated the mapping file (matkins)
+       - Let nouns classes register accessors (matkins)
+
 0.2000 Wed Jul 28 14:19:25 PDT 2010
        - Changed the API method mapping scheme to match with other language bindings (miyagawa, matkins)
        - Auto generating POD documents using the mapping-methods.json (miyagawa)
