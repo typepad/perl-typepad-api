@@ -153,6 +153,38 @@ sub begin_import {
 
 
 
+=item build_embed_code_for_urls
+
+  my $res = $tp->blogs->build_embed_code_for_urls($id);
+
+Given an array of absolute URLs, will try to return a block of HTML that embeds the content represented by those URLs as sensibly as possible.
+
+Returns hash reference which contains following properties.
+
+=over 8
+
+=item embedCode
+
+(string) An HTML fragment that embeds the provided URLs. This string may contain untrustworthy HTML, so to avoid XSS vulnerabilities this should not be displayed in a sensitive context without sanitization.
+
+
+=back
+
+=cut
+
+sub build_embed_code_for_urls {
+    my $api = shift;
+    my @args;
+    push @args, shift; # id
+    my $uri = sprintf '/blogs/%s/build-embed-code-for-urls.json', @args;
+    $api->base->call("POST", $uri, @_);
+}
+
+
+=pod
+
+
+
 =item get_categories
 
   my $res = $tp->blogs->get_categories($id);
@@ -431,23 +463,23 @@ Returns Asset which contains following properties.
 
 =item id
 
-(string) A URI that serves as a globally unique identifier for the user.
+(string) BE<lt>Read OnlyE<gt> A URI that serves as a globally unique identifier for the user.
 
 =item urlId
 
-(string) A string containing the canonical identifier that can be used to identify this object in URLs. This can be used to recognise where the same user is returned in response to different requests, and as a mapping key for an application's local data store.
+(string) BE<lt>Read OnlyE<gt> A string containing the canonical identifier that can be used to identify this object in URLs. This can be used to recognise where the same user is returned in response to different requests, and as a mapping key for an application's local data store.
 
 =item permalinkUrl
 
-(string) The URL that is this asset's permalink. This will be omitted if the asset does not have a permalink of its own (for example, if it's embedded in another asset) or if TypePad does not know its permalink.
+(string) BE<lt>Read OnlyE<gt> The URL that is this asset's permalink. This will be omitted if the asset does not have a permalink of its own (for example, if it's embedded in another asset) or if TypePad does not know its permalink.
 
 =item author
 
-(User) The user who created the selected asset.
+(User) BE<lt>Read OnlyE<gt> The user who created the selected asset.
 
 =item published
 
-(string) The time at which the asset was created, as a W3CDTF timestamp.
+(datetime) BE<lt>Read OnlyE<gt> The time at which the asset was created, as a W3CDTF timestamp.
 
 =item content
 
@@ -455,11 +487,11 @@ Returns Asset which contains following properties.
 
 =item renderedContent
 
-(string) The content of this asset rendered to HTML. This is currently available only for OE<lt>PostE<gt> and OE<lt>PageE<gt> assets.
+(string) BE<lt>Read OnlyE<gt> The content of this asset rendered to HTML. This is currently available only for OE<lt>PostE<gt> and OE<lt>PageE<gt> assets.
 
 =item excerpt
 
-(string) A short, plain-text excerpt of the entry content. This is currently available only for OE<lt>PostE<gt> assets.
+(string) BE<lt>Read OnlyE<gt> A short, plain-text excerpt of the entry content. This is currently available only for OE<lt>PostE<gt> assets.
 
 =item textFormat
 
@@ -467,31 +499,31 @@ Returns Asset which contains following properties.
 
 =item groups
 
-(arrayE<lt>stringE<gt>) BE<lt>DeprecatedE<gt> An array of strings containing the ME<lt>idE<gt> URI of the OE<lt>GroupE<gt> object that this asset is mapped into, if any. This property has been superseded by the ME<lt>containerE<gt> property.
+(arrayE<lt>stringE<gt>) BE<lt>Read OnlyE<gt> BE<lt>DeprecatedE<gt> An array of strings containing the ME<lt>idE<gt> URI of the OE<lt>GroupE<gt> object that this asset is mapped into, if any. This property has been superseded by the ME<lt>containerE<gt> property.
 
 =item source
 
-(AssetSource) An object describing the site from which this asset was retrieved, if the asset was obtained from an external source.
+(AssetSource) BE<lt>Read OnlyE<gt> An object describing the site from which this asset was retrieved, if the asset was obtained from an external source.
 
 =item objectTypes
 
-(setE<lt>stringE<gt>) BE<lt>DeprecatedE<gt> An array of object type identifier URIs identifying the type of this asset. Only the one object type URI for the particular type of asset this asset is will be present.
+(setE<lt>stringE<gt>) BE<lt>Read OnlyE<gt> BE<lt>DeprecatedE<gt> An array of object type identifier URIs identifying the type of this asset. Only the one object type URI for the particular type of asset this asset is will be present.
 
 =item objectType
 
-(string) The keyword identifying the type of asset this is.
+(string) BE<lt>Read OnlyE<gt> The keyword identifying the type of asset this is.
 
 =item isFavoriteForCurrentUser
 
-(boolean) CE<lt>trueE<gt> if this asset is a favorite for the currently authenticated user, or CE<lt>falseE<gt> otherwise. This property is omitted from responses to anonymous requests.
+(boolean) BE<lt>Read OnlyE<gt> CE<lt>trueE<gt> if this asset is a favorite for the currently authenticated user, or CE<lt>falseE<gt> otherwise. This property is omitted from responses to anonymous requests.
 
 =item favoriteCount
 
-(integer) The number of distinct users who have added this asset as a favorite.
+(integer) BE<lt>Read OnlyE<gt> The number of distinct users who have added this asset as a favorite.
 
 =item commentCount
 
-(integer) The number of comments that have been posted in reply to this asset. This number includes comments that have been posted in response to other comments.
+(integer) BE<lt>Read OnlyE<gt> The number of comments that have been posted in reply to this asset. This number includes comments that have been posted in response to other comments.
 
 =item title
 
@@ -503,27 +535,35 @@ Returns Asset which contains following properties.
 
 =item container
 
-(ContainerRef) An object describing the group or blog to which this asset belongs.
+(ContainerRef) BE<lt>Read OnlyE<gt> An object describing the group or blog to which this asset belongs.
 
 =item publicationStatus
 
-(PublicationStatus) BE<lt>EditableE<gt> An object describing the visibility status and publication date for this asset. Only visibility status is editable.
+(PublicationStatus) An object describing the visibility status and publication date for this asset. Only visibility status is editable.
 
 =item crosspostAccounts
 
-(setE<lt>stringE<gt>) BE<lt>EditableE<gt> A set of identifiers for OE<lt>AccountE<gt> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.
+(setE<lt>stringE<gt>) BE<lt>Write OnlyE<gt> A set of identifiers for OE<lt>AccountE<gt> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.
 
 =item isConversationsAnswer
 
-(boolean) BE<lt>DeprecatedE<gt> CE<lt>trueE<gt> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.
+(boolean) BE<lt>Read OnlyE<gt> BE<lt>DeprecatedE<gt> CE<lt>trueE<gt> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.
 
 =item reblogOf
 
-(AssetRef) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset, this property describes the original asset.
+(AssetRef) BE<lt>Read OnlyE<gt> BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset, this property describes the original asset.
 
 =item reblogOfUrl
 
-(string) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.
+(string) BE<lt>Read OnlyE<gt> BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.
+
+=item positiveVoteCount
+
+(integer) BE<lt>Read OnlyE<gt> The total number of positive votes this asset has received via the NE<lt>/assets/{id}/cast-positive-voteE<gt> endpoint.
+
+=item negativeVoteCount
+
+(integer) BE<lt>Read OnlyE<gt> The total number of negative votes this asset has received via the NE<lt>/assets/{id}/cast-negative-voteE<gt> endpoint.
 
 
 =back
@@ -561,55 +601,55 @@ Returns Page which contains following properties.
 
 =item filename
 
-(string) BE<lt>EditableE<gt> The base name of the page, used to create the ME<lt>permalinkUrlE<gt>.
+(string) The base name of the page, used to create the ME<lt>permalinkUrlE<gt>.
 
 =item embeddedImageLinks
 
-(arrayE<lt>ImageLinkE<gt>) A list of links to the images that are embedded within the content of this page.
+(arrayE<lt>ImageLinkE<gt>) BE<lt>Read OnlyE<gt> A list of links to the images that are embedded within the content of this page.
 
 =item title
 
-(string) BE<lt>EditableE<gt> The title of the page.
+(string) The title of the page.
 
 =item description
 
-(string) BE<lt>EditableE<gt> The description of the page.
+(string) The description of the page.
 
 =item textFormat
 
-(string) BE<lt>EditableE<gt> A keyword that indicates what formatting mode to use for the content of this page. This can be CE<lt>htmlE<gt> for assets the content of which is HTML, CE<lt>html_convert_linebreaksE<gt> for assets the content of which is HTML but where paragraph tags should be added automatically, or CE<lt>markdownE<gt> for assets the content of which is Markdown source. Other formatting modes may be added in future. Applications that present assets for editing should use this property to present an appropriate editor.
+(string) A keyword that indicates what formatting mode to use for the content of this page. This can be CE<lt>htmlE<gt> for assets the content of which is HTML, CE<lt>html_convert_linebreaksE<gt> for assets the content of which is HTML but where paragraph tags should be added automatically, or CE<lt>markdownE<gt> for assets the content of which is Markdown source. Other formatting modes may be added in future. Applications that present assets for editing should use this property to present an appropriate editor.
 
 =item publicationStatus
 
-(PublicationStatus) BE<lt>EditableE<gt> An object describing the draft status and publication date for this page.
+(PublicationStatus) An object describing the draft status and publication date for this page.
 
 =item feedbackStatus
 
-(FeedbackStatus) BE<lt>EditableE<gt> An object describing the comment and trackback behavior for this page.
+(FeedbackStatus) An object describing the comment and trackback behavior for this page.
 
 =item suppressEvents
 
-(boolean) BE<lt>EditableE<gt> An optional, write-only flag indicating that asset creation should not trigger notification events such as emails or dashboard entries. Not available to all applications.
+(boolean) BE<lt>Write OnlyE<gt> An optional, write-only flag indicating that asset creation should not trigger notification events such as emails or dashboard entries. Not available to all applications.
 
 =item id
 
-(string) A URI that serves as a globally unique identifier for the user.
+(string) BE<lt>Read OnlyE<gt> A URI that serves as a globally unique identifier for the user.
 
 =item urlId
 
-(string) A string containing the canonical identifier that can be used to identify this object in URLs. This can be used to recognise where the same user is returned in response to different requests, and as a mapping key for an application's local data store.
+(string) BE<lt>Read OnlyE<gt> A string containing the canonical identifier that can be used to identify this object in URLs. This can be used to recognise where the same user is returned in response to different requests, and as a mapping key for an application's local data store.
 
 =item permalinkUrl
 
-(string) The URL that is this asset's permalink. This will be omitted if the asset does not have a permalink of its own (for example, if it's embedded in another asset) or if TypePad does not know its permalink.
+(string) BE<lt>Read OnlyE<gt> The URL that is this asset's permalink. This will be omitted if the asset does not have a permalink of its own (for example, if it's embedded in another asset) or if TypePad does not know its permalink.
 
 =item author
 
-(User) The user who created the selected asset.
+(User) BE<lt>Read OnlyE<gt> The user who created the selected asset.
 
 =item published
 
-(string) The time at which the asset was created, as a W3CDTF timestamp.
+(datetime) BE<lt>Read OnlyE<gt> The time at which the asset was created, as a W3CDTF timestamp.
 
 =item content
 
@@ -617,11 +657,11 @@ Returns Page which contains following properties.
 
 =item renderedContent
 
-(string) The content of this asset rendered to HTML. This is currently available only for OE<lt>PostE<gt> and OE<lt>PageE<gt> assets.
+(string) BE<lt>Read OnlyE<gt> The content of this asset rendered to HTML. This is currently available only for OE<lt>PostE<gt> and OE<lt>PageE<gt> assets.
 
 =item excerpt
 
-(string) A short, plain-text excerpt of the entry content. This is currently available only for OE<lt>PostE<gt> assets.
+(string) BE<lt>Read OnlyE<gt> A short, plain-text excerpt of the entry content. This is currently available only for OE<lt>PostE<gt> assets.
 
 =item textFormat
 
@@ -629,31 +669,31 @@ Returns Page which contains following properties.
 
 =item groups
 
-(arrayE<lt>stringE<gt>) BE<lt>DeprecatedE<gt> An array of strings containing the ME<lt>idE<gt> URI of the OE<lt>GroupE<gt> object that this asset is mapped into, if any. This property has been superseded by the ME<lt>containerE<gt> property.
+(arrayE<lt>stringE<gt>) BE<lt>Read OnlyE<gt> BE<lt>DeprecatedE<gt> An array of strings containing the ME<lt>idE<gt> URI of the OE<lt>GroupE<gt> object that this asset is mapped into, if any. This property has been superseded by the ME<lt>containerE<gt> property.
 
 =item source
 
-(AssetSource) An object describing the site from which this asset was retrieved, if the asset was obtained from an external source.
+(AssetSource) BE<lt>Read OnlyE<gt> An object describing the site from which this asset was retrieved, if the asset was obtained from an external source.
 
 =item objectTypes
 
-(setE<lt>stringE<gt>) BE<lt>DeprecatedE<gt> An array of object type identifier URIs identifying the type of this asset. Only the one object type URI for the particular type of asset this asset is will be present.
+(setE<lt>stringE<gt>) BE<lt>Read OnlyE<gt> BE<lt>DeprecatedE<gt> An array of object type identifier URIs identifying the type of this asset. Only the one object type URI for the particular type of asset this asset is will be present.
 
 =item objectType
 
-(string) The keyword identifying the type of asset this is.
+(string) BE<lt>Read OnlyE<gt> The keyword identifying the type of asset this is.
 
 =item isFavoriteForCurrentUser
 
-(boolean) CE<lt>trueE<gt> if this asset is a favorite for the currently authenticated user, or CE<lt>falseE<gt> otherwise. This property is omitted from responses to anonymous requests.
+(boolean) BE<lt>Read OnlyE<gt> CE<lt>trueE<gt> if this asset is a favorite for the currently authenticated user, or CE<lt>falseE<gt> otherwise. This property is omitted from responses to anonymous requests.
 
 =item favoriteCount
 
-(integer) The number of distinct users who have added this asset as a favorite.
+(integer) BE<lt>Read OnlyE<gt> The number of distinct users who have added this asset as a favorite.
 
 =item commentCount
 
-(integer) The number of comments that have been posted in reply to this asset. This number includes comments that have been posted in response to other comments.
+(integer) BE<lt>Read OnlyE<gt> The number of comments that have been posted in reply to this asset. This number includes comments that have been posted in response to other comments.
 
 =item title
 
@@ -665,27 +705,35 @@ Returns Page which contains following properties.
 
 =item container
 
-(ContainerRef) An object describing the group or blog to which this asset belongs.
+(ContainerRef) BE<lt>Read OnlyE<gt> An object describing the group or blog to which this asset belongs.
 
 =item publicationStatus
 
-(PublicationStatus) BE<lt>EditableE<gt> An object describing the visibility status and publication date for this asset. Only visibility status is editable.
+(PublicationStatus) An object describing the visibility status and publication date for this asset. Only visibility status is editable.
 
 =item crosspostAccounts
 
-(setE<lt>stringE<gt>) BE<lt>EditableE<gt> A set of identifiers for OE<lt>AccountE<gt> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.
+(setE<lt>stringE<gt>) BE<lt>Write OnlyE<gt> A set of identifiers for OE<lt>AccountE<gt> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.
 
 =item isConversationsAnswer
 
-(boolean) BE<lt>DeprecatedE<gt> CE<lt>trueE<gt> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.
+(boolean) BE<lt>Read OnlyE<gt> BE<lt>DeprecatedE<gt> CE<lt>trueE<gt> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.
 
 =item reblogOf
 
-(AssetRef) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset, this property describes the original asset.
+(AssetRef) BE<lt>Read OnlyE<gt> BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset, this property describes the original asset.
 
 =item reblogOfUrl
 
-(string) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.
+(string) BE<lt>Read OnlyE<gt> BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.
+
+=item positiveVoteCount
+
+(integer) BE<lt>Read OnlyE<gt> The total number of positive votes this asset has received via the NE<lt>/assets/{id}/cast-positive-voteE<gt> endpoint.
+
+=item negativeVoteCount
+
+(integer) BE<lt>Read OnlyE<gt> The total number of negative votes this asset has received via the NE<lt>/assets/{id}/cast-negative-voteE<gt> endpoint.
 
 
 =back
@@ -765,79 +813,87 @@ Returns Post which contains following properties.
 
 =item categories
 
-(arrayE<lt>stringE<gt>) BE<lt>EditableE<gt> A list of categories associated with the post.
+(arrayE<lt>stringE<gt>) A list of categories associated with the post.
 
 =item embeddedImageLinks
 
-(arrayE<lt>ImageLinkE<gt>) A list of links to the images that are embedded within the content of this post.
+(arrayE<lt>ImageLinkE<gt>) BE<lt>Read OnlyE<gt> A list of links to the images that are embedded within the content of this post.
 
 =item embeddedVideoLinks
 
-(arrayE<lt>VideoLinkE<gt>) A list of links to the videos that are embedded within the content of this post.
+(arrayE<lt>VideoLinkE<gt>) BE<lt>Read OnlyE<gt> A list of links to the videos that are embedded within the content of this post.
 
 =item embeddedAudioLinks
 
-(arrayE<lt>AudioLinkE<gt>) A list of links to the audio streams that are embedded within the content of this post.
+(arrayE<lt>AudioLinkE<gt>) BE<lt>Read OnlyE<gt> A list of links to the audio streams that are embedded within the content of this post.
 
 =item title
 
-(string) BE<lt>EditableE<gt> The title of the post.
+(string) The title of the post.
 
 =item description
 
-(string) BE<lt>EditableE<gt> The description of the post.
+(string) The description of the post.
 
 =item filename
 
-(string) BE<lt>EditableE<gt> The base name of the post to use when creating its ME<lt>permalinkUrlE<gt>.
+(string) The base name of the post to use when creating its ME<lt>permalinkUrlE<gt>.
 
 =item content
 
-(string) BE<lt>EditableE<gt> The raw post content. The ME<lt>textFormatE<gt> property defines what format this data is in.
+(string) The raw post content. The ME<lt>textFormatE<gt> property defines what format this data is in.
 
 =item textFormat
 
-(string) BE<lt>EditableE<gt> A keyword that indicates what formatting mode to use for the content of this post. This can be CE<lt>htmlE<gt> for assets the content of which is HTML, CE<lt>html_convert_linebreaksE<gt> for assets the content of which is HTML but where paragraph tags should be added automatically, or CE<lt>markdownE<gt> for assets the content of which is Markdown source. Other formatting modes may be added in future. Applications that present assets for editing should use this property to present an appropriate editor.
+(string) A keyword that indicates what formatting mode to use for the content of this post. This can be CE<lt>htmlE<gt> for assets the content of which is HTML, CE<lt>html_convert_linebreaksE<gt> for assets the content of which is HTML but where paragraph tags should be added automatically, or CE<lt>markdownE<gt> for assets the content of which is Markdown source. Other formatting modes may be added in future. Applications that present assets for editing should use this property to present an appropriate editor.
 
 =item publicationStatus
 
-(PublicationStatus) BE<lt>EditableE<gt> An object describing the draft status and publication date for this post.
+(PublicationStatus) An object describing the draft status and publication date for this post.
 
 =item feedbackStatus
 
-(FeedbackStatus) BE<lt>EditableE<gt> An object describing the comment and trackback behavior for this post.
+(FeedbackStatus) An object describing the comment and trackback behavior for this post.
 
 =item reblogCount
 
-(integer) The number of times this post has been reblogged by other people.
+(integer) BE<lt>Read OnlyE<gt> The number of times this post has been reblogged by other people.
 
 =item reblogOf
 
-(AssetRef) A reference to a post of which this post is a reblog.
+(AssetRef) BE<lt>Fixed After CreationE<gt> A reference to a post of which this post is a reblog.
 
 =item suppressEvents
 
-(boolean) BE<lt>EditableE<gt> An optional, write-only flag indicating that asset creation should not trigger notification events such as emails or dashboard entries. Not available to all applications.
+(boolean) BE<lt>Write OnlyE<gt> An optional, write-only flag indicating that asset creation should not trigger notification events such as emails or dashboard entries. Not available to all applications.
+
+=item createConversation
+
+(boolean) BE<lt>Write OnlyE<gt> An optional, write-only flag indicating that the asset is starting a new conversation.
+
+=item conversationId
+
+(string) BE<lt>Read OnlyE<gt> Identifies the OE<lt>ConversationE<gt> object this asset belongs to, if any. Omitted if the asset is not part of a conversation.
 
 =item id
 
-(string) A URI that serves as a globally unique identifier for the user.
+(string) BE<lt>Read OnlyE<gt> A URI that serves as a globally unique identifier for the user.
 
 =item urlId
 
-(string) A string containing the canonical identifier that can be used to identify this object in URLs. This can be used to recognise where the same user is returned in response to different requests, and as a mapping key for an application's local data store.
+(string) BE<lt>Read OnlyE<gt> A string containing the canonical identifier that can be used to identify this object in URLs. This can be used to recognise where the same user is returned in response to different requests, and as a mapping key for an application's local data store.
 
 =item permalinkUrl
 
-(string) The URL that is this asset's permalink. This will be omitted if the asset does not have a permalink of its own (for example, if it's embedded in another asset) or if TypePad does not know its permalink.
+(string) BE<lt>Read OnlyE<gt> The URL that is this asset's permalink. This will be omitted if the asset does not have a permalink of its own (for example, if it's embedded in another asset) or if TypePad does not know its permalink.
 
 =item author
 
-(User) The user who created the selected asset.
+(User) BE<lt>Read OnlyE<gt> The user who created the selected asset.
 
 =item published
 
-(string) The time at which the asset was created, as a W3CDTF timestamp.
+(datetime) BE<lt>Read OnlyE<gt> The time at which the asset was created, as a W3CDTF timestamp.
 
 =item content
 
@@ -845,11 +901,11 @@ Returns Post which contains following properties.
 
 =item renderedContent
 
-(string) The content of this asset rendered to HTML. This is currently available only for OE<lt>PostE<gt> and OE<lt>PageE<gt> assets.
+(string) BE<lt>Read OnlyE<gt> The content of this asset rendered to HTML. This is currently available only for OE<lt>PostE<gt> and OE<lt>PageE<gt> assets.
 
 =item excerpt
 
-(string) A short, plain-text excerpt of the entry content. This is currently available only for OE<lt>PostE<gt> assets.
+(string) BE<lt>Read OnlyE<gt> A short, plain-text excerpt of the entry content. This is currently available only for OE<lt>PostE<gt> assets.
 
 =item textFormat
 
@@ -857,31 +913,31 @@ Returns Post which contains following properties.
 
 =item groups
 
-(arrayE<lt>stringE<gt>) BE<lt>DeprecatedE<gt> An array of strings containing the ME<lt>idE<gt> URI of the OE<lt>GroupE<gt> object that this asset is mapped into, if any. This property has been superseded by the ME<lt>containerE<gt> property.
+(arrayE<lt>stringE<gt>) BE<lt>Read OnlyE<gt> BE<lt>DeprecatedE<gt> An array of strings containing the ME<lt>idE<gt> URI of the OE<lt>GroupE<gt> object that this asset is mapped into, if any. This property has been superseded by the ME<lt>containerE<gt> property.
 
 =item source
 
-(AssetSource) An object describing the site from which this asset was retrieved, if the asset was obtained from an external source.
+(AssetSource) BE<lt>Read OnlyE<gt> An object describing the site from which this asset was retrieved, if the asset was obtained from an external source.
 
 =item objectTypes
 
-(setE<lt>stringE<gt>) BE<lt>DeprecatedE<gt> An array of object type identifier URIs identifying the type of this asset. Only the one object type URI for the particular type of asset this asset is will be present.
+(setE<lt>stringE<gt>) BE<lt>Read OnlyE<gt> BE<lt>DeprecatedE<gt> An array of object type identifier URIs identifying the type of this asset. Only the one object type URI for the particular type of asset this asset is will be present.
 
 =item objectType
 
-(string) The keyword identifying the type of asset this is.
+(string) BE<lt>Read OnlyE<gt> The keyword identifying the type of asset this is.
 
 =item isFavoriteForCurrentUser
 
-(boolean) CE<lt>trueE<gt> if this asset is a favorite for the currently authenticated user, or CE<lt>falseE<gt> otherwise. This property is omitted from responses to anonymous requests.
+(boolean) BE<lt>Read OnlyE<gt> CE<lt>trueE<gt> if this asset is a favorite for the currently authenticated user, or CE<lt>falseE<gt> otherwise. This property is omitted from responses to anonymous requests.
 
 =item favoriteCount
 
-(integer) The number of distinct users who have added this asset as a favorite.
+(integer) BE<lt>Read OnlyE<gt> The number of distinct users who have added this asset as a favorite.
 
 =item commentCount
 
-(integer) The number of comments that have been posted in reply to this asset. This number includes comments that have been posted in response to other comments.
+(integer) BE<lt>Read OnlyE<gt> The number of comments that have been posted in reply to this asset. This number includes comments that have been posted in response to other comments.
 
 =item title
 
@@ -893,27 +949,35 @@ Returns Post which contains following properties.
 
 =item container
 
-(ContainerRef) An object describing the group or blog to which this asset belongs.
+(ContainerRef) BE<lt>Read OnlyE<gt> An object describing the group or blog to which this asset belongs.
 
 =item publicationStatus
 
-(PublicationStatus) BE<lt>EditableE<gt> An object describing the visibility status and publication date for this asset. Only visibility status is editable.
+(PublicationStatus) An object describing the visibility status and publication date for this asset. Only visibility status is editable.
 
 =item crosspostAccounts
 
-(setE<lt>stringE<gt>) BE<lt>EditableE<gt> A set of identifiers for OE<lt>AccountE<gt> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.
+(setE<lt>stringE<gt>) BE<lt>Write OnlyE<gt> A set of identifiers for OE<lt>AccountE<gt> objects to which to crosspost this asset when it's posted. This property is omitted when retrieving existing assets.
 
 =item isConversationsAnswer
 
-(boolean) BE<lt>DeprecatedE<gt> CE<lt>trueE<gt> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.
+(boolean) BE<lt>Read OnlyE<gt> BE<lt>DeprecatedE<gt> CE<lt>trueE<gt> if this asset is an answer to a TypePad Conversations question, or absent otherwise. This property is deprecated and will be replaced with something more useful in future.
 
 =item reblogOf
 
-(AssetRef) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset, this property describes the original asset.
+(AssetRef) BE<lt>Read OnlyE<gt> BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset, this property describes the original asset.
 
 =item reblogOfUrl
 
-(string) BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.
+(string) BE<lt>Read OnlyE<gt> BE<lt>DeprecatedE<gt> If this asset was created by 'reblogging' another asset or some other arbitrary web page, this property contains the URL of the item that was reblogged.
+
+=item positiveVoteCount
+
+(integer) BE<lt>Read OnlyE<gt> The total number of positive votes this asset has received via the NE<lt>/assets/{id}/cast-positive-voteE<gt> endpoint.
+
+=item negativeVoteCount
+
+(integer) BE<lt>Read OnlyE<gt> The total number of negative votes this asset has received via the NE<lt>/assets/{id}/cast-negative-voteE<gt> endpoint.
 
 
 =back
@@ -1026,7 +1090,7 @@ sub post_assets_by_category {
 
 =item get_post_assets_by_filename
 
-  my $res = $tp->blogs->get_post_assets_by_filename($id, $fileRef);
+  my $res = $tp->blogs->get_post_assets_by_filename($id, $filename);
 
 Get zero or one posts matching the given year, month and filename.
 
@@ -1051,7 +1115,7 @@ sub get_post_assets_by_filename {
     my $api = shift;
     my @args;
     push @args, shift; # id
-    push @args, shift; # fileRef
+    push @args, shift; # filename
     my $uri = sprintf '/blogs/%s/post-assets/@by-filename/%s.json', @args;
     $api->base->call("GET", $uri, @_);
 }

@@ -440,7 +440,7 @@ Returns Favorite which contains following properties.
 
 =item published
 
-(string) The time that the favorite was created, as a W3CDTF timestamp.
+(datetime) The time that the favorite was created, as a W3CDTF timestamp.
 
 
 =back

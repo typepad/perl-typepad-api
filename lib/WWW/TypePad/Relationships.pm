@@ -65,7 +65,7 @@ Returns Relationship which contains following properties.
 
 =item created
 
-(mapE<lt>stringE<gt>) A mapping of the relationship types present between the source and target objects to the times those types of relationship were established. The keys of the map are the relationship type URIs present in the relationship's ME<lt>statusE<gt> property; the values are W3CDTF timestamps for the times those relationship edges were created.
+(mapE<lt>datetimeE<gt>) A mapping of the relationship types present between the source and target objects to the times those types of relationship were established. The keys of the map are the relationship type URIs present in the relationship's ME<lt>statusE<gt> property; the values are W3CDTF timestamps for the times those relationship edges were created.
 
 
 =back

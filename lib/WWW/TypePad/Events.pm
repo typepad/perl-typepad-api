@@ -53,7 +53,7 @@ Returns Event which contains following properties.
 
 =item verb
 
-(setE<lt>stringE<gt>) A keyword identifying the type of event this is.
+(string) A keyword identifying the type of event this is.
 
 =item verbs
 
@@ -69,7 +69,7 @@ Returns Event which contains following properties.
 
 =item published
 
-(string) The time at which the event was performed, as a W3CDTF timestamp.
+(datetime) The time at which the event was performed, as a W3CDTF timestamp.
 
 
 =back
