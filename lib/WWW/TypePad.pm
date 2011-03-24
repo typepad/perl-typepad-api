@@ -296,7 +296,7 @@ WWW::TypePad - Client for the TypePad Platform
   );
 
   # See samples/debug-console/app.psgi for the OAuth authentication flow
-
+  my $uid  = '6p0134842724af970c';
   my $user = $tp->users->get($uid);
 
   # See each modules POD documents for the API methods
