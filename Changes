@@ -1,5 +1,12 @@
 Revision history for Perl extension WWW::TypePad
 
+0.4001 Thu Mar 24 11:05:13 PDT 2011
+       - Make all of the author tests succeed.
+
+0.4000 Thu Mar 24 10:29:46 PDT 2011
+       - Updated the mappings and auto-generated code (skimbrel)
+       - Remove the old-style method names entirely (skimbrel)
+
 0.3001 Sat Aug 21 14:34:16 PDT 2010
        - Fixed packaging (miyagawa)
 
