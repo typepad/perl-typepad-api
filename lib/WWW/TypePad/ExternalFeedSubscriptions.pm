@@ -77,12 +77,6 @@ sub delete {
 }
 
 
-sub remove {
-    my $self = shift;
-    Carp::carp("'remove' is deprecated. Use 'delete' instead.");
-    $self->delete(@_);
-}
-
 =pod
 
 

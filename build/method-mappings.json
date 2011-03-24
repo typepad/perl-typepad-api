@@ -418,6 +418,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -531,6 +536,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             }
@@ -567,6 +577,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -680,6 +695,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             }
@@ -708,6 +728,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -821,6 +846,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             },
@@ -851,6 +881,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -964,6 +999,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             }
@@ -1156,6 +1196,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -1269,6 +1314,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             },
@@ -1325,6 +1375,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -1438,6 +1493,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             }
@@ -2379,6 +2439,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -2492,6 +2557,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             },
@@ -2523,6 +2593,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -2636,6 +2711,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             }
@@ -2704,6 +2784,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -2817,6 +2902,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             },
@@ -2888,6 +2978,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -3001,6 +3096,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             }
@@ -3142,6 +3242,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -3255,6 +3360,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             },
@@ -3366,6 +3476,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -3479,6 +3594,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             }
@@ -4019,19 +4139,29 @@
             },
             "queryParams" : {
                "limit" : "max-results",
-               "offset" : "start-index"
+               "startToken" : "start-token"
             },
             "returnObjectType" : {
-               "name" : "List<ConversationResponse>",
+               "name" : "Stream<ConversationResponse>",
                "parentType" : "Base",
                "properties" : [
                   {
-                     "docString" : "The total number of items in the whole list of which this list object is a paginated view.",
+                     "docString" : "The total number of items in the whole stream of which this response contains a subset. C<null> if an exact count cannot be determined.",
                      "name" : "totalResults",
                      "type" : "integer"
                   },
                   {
-                     "docString" : "The items within the selected slice of the list.",
+                     "docString" : "An estimate of the total number of items in the whole list of which this response contains a subset. C<null> if a count cannot be determined at all, or if an exact count is returned in C<totalResults>.",
+                     "name" : "estimatedTotalResults",
+                     "type" : "integer"
+                  },
+                  {
+                     "docString" : "An opaque token that can be used as the C<start-token> parameter of a followup request to retrieve additional results. C<null> if there are no more results to retrieve, but the presence of this token does not guarantee that the response to a followup request will actually contain results.",
+                     "name" : "moreResultsToken",
+                     "type" : "string"
+                  },
+                  {
+                     "docString" : "A selection of items from the underlying stream.",
                      "name" : "entries",
                      "type" : "array<ConversationResponse>"
                   }
@@ -4039,100 +4169,45 @@
             }
          },
          {
-            "docString" : "T<Unimplemented> Retrieve the data needed to render the conversations widget without site affinity.",
+            "docString" : "Retrieve a list of responses from invited participants for the selected conversation.",
             "httpMethod" : "GET",
-            "methodName" : "getWidgetData",
+            "methodName" : "getFromVoicesResponses",
             "pathChunks" : [
                "conversations",
                null,
-               "widget-data"
+               "responses",
+               "@from-voices"
             ],
             "pathParams" : {
                "id" : 1
             },
-            "queryParams" : {},
-            "returnObjectType" : {
-               "properties" : [
-                  {
-                     "docString" : "A response from the selected conversation to show in a prominent position in the widget. This response should always be high-quality. Omitted if the conversation does not yet have any responses.",
-                     "name" : "featuredResponse",
-                     "type" : "ConversationResponse"
-                  },
-                  {
-                     "docString" : "A plain text (no HTML) version of the selected conversation's body text.",
-                     "name" : "contentPlain",
-                     "type" : "string"
-                  },
-                  {
-                     "docString" : "The number of times the asset that started the selected conversation has been reacted to.",
-                     "name" : "reactionCount",
-                     "type" : "integer"
-                  },
-                  {
-                     "docString" : "The poll options for the selected conversation.",
-                     "name" : "pollOptions",
-                     "type" : "array<ConversationPollOption>"
-                  },
-                  {
-                     "docString" : "The user that provided the content for the selected conversation.",
-                     "name" : "author",
-                     "type" : "User"
-                  },
-                  {
-                     "docString" : "The title of the selected conversation. This is the question that was asked.",
-                     "name" : "title",
-                     "type" : "string"
-                  }
-               ]
-            }
-         },
-         {
-            "docString" : "T<Unimplemented> Retrieve the data needed to render the conversations widget with affinity to the selected site.",
-            "httpMethod" : "GET",
-            "methodName" : "getWidgetDataBySite",
-            "pathChunks" : [
-               "conversations",
-               null,
-               "widget-data",
-               "@by-site",
-               null
-            ],
-            "pathParams" : {
-               "id" : 1,
-               "siteId" : 4
+            "queryParams" : {
+               "limit" : "max-results",
+               "startToken" : "start-token"
             },
-            "queryParams" : {},
             "returnObjectType" : {
+               "name" : "Stream<ConversationResponse>",
+               "parentType" : "Base",
                "properties" : [
                   {
-                     "docString" : "A response from the selected conversation to show in a prominent position in the widget. This response should always be high-quality. Omitted if the conversation does not yet have any responses.",
-                     "name" : "featuredResponse",
-                     "type" : "ConversationResponse"
-                  },
-                  {
-                     "docString" : "A plain text (no HTML) version of the selected conversation's body text.",
-                     "name" : "contentPlain",
-                     "type" : "string"
-                  },
-                  {
-                     "docString" : "The number of times the asset that started the selected conversation has been reacted to.",
-                     "name" : "reactionCount",
+                     "docString" : "The total number of items in the whole stream of which this response contains a subset. C<null> if an exact count cannot be determined.",
+                     "name" : "totalResults",
                      "type" : "integer"
                   },
                   {
-                     "docString" : "The poll options for the selected conversation.",
-                     "name" : "pollOptions",
-                     "type" : "array<ConversationPollOption>"
+                     "docString" : "An estimate of the total number of items in the whole list of which this response contains a subset. C<null> if a count cannot be determined at all, or if an exact count is returned in C<totalResults>.",
+                     "name" : "estimatedTotalResults",
+                     "type" : "integer"
                   },
                   {
-                     "docString" : "The user that provided the content for the selected conversation.",
-                     "name" : "author",
-                     "type" : "User"
-                  },
-                  {
-                     "docString" : "The title of the selected conversation. This is the question that was asked.",
-                     "name" : "title",
+                     "docString" : "An opaque token that can be used as the C<start-token> parameter of a followup request to retrieve additional results. C<null> if there are no more results to retrieve, but the presence of this token does not guarantee that the response to a followup request will actually contain results.",
+                     "name" : "moreResultsToken",
                      "type" : "string"
+                  },
+                  {
+                     "docString" : "A selection of items from the underlying stream.",
+                     "name" : "entries",
+                     "type" : "array<ConversationResponse>"
                   }
                ]
             }
@@ -4732,6 +4807,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -4845,6 +4925,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             },
@@ -4886,6 +4971,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -4999,6 +5089,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             }
@@ -5199,6 +5294,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -5312,6 +5412,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             },
@@ -5353,6 +5458,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -5466,6 +5576,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             }
@@ -5677,6 +5792,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -5790,6 +5910,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             },
@@ -5831,6 +5956,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -5944,6 +6074,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             }
@@ -6085,6 +6220,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -6198,6 +6338,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             },
@@ -6309,6 +6454,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -6422,6 +6572,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             }
@@ -6542,6 +6697,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -6655,6 +6815,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             },
@@ -6701,6 +6866,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -6814,6 +6984,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             }
@@ -6895,6 +7070,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -7008,6 +7188,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             },
@@ -7039,6 +7224,11 @@
                      "type" : "string"
                   },
                   {
+                     "docString" : "T<Read Only> The short version of the URL that is this asset's permalink. This is currently available only for O<Post> assetes.",
+                     "name" : "shortUrl",
+                     "type" : "string"
+                  },
+                  {
                      "docString" : "T<Read Only> The user who created the selected asset.",
                      "name" : "author",
                      "type" : "User"
@@ -7152,6 +7342,11 @@
                      "docString" : "T<Read Only> The total number of negative votes this asset has received via the N</assets/{id}/cast-negative-vote> endpoint.",
                      "name" : "negativeVoteCount",
                      "type" : "integer"
+                  },
+                  {
+                     "docString" : "T<Read Only> C<true> if this asset has the extended content. This is currently supported only for O<Post> assets that are posted within a blog.",
+                     "name" : "hasExtendedContent",
+                     "type" : "boolean"
                   }
                ]
             }

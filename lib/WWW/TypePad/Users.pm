@@ -456,12 +456,6 @@ sub post_to_favorites {
 }
 
 
-sub new_to_favorites {
-    my $self = shift;
-    Carp::carp("'new_to_favorites' is deprecated. Use 'post_to_favorites' instead.");
-    $self->post_to_favorites(@_);
-}
-
 =pod
 
 

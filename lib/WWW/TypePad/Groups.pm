@@ -151,6 +151,10 @@ Returns Audio which contains following properties.
 
 (string) BE<lt>Read OnlyE<gt> The URL that is this asset's permalink. This will be omitted if the asset does not have a permalink of its own (for example, if it's embedded in another asset) or if TypePad does not know its permalink.
 
+=item shortUrl
+
+(string) BE<lt>Read OnlyE<gt> The short version of the URL that is this asset's permalink. This is currently available only for OE<lt>PostE<gt> assetes.
+
 =item author
 
 (User) BE<lt>Read OnlyE<gt> The user who created the selected asset.
@@ -243,6 +247,10 @@ Returns Audio which contains following properties.
 
 (integer) BE<lt>Read OnlyE<gt> The total number of negative votes this asset has received via the NE<lt>/assets/{id}/cast-negative-voteE<gt> endpoint.
 
+=item hasExtendedContent
+
+(boolean) BE<lt>Read OnlyE<gt> CE<lt>trueE<gt> if this asset has the extended content. This is currently supported only for OE<lt>PostE<gt> assets that are posted within a blog.
+
 
 =back
 
@@ -256,12 +264,6 @@ sub post_to_audio_assets {
     $api->base->call("POST", $uri, @_);
 }
 
-
-sub new_to_audio_assets {
-    my $self = shift;
-    Carp::carp("'new_to_audio_assets' is deprecated. Use 'post_to_audio_assets' instead.");
-    $self->post_to_audio_assets(@_);
-}
 
 =pod
 
@@ -483,6 +485,10 @@ Returns Link which contains following properties.
 
 (string) BE<lt>Read OnlyE<gt> The URL that is this asset's permalink. This will be omitted if the asset does not have a permalink of its own (for example, if it's embedded in another asset) or if TypePad does not know its permalink.
 
+=item shortUrl
+
+(string) BE<lt>Read OnlyE<gt> The short version of the URL that is this asset's permalink. This is currently available only for OE<lt>PostE<gt> assetes.
+
 =item author
 
 (User) BE<lt>Read OnlyE<gt> The user who created the selected asset.
@@ -575,6 +581,10 @@ Returns Link which contains following properties.
 
 (integer) BE<lt>Read OnlyE<gt> The total number of negative votes this asset has received via the NE<lt>/assets/{id}/cast-negative-voteE<gt> endpoint.
 
+=item hasExtendedContent
+
+(boolean) BE<lt>Read OnlyE<gt> CE<lt>trueE<gt> if this asset has the extended content. This is currently supported only for OE<lt>PostE<gt> assets that are posted within a blog.
+
 
 =back
 
@@ -588,12 +598,6 @@ sub post_to_link_assets {
     $api->base->call("POST", $uri, @_);
 }
 
-
-sub new_to_link_assets {
-    my $self = shift;
-    Carp::carp("'new_to_link_assets' is deprecated. Use 'post_to_link_assets' instead.");
-    $self->post_to_link_assets(@_);
-}
 
 =pod
 
@@ -839,6 +843,10 @@ Returns Photo which contains following properties.
 
 (string) BE<lt>Read OnlyE<gt> The URL that is this asset's permalink. This will be omitted if the asset does not have a permalink of its own (for example, if it's embedded in another asset) or if TypePad does not know its permalink.
 
+=item shortUrl
+
+(string) BE<lt>Read OnlyE<gt> The short version of the URL that is this asset's permalink. This is currently available only for OE<lt>PostE<gt> assetes.
+
 =item author
 
 (User) BE<lt>Read OnlyE<gt> The user who created the selected asset.
@@ -931,6 +939,10 @@ Returns Photo which contains following properties.
 
 (integer) BE<lt>Read OnlyE<gt> The total number of negative votes this asset has received via the NE<lt>/assets/{id}/cast-negative-voteE<gt> endpoint.
 
+=item hasExtendedContent
+
+(boolean) BE<lt>Read OnlyE<gt> CE<lt>trueE<gt> if this asset has the extended content. This is currently supported only for OE<lt>PostE<gt> assets that are posted within a blog.
+
 
 =back
 
@@ -944,12 +956,6 @@ sub post_to_photo_assets {
     $api->base->call("POST", $uri, @_);
 }
 
-
-sub new_to_photo_assets {
-    my $self = shift;
-    Carp::carp("'new_to_photo_assets' is deprecated. Use 'post_to_photo_assets' instead.");
-    $self->post_to_photo_assets(@_);
-}
 
 =pod
 
@@ -1083,6 +1089,10 @@ Returns Post which contains following properties.
 
 (string) BE<lt>Read OnlyE<gt> The URL that is this asset's permalink. This will be omitted if the asset does not have a permalink of its own (for example, if it's embedded in another asset) or if TypePad does not know its permalink.
 
+=item shortUrl
+
+(string) BE<lt>Read OnlyE<gt> The short version of the URL that is this asset's permalink. This is currently available only for OE<lt>PostE<gt> assetes.
+
 =item author
 
 (User) BE<lt>Read OnlyE<gt> The user who created the selected asset.
@@ -1175,6 +1185,10 @@ Returns Post which contains following properties.
 
 (integer) BE<lt>Read OnlyE<gt> The total number of negative votes this asset has received via the NE<lt>/assets/{id}/cast-negative-voteE<gt> endpoint.
 
+=item hasExtendedContent
+
+(boolean) BE<lt>Read OnlyE<gt> CE<lt>trueE<gt> if this asset has the extended content. This is currently supported only for OE<lt>PostE<gt> assets that are posted within a blog.
+
 
 =back
 
@@ -1188,12 +1202,6 @@ sub post_to_post_assets {
     $api->base->call("POST", $uri, @_);
 }
 
-
-sub new_to_post_assets {
-    my $self = shift;
-    Carp::carp("'new_to_post_assets' is deprecated. Use 'post_to_post_assets' instead.");
-    $self->post_to_post_assets(@_);
-}
 
 =pod
 
@@ -1332,6 +1340,10 @@ Returns Video which contains following properties.
 
 (string) BE<lt>Read OnlyE<gt> The URL that is this asset's permalink. This will be omitted if the asset does not have a permalink of its own (for example, if it's embedded in another asset) or if TypePad does not know its permalink.
 
+=item shortUrl
+
+(string) BE<lt>Read OnlyE<gt> The short version of the URL that is this asset's permalink. This is currently available only for OE<lt>PostE<gt> assetes.
+
 =item author
 
 (User) BE<lt>Read OnlyE<gt> The user who created the selected asset.
@@ -1424,6 +1436,10 @@ Returns Video which contains following properties.
 
 (integer) BE<lt>Read OnlyE<gt> The total number of negative votes this asset has received via the NE<lt>/assets/{id}/cast-negative-voteE<gt> endpoint.
 
+=item hasExtendedContent
+
+(boolean) BE<lt>Read OnlyE<gt> CE<lt>trueE<gt> if this asset has the extended content. This is currently supported only for OE<lt>PostE<gt> assets that are posted within a blog.
+
 
 =back
 
@@ -1437,12 +1453,6 @@ sub post_to_video_assets {
     $api->base->call("POST", $uri, @_);
 }
 
-
-sub new_to_video_assets {
-    my $self = shift;
-    Carp::carp("'new_to_video_assets' is deprecated. Use 'post_to_video_assets' instead.");
-    $self->post_to_video_assets(@_);
-}
 
 =pod
 

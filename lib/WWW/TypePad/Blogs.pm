@@ -473,6 +473,10 @@ Returns Asset which contains following properties.
 
 (string) BE<lt>Read OnlyE<gt> The URL that is this asset's permalink. This will be omitted if the asset does not have a permalink of its own (for example, if it's embedded in another asset) or if TypePad does not know its permalink.
 
+=item shortUrl
+
+(string) BE<lt>Read OnlyE<gt> The short version of the URL that is this asset's permalink. This is currently available only for OE<lt>PostE<gt> assetes.
+
 =item author
 
 (User) BE<lt>Read OnlyE<gt> The user who created the selected asset.
@@ -565,6 +569,10 @@ Returns Asset which contains following properties.
 
 (integer) BE<lt>Read OnlyE<gt> The total number of negative votes this asset has received via the NE<lt>/assets/{id}/cast-negative-voteE<gt> endpoint.
 
+=item hasExtendedContent
+
+(boolean) BE<lt>Read OnlyE<gt> CE<lt>trueE<gt> if this asset has the extended content. This is currently supported only for OE<lt>PostE<gt> assets that are posted within a blog.
+
 
 =back
 
@@ -578,12 +586,6 @@ sub post_to_media_assets {
     $api->base->call("POST", $uri, @_);
 }
 
-
-sub new_to_media_assets {
-    my $self = shift;
-    Carp::carp("'new_to_media_assets' is deprecated. Use 'post_to_media_assets' instead.");
-    $self->post_to_media_assets(@_);
-}
 
 =pod
 
@@ -643,6 +645,10 @@ Returns Page which contains following properties.
 
 (string) BE<lt>Read OnlyE<gt> The URL that is this asset's permalink. This will be omitted if the asset does not have a permalink of its own (for example, if it's embedded in another asset) or if TypePad does not know its permalink.
 
+=item shortUrl
+
+(string) BE<lt>Read OnlyE<gt> The short version of the URL that is this asset's permalink. This is currently available only for OE<lt>PostE<gt> assetes.
+
 =item author
 
 (User) BE<lt>Read OnlyE<gt> The user who created the selected asset.
@@ -735,6 +741,10 @@ Returns Page which contains following properties.
 
 (integer) BE<lt>Read OnlyE<gt> The total number of negative votes this asset has received via the NE<lt>/assets/{id}/cast-negative-voteE<gt> endpoint.
 
+=item hasExtendedContent
+
+(boolean) BE<lt>Read OnlyE<gt> CE<lt>trueE<gt> if this asset has the extended content. This is currently supported only for OE<lt>PostE<gt> assets that are posted within a blog.
+
 
 =back
 
@@ -748,12 +758,6 @@ sub post_to_page_assets {
     $api->base->call("POST", $uri, @_);
 }
 
-
-sub new_to_page_assets {
-    my $self = shift;
-    Carp::carp("'new_to_page_assets' is deprecated. Use 'post_to_page_assets' instead.");
-    $self->post_to_page_assets(@_);
-}
 
 =pod
 
@@ -887,6 +891,10 @@ Returns Post which contains following properties.
 
 (string) BE<lt>Read OnlyE<gt> The URL that is this asset's permalink. This will be omitted if the asset does not have a permalink of its own (for example, if it's embedded in another asset) or if TypePad does not know its permalink.
 
+=item shortUrl
+
+(string) BE<lt>Read OnlyE<gt> The short version of the URL that is this asset's permalink. This is currently available only for OE<lt>PostE<gt> assetes.
+
 =item author
 
 (User) BE<lt>Read OnlyE<gt> The user who created the selected asset.
@@ -979,6 +987,10 @@ Returns Post which contains following properties.
 
 (integer) BE<lt>Read OnlyE<gt> The total number of negative votes this asset has received via the NE<lt>/assets/{id}/cast-negative-voteE<gt> endpoint.
 
+=item hasExtendedContent
+
+(boolean) BE<lt>Read OnlyE<gt> CE<lt>trueE<gt> if this asset has the extended content. This is currently supported only for OE<lt>PostE<gt> assets that are posted within a blog.
+
 
 =back
 
@@ -992,12 +1004,6 @@ sub post_to_post_assets {
     $api->base->call("POST", $uri, @_);
 }
 
-
-sub new_to_post_assets {
-    my $self = shift;
-    Carp::carp("'new_to_post_assets' is deprecated. Use 'post_to_post_assets' instead.");
-    $self->post_to_post_assets(@_);
-}
 
 =pod
 

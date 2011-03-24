@@ -151,12 +151,6 @@ sub put_status {
 }
 
 
-sub update_status {
-    my $self = shift;
-    Carp::carp("'update_status' is deprecated. Use 'put_status' instead.");
-    $self->put_status(@_);
-}
-
 =pod
 
 =back
