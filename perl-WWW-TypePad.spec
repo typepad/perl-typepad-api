@@ -1,6 +1,6 @@
 name:      perl-WWW-TypePad
 summary:   perl-WWW-TypePad - Module to access the TypePad API from perl.
-version:   0.3001
+version:   0.4000
 release:   1%{?dist}
 vendor:    SAY Media <cpan@saymedia.com>
 packager:  Jonathan Steinert <rpm@hachi.kuiki.net>
