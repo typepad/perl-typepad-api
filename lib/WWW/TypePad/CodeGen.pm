@@ -12,12 +12,6 @@ use warnings;
 
 use String::CamelCase qw(camelize decamelize);
 
-my $method_name_map = {
-    'post' => 'new',
-    'put'  => 'update',
-    'delete' => 'remove',
-};
-
 sub handle_object {
     my($key, $mapping) = @_;
 
@@ -50,7 +44,6 @@ sub generate_code {
         decamelize => sub { decamelize($_[0]) },
         mangle_method => sub {
             my $method = $_[0];
-            $method =~ s/^(post|put|delete)/$method_name_map->{$1}/;
             $method =~ s/^get([A-Z])/$1/;
             decamelize($method);
         },
@@ -176,3 +169,4 @@ EOT
 }
 
 
+1;
