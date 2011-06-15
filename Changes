@@ -1,5 +1,8 @@
 Revision history for Perl extension WWW::TypePad
 
+0.4002 Wed Jun 15 13:39:12 PDT 2011
+       - Move the SSL substitution into the OAuth handler.
+
 0.4001 Thu Mar 24 11:05:13 PDT 2011
        - Make all of the author tests succeed.
 

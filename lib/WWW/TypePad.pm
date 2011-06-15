@@ -2,7 +2,7 @@ package WWW::TypePad;
 use strict;
 use 5.008_001;
 
-our $VERSION = '0.4001';
+our $VERSION = '0.4002';
 
 use Any::Moose;
 use Carp qw( croak );
