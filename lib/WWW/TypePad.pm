@@ -114,8 +114,6 @@ sub _call {
     }
     my $res;
     if ( $api->access_token && !$anon ) {
-        $uri =~ s/^http:/https:/;
-
         my %extra;
         if (($method eq 'POST' or $method eq 'PUT') and $qs) {
             $extra{ContentBody} = JSON::encode_json($qs);
@@ -131,7 +129,6 @@ sub _call {
             );
         }
     } else {
-        $uri =~ s/^https:/http:/;
         my $req = HTTP::Request->new( $method => $uri );
         $res = $api->ua->request( $req );
         
@@ -233,6 +230,8 @@ sub make_restricted_request {
     croak $Net::OAuth::Simple::UNAUTHORIZED unless $self->authorized;
 
     my( $url, $method, %extras ) = @_;
+    # Use SSL.
+    $url =~ s/^http:/https:/;
 
     my $uri = URI->new( $url );
     my %query = $uri->query_form;
